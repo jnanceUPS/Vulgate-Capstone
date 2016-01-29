@@ -6,7 +6,7 @@ $(document).ready(function(){
         }
 });
 
-
+//given a word, stems it
 var stem = function(word){
         
         word = stemQUE(word);
