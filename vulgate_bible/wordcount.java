@@ -26,7 +26,8 @@ public class wordcount {
 		
 			while (sc.hasNextLine()){
 				String word = sc.next();
-				word = Normalizer.normalize(word, Normalizer.Form.NFD); //takes of accent marks
+				word = word.replaceAll("\u00E6","e"); //replaces "ae" with "e"
+				word = Normalizer.normalize(word, Normalizer.Form.NFD); //takes off accent marks
 				word = word.toLowerCase().replaceAll("\\W", ""); //removes punctuation
 				word = word.replaceAll("\\d+", ""); //removes numbers
 				if (word.equals("")) continue; 
@@ -52,7 +53,8 @@ public class wordcount {
 	}
 }
 
-//hashmap sorter, reversed so largest appears first	
+// hashmap sorter, reversed so largest appears first	
+// from http://stackoverflow.com/questions/109383/sort-a-mapkey-value-by-values-java
 class MapUtil
 {
     public static <K, V extends Comparable<? super V>> Map<K, V> 
