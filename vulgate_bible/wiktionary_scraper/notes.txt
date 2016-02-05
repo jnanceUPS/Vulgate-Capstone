@@ -1,0 +1,5 @@
+pattern for scraping:
+	class="form-of-definition-link"
+
+for pages w/multiple lang results:
+	<span class="toctext">Latin</span>

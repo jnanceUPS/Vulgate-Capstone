@@ -1,0 +1,1 @@
+If you've downloaded anything / added anything to your classpath / etc. include the download links and installation steps you went through so that when we host this project on a server at some point we know how to do all this and don't have to relearn it.
