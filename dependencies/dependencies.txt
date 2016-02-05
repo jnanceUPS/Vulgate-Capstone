@@ -1,1 +1,7 @@
 If you've downloaded anything / added anything to your classpath / etc. include the download links and installation steps you went through so that when we host this project on a server at some point we know how to do all this and don't have to relearn it.
+
+For the JWKTL:
+Oracle BerkeleyDB Java Edition http://www.oracle.com/technology/software/products/berkeley-db/je/index.html
+XML Wiktionary Dump (http://dumps.wikimedia.org/backup-index.html)
+JWKTL: http://search.maven.org/#search|ga|1|a%3A%22jwktl%22
+Note that the JWKTL needs to parse the XML Wiktionary Data before it can be used.  I (Ray) have these files already parsed.
