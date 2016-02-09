@@ -24,7 +24,7 @@ public class wordcount {
 				sc.useDelimiter(" ");
 			} catch(FileNotFoundException e) { e.printStackTrace(); }
 		
-			while (sc.hasNextLine()){
+			while (sc.hasNext()){
 				String word = sc.next();
 				word = word.replaceAll("\u00E6","e"); //replaces "ae" with "e"
 				word = Normalizer.normalize(word, Normalizer.Form.NFD); //takes off accent marks

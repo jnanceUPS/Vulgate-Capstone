@@ -5,3 +5,10 @@ Oracle BerkeleyDB Java Edition http://www.oracle.com/technology/software/product
 XML Wiktionary Dump (http://dumps.wikimedia.org/backup-index.html)
 JWKTL: http://search.maven.org/#search|ga|1|a%3A%22jwktl%22
 Note that the JWKTL needs to parse the XML Wiktionary Data before it can be used.  I (Ray) have these files already parsed.
+
+
+Node.js - download, add node to path
+MongoDB - download, npm install mongodb (if mongodb isn't in node_modules), add mongo java driver to class path (for running indexer.java)
+
+
+
