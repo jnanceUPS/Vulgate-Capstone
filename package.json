@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "cheerio": "^0.20.0",
     "jquery": "^2.2.0",
+    "jsdom": "^8.0.2",
     "mongodb": "^2.1.6"
   }
 }

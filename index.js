@@ -1,12 +1,11 @@
-var $ = require('jquery');
 var mongodb = require('mongodb'),
 http = require('http'),
-fs = require('fs');
+fs = require('fs'),
+jsdom = require('jsdom');
 
-$(document).ready(function(){
-        var sentence = "et protulit terra herbam virentem et adferentem semen iuxta genus suum lignumque faciens fructum et habens unumquodque sementem secundum speciem suam et vidit Deus quod esset bonum"
-        console.log(sentence);
-});
+var jquery = fs.readFileSync("./lib/jquery-2.2.0.min.js", "utf-8");
+
+
 
 fs.readFile('./index.html', function(err, html){
 	if (err) {
@@ -14,6 +13,8 @@ fs.readFile('./index.html', function(err, html){
 	}
 	http.createServer(function (req, res) {
 		res.writeHeader(200, {'Content-Type': 'text/html'});
+		res.write('<h1>HI</h1>');
+		res.write(y);		
 		res.write(html);
 		res.end();
 	}).listen(8080);
@@ -21,6 +22,7 @@ fs.readFile('./index.html', function(err, html){
 
 var MongoClient = mongodb.MongoClient;
 var url = "mongodb://localhost:27017/vulgate";
+var y;
 
 MongoClient.connect(url, function (err, db) {
 	if (err) {
@@ -34,6 +36,7 @@ MongoClient.connect(url, function (err, db) {
 
         collection.find().toArray(function(err, items){
             console.log(x, items[0][x][1]);
+            y = items[0][x][1];
         });    
     }
 });

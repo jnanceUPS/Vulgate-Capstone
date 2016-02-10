@@ -118,14 +118,15 @@ public class indexer {
 		//table.insert(new BasicDBObject(map));
 
 		// //writes to file
-		// Path file = Paths.get("indexer.txt");
-		// List<String> output = new ArrayList<>();
-
+		 Path file = Paths.get("unique_words.txt");
+		 List<String> output = new ArrayList<>();
+		 for (String s: map.keySet())
+		 output.add(s);
 		// for (Map.Entry<String,List<String>> e : map.entrySet()){
 		// 	output.add(e.getKey() + "\t" + e.getValue());
 		// }
-		// try {
-		// 	Files.write(file, output, Charset.forName("UTF-8"));
-		// } catch(IOException e){ e.printStackTrace(); }
+		try {
+			Files.write(file, output, Charset.forName("UTF-8"));
+		} catch(IOException e){ e.printStackTrace(); }
 	}
 }
