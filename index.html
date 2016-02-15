@@ -1,22 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
+	<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
 	<title>Vulgate Reference Finder</title>
+	<h1>Que<sup>2</sup></h1>
+
 	<script type="text/javascript" src="lib/jquery-2.2.0.min.js"></script>
-	<script type="text/javascript" src="index.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<script type="text/javascript" src="lib/ng-file-upload-shim.min.js"></script>
+	<script type="text/javascript" src="lib/ng-file-upload.min.js"></script>
+	<script type="text/javascript" src="controller.js"></script>
 
 </head>
-<body>
-
-	<h1></h1>
-	<p></p>
-	<div>
-		<button type="button" id="button">Click!</button>
+<body id="body" ng-controller="myCtrl" >
+	<div class="center" ng-hide="showDiv">
+		<button id="upload" class="button" ng-click="showDiv=true" ngf-select="upload($file)">Upload File</button>
 	</div>
-	<form action="">
-		Text to upload:<br>
-		<input type="text" name="fileName" id="x_fileName" val="s"><br>
-		<input type="submit">
-	</form>
+	<div id="res">
+		<div id="file">{{fileName}}</div><br>
+		<div ng-repeat="r in results track by $index">
+			<table width="80%">
+				<col width="15%" />
+				<col width="15%" />
+				<col width="70%" />
+				<th colspan="3" id="sentence"> {{r.sentence}}</th>
+				<tr ng-repeat="ref in r.refs">
+					<td> {{ref.w1}} </td>
+					<td> {{ref.w2}}</td>
+					<td> {{ref.inds}}</td>
+				</tr>
+			</table>
+			<br>
+		</div>
+	</div>
+</div>
 </body>
 </html>
