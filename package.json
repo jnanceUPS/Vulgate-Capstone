@@ -1,9 +1,11 @@
 {
   "dependencies": {
     "angular": "^1.5.0",
+    "async": "^1.5.2",
     "body-parser": "^1.15.0",
     "busboy": "^0.2.12",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
     "mongodb": "^2.1.6",
     "mongoose": "^4.4.3",
     "ng-file-upload": "^11.2.3"

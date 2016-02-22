@@ -1,8 +1,6 @@
-a
 aaron
 aaronitis
 aasbai
-ab
 abaddon
 abalienabit
 abalienati
@@ -426,7 +424,6 @@ abysso
 abyssos
 abyssum
 abyssus
-ac
 acan
 accain
 accaron
@@ -825,7 +822,6 @@ acuti
 acutissimam
 acutum
 acutus
-ad
 ada
 adad
 adada
@@ -1745,7 +1741,6 @@ ainfecit
 ainidcirco
 ainoculus
 aio
-ait
 aiunt
 aja
 ajalon
@@ -1859,9 +1854,6 @@ aliquantum
 aliquas
 alique
 aliquem
-aliqui
-aliquid
-aliquis
 aliquo
 aliquod
 aliquos
@@ -2166,7 +2158,6 @@ ambulet
 ambuletis
 ambulo
 amelech
-amen
 ament
 amentia
 amentiam
@@ -2312,7 +2303,6 @@ amygdalarum
 amygdalas
 amygdalinas
 amygdalus
-an
 ana
 anab
 anaglypha
@@ -2545,7 +2535,6 @@ ansam
 ansas
 anse
 ansulas
-ante
 antea
 antecedat
 antecede
@@ -2558,7 +2547,6 @@ anteibit
 antelucani
 antelucanum
 antemurale
-antequam
 antichristi
 antichristus
 anticipaverunt
@@ -2946,7 +2934,6 @@ apti
 apto
 aptum
 aptus
-apud
 apum
 aqua
 aquam
@@ -3779,7 +3766,6 @@ astutus
 astyages
 asylo
 asyncritum
-at
 atad
 atara
 ataroth
@@ -3801,7 +3787,6 @@ athenobius
 ather
 athersatha
 athmatha
-atque
 atramentarium
 atramento
 atramentum
@@ -4168,8 +4153,6 @@ austro
 austrum
 austrumque
 ausus
-aut
-autem
 autumnales
 autumni
 autumno
@@ -6448,7 +6431,6 @@ circulo
 circulos
 circulum
 circulus
-circum
 circumagam
 circumamicta
 circumamicti
@@ -9558,7 +9540,6 @@ continuus
 contis
 contorquere
 contos
-contra
 contracta
 contractum
 contradicam
@@ -10506,13 +10487,11 @@ cucurrissem
 cucurrisset
 cucurrit
 cudebat
-cui
 cuicumque
 cuidam
 cuilibet
 cuiquam
 cuique
-cujus
 cujusdam
 cujusmodi
 cujusquam
@@ -10549,9 +10528,7 @@ cultura
 culturam
 culture
 cultus
-cum
 cumi
-cumque
 cumulare
 cumulum
 cuncta
@@ -10610,7 +10587,6 @@ cupio
 cupis
 cupit
 cupitis
-cur
 cura
 curabant
 curabantur
@@ -10949,7 +10925,6 @@ datus
 david
 davidi
 davidis
-de
 dealbabor
 dealbabuntur
 dealbate
@@ -11486,7 +11461,6 @@ deglutivit
 dehonestaveris
 dei
 deinceps
-deinde
 deintus
 dejecerint
 dejecerit
@@ -11753,7 +11727,6 @@ denuntiaverunt
 denuntiavit
 denuntiemus
 denuo
-deo
 deorsum
 deorum
 deos
@@ -12469,13 +12442,11 @@ diane
 dibon
 dibongad
 dic
-dicam
 dicamque
 dicamus
 dicant
 dicantur
 dicas
-dicat
 dicatis
 dicatque
 dicatur
@@ -12493,12 +12464,9 @@ dicemusque
 dicenda
 dicendo
 dicendum
-dicens
 dicensque
-dicent
 dicente
 dicentem
-dicentes
 dicenti
 dicentia
 dicentibus
@@ -12513,7 +12481,6 @@ diceres
 diceret
 diceretis
 diceretur
-dices
 dicesque
 dicet
 dicetis
@@ -12523,13 +12490,9 @@ diceturque
 dici
 dicimini
 dicimus
-dicis
-dicit
 dicite
 dicitis
 dicito
-dicitur
-dico
 dicta
 dictaverit
 dicte
@@ -13573,10 +13536,8 @@ dixisse
 dixissem
 dixissent
 dixisset
-dixisti
 dixistique
 dixistis
-dixit
 dixitque
 do
 doce
@@ -14005,7 +13966,6 @@ dulcissimum
 dulcius
 dulcoratur
 dulcoris
-dum
 duma
 dummodo
 dumque
@@ -14076,19 +14036,13 @@ duxit
 duxitque
 dyscolis
 dysenteria
-e
-ea
-eadem
 eademque
-eam
 eamdem
 eamdemque
 eamus
 eant
 eaque
-earum
 earumdem
-eas
 easdem
 eat
 eatis
@@ -14502,7 +14456,6 @@ egistis
 egit
 egla
 eglon
-ego
 egredere
 egrederemini
 egrederentur
@@ -14586,8 +14539,6 @@ egyptie
 egyptio
 egyptium
 egyptius
-ei
-eis
 eisdem
 eisque
 ejeceram
@@ -14643,7 +14594,6 @@ ejulabunt
 ejulans
 ejulantes
 ejulatu
-ejus
 ejusdem
 ejusdemque
 ejusmodi
@@ -15103,7 +15053,6 @@ enigmata
 enigmate
 enigmatibus
 enigmatum
-enim
 ennom
 enoch
 enon
@@ -15131,11 +15080,7 @@ enutriti
 enutritus
 enutrivi
 enutrivit
-eo
-eodem
-eorum
 eorumdem
-eos
 eosque
 epaphra
 epaphras
@@ -15271,7 +15216,6 @@ eramento
 eramentorum
 eramentum
 eramus
-erant
 erantque
 erarii
 erario
@@ -15283,7 +15227,6 @@ eraserit
 erastum
 erastus
 erasus
-erat
 eratis
 eratque
 erchuei
@@ -15321,7 +15264,6 @@ erexitque
 erga
 ergastulo
 ergastulum
-ergo
 ergone
 ericii
 ericius
@@ -15364,13 +15306,9 @@ eripiunt
 eripui
 eripuisti
 eripuit
-eris
 erisque
-erit
-eritis
 eritisque
 eritque
-ero
 erogant
 erogarentur
 erogaverat
@@ -15520,7 +15458,6 @@ erumpet
 erumpit
 erumpite
 erumpunt
-erunt
 eruntque
 eruperant
 eruperunt
@@ -15529,7 +15466,6 @@ erupit
 erupta
 eruti
 erutus
-es
 esaan
 esau
 esbaal
@@ -15557,15 +15493,12 @@ esna
 esphatha
 esriel
 esron
-esse
 essem
 essemus
 essent
 essentque
 esses
-esset
 essetis
-est
 estaol
 estas
 estate
@@ -15605,7 +15538,6 @@ estimaverit
 estimaverunt
 estimet
 estimo
-estis
 estiva
 estive
 estivo
@@ -15648,7 +15580,6 @@ esuritis
 esuriunt
 esurivi
 esus
-et
 etam
 etas
 etate
@@ -15686,14 +15617,11 @@ ethi
 ethnan
 ethnici
 ethnicus
-etiam
 etiamsi
 etroth
-etsi
 eubulus
 eucharis
 euge
-eum
 eumdem
 eumeni
 eumque
@@ -15881,7 +15809,6 @@ evulse
 evulsero
 evulsione
 evum
-ex
 exacerbabat
 exacerbant
 exacerbastis
@@ -16942,7 +16869,6 @@ extollo
 extollunt
 extorserit
 extorsit
-extra
 extraham
 extrahentes
 extrahentur
@@ -18362,9 +18288,7 @@ fuerat
 fuere
 fuerim
 fuerimus
-fuerint
 fueris
-fuerit
 fueritis
 fuero
 fuerunt
@@ -18443,7 +18367,6 @@ fugitivos
 fugitivus
 fugitque
 fugiunt
-fui
 fuimus
 fuisse
 fuissem
@@ -18454,7 +18377,6 @@ fuisset
 fuissetis
 fuisti
 fuistis
-fuit
 fuitque
 fulciebantur
 fulcientes
@@ -19602,7 +19524,6 @@ habuisti
 habuistis
 habuit
 habuitque
-hac
 haccus
 haceldama
 hachamoni
@@ -19651,7 +19572,6 @@ hananiam
 hananias
 hananie
 hanathon
-hanc
 hanes
 haniel
 hanni
@@ -19726,7 +19646,6 @@ hatipha
 hatita
 hatitha
 hattus
-haud
 hauri
 hauriam
 hauriant
@@ -19788,7 +19707,6 @@ hebroni
 hebronitarum
 hebronitas
 hebronitis
-hec
 heccine
 heddai
 heder
@@ -19965,10 +19883,8 @@ hezecia
 hezecie
 hezion
 hezir
-hi
 hians
 hibernalis
-hic
 hiccine
 hiel
 hiemabo
@@ -20021,7 +19937,6 @@ hirundines
 hirundinis
 hirundinum
 hirundo
-his
 hispaniam
 hispanie
 hispidus
@@ -20034,7 +19949,6 @@ historiis
 hoba
 hobab
 hobia
-hoc
 hod
 hodes
 hodie
@@ -20202,7 +20116,6 @@ hortulanus
 hortum
 hortus
 horum
-hos
 hosa
 hosanna
 hosiel
@@ -20244,12 +20157,9 @@ hostis
 hostium
 hotham
 hozai
-huc
 hucac
 hucuca
 hucusque
-huic
-hujus
 hujuscemodi
 hujusmodi
 hul
@@ -20343,7 +20253,6 @@ humore
 humorem
 humum
 humus
-hunc
 hupham
 huphamitarum
 hur
@@ -20424,8 +20333,6 @@ id
 idaia
 idaie
 idcirco
-idem
-ideo
 ideoque
 idida
 idiota
@@ -20470,7 +20377,6 @@ ierunt
 ierusalem
 igaal
 igal
-igitur
 ignavi
 ignavia
 igne
@@ -20571,30 +20477,23 @@ ijeabarim
 ilai
 ilia
 ilicem
-illa
-illam
 illamentatus
 illaque
 illaqueatus
 illaqueavi
 illaqueentur
-illarum
-illas
 illata
 illatas
 illatis
 illatum
 illaturum
 illatus
-ille
 illecebris
 illectus
 illel
 illeque
 illesi
 illesum
-illi
-illic
 illiciar
 illicita
 illicitam
@@ -20604,16 +20503,11 @@ illico
 illicque
 illidetur
 illique
-illis
 illisit
 illisque
 illisum
 illisus
-illius
-illo
 illoque
-illorum
-illos
 illotis
 illuc
 illucescat
@@ -20621,7 +20515,6 @@ illucescebat
 illucescente
 illucesceret
 illucque
-illud
 illudant
 illudas
 illudebant
@@ -20637,7 +20530,6 @@ illudes
 illudet
 illudetur
 illuditur
-illum
 illumina
 illuminabatur
 illuminabis
@@ -21209,7 +21101,6 @@ imputavit
 imputetur
 imputribile
 imus
-in
 inaccessibilem
 inaccessis
 inaltabit
@@ -21980,7 +21871,6 @@ influebat
 infodit
 informationem
 informibus
-infra
 infremuit
 infrenabo
 infringere
@@ -22675,7 +22565,6 @@ intentator
 intente
 intenti
 intentionum
-inter
 intercedat
 intercedente
 intercedite
@@ -22772,7 +22661,6 @@ interierint
 interierit
 interierunt
 interiit
-interim
 interimeret
 interior
 interiora
@@ -22905,7 +22793,6 @@ intoleranda
 intolerantiam
 intonsa
 intonuit
-intra
 intrabant
 intrabat
 intrabimus
@@ -23302,23 +23189,15 @@ involvet
 involvimur
 involvit
 invulnerabiles
-ipsa
 ipsam
 ipsamque
 ipsaque
 ipsarum
 ipsas
-ipse
 ipseque
-ipsi
 ipsique
-ipsis
-ipsius
-ipso
-ipsorum
 ipsos
 ipsosque
-ipsum
 ipsumque
 ira
 iracunda
@@ -23453,7 +23332,6 @@ irrumpentes
 irrumpere
 irrumperent
 irruperunt
-is
 isaac
 isaar
 isaari
@@ -23499,23 +23377,16 @@ issent
 isset
 issetque
 ista
-istam
 istarum
 istas
-iste
 istemo
-isti
-istis
 istius
 istiusmodi
-isto
 istob
 istorum
 istos
 istud
-istum
 isuhaia
-ita
 italia
 italiam
 italica
@@ -25967,7 +25838,6 @@ mageth
 magi
 magice
 magiis
-magis
 magisque
 magister
 magistratibus
@@ -26222,7 +26092,6 @@ malorum
 malos
 maluimus
 maluisses
-malum
 malumque
 malus
 mambre
@@ -26641,15 +26510,10 @@ mchatur
 mchatus
 mchie
 mchus
-me
-mea
-meam
 mearum
-meas
 mecherathites
 mechmas
 mechnedebai
-mecum
 mecumque
 medaba
 medad
@@ -26724,16 +26588,13 @@ medullata
 medullatorum
 medullis
 medus
-mee
 meetabel
 megbis
 megphias
 mehusim
-mei
 meipso
 meipsum
 meique
-meis
 mejarcon
 mel
 melaleel
@@ -26917,9 +26778,7 @@ mentitus
 mentium
 mentiuntur
 mentum
-meo
 meorum
-meos
 mephaat
 mephaath
 meracissimum
@@ -27099,8 +26958,6 @@ metum
 metunt
 metus
 metuunt
-meum
-meus
 meza
 mezaab
 mi
@@ -27130,7 +26987,6 @@ migrans
 migrantium
 migrare
 migravit
-mihi
 mihimetipsi
 mihique
 miles
@@ -27553,7 +27409,6 @@ modiorum
 modios
 modis
 modius
-modo
 modos
 modulamini
 modum
@@ -28254,7 +28109,6 @@ nahath
 nahum
 naim
 najoth
-nam
 namque
 namsi
 namuel
@@ -28434,7 +28288,6 @@ nazarenus
 nazareos
 nazareth
 nazareus
-ne
 nea
 neam
 neapolim
@@ -28448,7 +28301,6 @@ nebulam
 nebulas
 nebule
 nebulosa
-nec
 necabis
 necabitur
 necarentur
@@ -28615,7 +28467,6 @@ neptis
 nequam
 nequando
 nequaquam
-neque
 nequeant
 nequeas
 nequeat
@@ -28740,7 +28591,6 @@ niniven
 ninivite
 ninivitis
 nisan
-nisi
 nisus
 nisusque
 nitebantur
@@ -28780,8 +28630,6 @@ nobilissimam
 nobilissimi
 nobilitatis
 nobiliter
-nobis
-nobiscum
 nobismetipsis
 noceas
 noceat
@@ -28883,7 +28731,6 @@ nomini
 nominibus
 nominis
 nominum
-non
 nona
 nonadecima
 nonagenaria
@@ -28906,7 +28753,6 @@ noran
 norma
 normam
 norunt
-nos
 noscetur
 noscitur
 nosmetipsos
@@ -28914,21 +28760,11 @@ nosque
 nosse
 nossent
 nosset
-noster
 nosti
 nostis
-nostra
-nostram
 nostrarum
-nostras
-nostre
-nostri
-nostris
 nostrisque
-nostro
 nostrorum
-nostros
-nostrum
 nota
 notam
 notarent
@@ -29113,7 +28949,6 @@ numulariis
 numulariorum
 numularios
 nun
-nunc
 nundinas
 nundinis
 nunerraverunt
@@ -29222,8 +29057,6 @@ nutum
 nycticoracem
 nycticorax
 nympham
-o
-ob
 obadia
 obaudiendo
 obaudierit
@@ -30024,9 +29857,7 @@ omne
 omnem
 omnemque
 omneque
-omnes
 omnesque
-omni
 omnia
 omniaque
 omnibus
@@ -31464,7 +31295,6 @@ pepigisti
 pepigit
 pepigitque
 pepones
-per
 pera
 peracto
 peragrantes
@@ -33265,10 +33095,8 @@ possint
 possis
 possit
 possitis
-possum
 possumus
 possunt
-post
 poste
 postea
 posteaquam
@@ -34253,7 +34081,6 @@ privatim
 privatus
 privavit
 privilegio
-pro
 proba
 probabat
 probabilem
@@ -34851,7 +34678,6 @@ propriis
 proprio
 proprium
 proprius
-propter
 propterea
 propugnacula
 propugnaculis
@@ -35471,7 +35297,6 @@ pythonibus
 pythonicus
 pythonis
 pythonissam
-qua
 quacumque
 quadam
 quadragenarium
@@ -35524,7 +35349,6 @@ qualitate
 qualitatis
 qualiter
 qualive
-quam
 quamcumque
 quamdam
 quamdiu
@@ -35547,7 +35371,6 @@ quantum
 quantumcumque
 quantus
 quapropter
-quare
 quarta
 quartadecima
 quartam
@@ -35558,8 +35381,6 @@ quartodecimo
 quartum
 quartumdecimum
 quartus
-quarum
-quas
 quascumque
 quasdam
 quasi
@@ -35575,14 +35396,12 @@ quatriduanus
 quatuor
 quatuordecim
 quatuorque
-que
 queam
 queant
 queas
 queat
 quecumque
 quedam
-quem
 quemadmodum
 quemcumque
 quemdam
@@ -35679,19 +35498,10 @@ questum
 questus
 quesumus
 queunt
-qui
-quia
 quibat
-quibus
 quibuscumque
 quibusdam
-quicumque
-quid
-quidam
-quidem
 quidnam
-quidquam
-quidquid
 quiescam
 quiescant
 quiescas
@@ -35725,7 +35535,6 @@ quievimus
 quievissent
 quievit
 quievitque
-quilibet
 quin
 quinam
 quindecim
@@ -35765,23 +35574,14 @@ quintus
 quippe
 quippiam
 quique
-quis
-quisnam
 quispiam
-quisquam
-quisque
 quisquilias
-quisquis
 quitas
 quiverit
 quivero
 quivimus
-quo
 quoadusque
-quocumque
-quod
 quodam
-quodcumque
 quoddam
 quodlibet
 quodque
@@ -35789,12 +35589,8 @@ quolibet
 quominus
 quomodo
 quondam
-quoniam
 quoquam
-quoque
-quorum
 quorumdam
-quos
 quoscumque
 quosdam
 quosque
@@ -37562,7 +37358,6 @@ revocet
 revolutum
 revolvet
 revolvit
-rex
 rexit
 rexque
 rhamno
@@ -38942,7 +38737,6 @@ scytha
 scytharum
 scythas
 scythopolitas
-se
 seba
 sebe
 sebenia
@@ -39044,7 +38838,6 @@ secutis
 secutum
 secutus
 secutusque
-sed
 sedada
 sedare
 sedasset
@@ -39822,7 +39615,6 @@ sextus
 sexui
 sexum
 sexus
-si
 siaa
 siaha
 siba
@@ -39830,7 +39622,6 @@ sibam
 siban
 sibboleth
 sibe
-sibi
 sibilabit
 sibilabo
 sibilans
@@ -39841,7 +39632,6 @@ sibilum
 sibilus
 sibimet
 sibimetipsis
-sic
 sicam
 sicariorum
 sicca
@@ -40097,7 +39887,6 @@ sinceriter
 sindone
 sindonem
 sindones
-sine
 sinebant
 sinebat
 sinent
@@ -40135,7 +39924,6 @@ sinlabia
 sinopide
 sinprincipes
 sinsessionem
-sint
 sintque
 sinu
 sinum
@@ -40159,7 +39947,6 @@ sisare
 sisque
 sisterent
 sistris
-sit
 sita
 sitarciis
 site
@@ -40192,7 +39979,6 @@ situm
 situs
 siva
 sivan
-sive
 siza
 smaragdi
 smaragdine
@@ -41167,7 +40953,6 @@ stupuerunt
 stylo
 stylum
 stylus
-sua
 suaa
 suade
 suadebant
@@ -41183,10 +40968,7 @@ suadere
 suades
 suadibilis
 sual
-suam
 suar
-suarum
-suas
 suasa
 suaserunt
 suasi
@@ -41205,7 +40987,6 @@ suavitate
 suavitatem
 suavitatis
 suaviter
-sub
 suba
 subacta
 subael
@@ -41585,7 +41366,6 @@ sudibus
 sudor
 sudore
 sudoris
-sue
 suffecerat
 suffecerit
 suffecit
@@ -41665,11 +41445,9 @@ suham
 suhamitarum
 suhamite
 suhites
-sui
 suillam
 suillas
 suillum
-suis
 suisque
 sulamite
 sulamitis
@@ -41680,7 +41458,6 @@ sulphur
 sulphure
 sulphureas
 sulphuris
-sum
 sumam
 sumamus
 sumas
@@ -41749,7 +41526,6 @@ sumptum
 sumptumque
 sumptus
 sumunt
-sumus
 sumusque
 sunam
 sunamitidem
@@ -41757,16 +41533,11 @@ sunamitis
 sunem
 suni
 sunitarum
-sunt
 suntque
-suo
-suorum
-suos
 supellectilem
 supellectili
 supellectilis
 supellex
-super
 superabat
 superabit
 superabundanter
@@ -42285,8 +42056,6 @@ susurronis
 suthala
 suthalaitarum
 suthula
-suum
-suus
 suxisti
 sycomororum
 sycomoros
@@ -42416,11 +42185,8 @@ talium
 talos
 talpa
 talpas
-tam
 tamdiu
-tamen
 tametsi
-tamquam
 tandem
 tandemque
 taneos
@@ -42493,7 +42259,6 @@ taurorumque
 tauros
 taurum
 taurus
-te
 tebbaoth
 tebbath
 tebeth
@@ -42504,7 +42269,6 @@ tecto
 tectorum
 tectum
 tectus
-tecum
 tecumque
 tede
 tedebit
@@ -43101,7 +42865,6 @@ tiaris
 tiberiade
 tiberiadis
 tiberii
-tibi
 tibia
 tibiam
 tibiarum
@@ -43520,7 +43283,6 @@ tranquillam
 tranquillitas
 tranquillitate
 tranquillum
-trans
 transacta
 transacti
 transactis
@@ -43941,11 +43703,7 @@ tryphone
 tryphonem
 tryphonis
 tryphosam
-tu
-tua
-tuam
 tuarum
-tuas
 tuba
 tubalcain
 tubam
@@ -43955,12 +43713,9 @@ tube
 tubianei
 tubin
 tubis
-tue
 tueatur
 tuere
 tugurium
-tui
-tuis
 tuitus
 tulerant
 tulerat
@@ -44014,9 +43769,6 @@ tunicam
 tunicas
 tunice
 tunicis
-tuo
-tuorum
-tuos
 tuosque
 turba
 turbabantur
@@ -44111,8 +43863,6 @@ tutiora
 tutissimis
 tuto
 tutoribus
-tuum
-tuus
 tychicum
 tychicus
 tympanis
@@ -44159,7 +43909,6 @@ ubertate
 ubertatem
 ubertatis
 uberum
-ubi
 ubicumque
 ubil
 ubinam
@@ -44367,7 +44116,6 @@ unoquoque
 unum
 unumquemque
 unumquodque
-unus
 unusquisque
 unxerit
 unxerunt
@@ -44436,7 +44184,6 @@ urtica
 urtice
 us
 usi
-usque
 usquequaque
 usquequo
 usu
@@ -44450,7 +44197,6 @@ usuris
 usurpabis
 usurpaverunt
 usus
-ut
 utamur
 utantur
 utatur
@@ -44804,7 +44550,6 @@ vehementissime
 vehementissimo
 vehementissimum
 vehementius
-vel
 vela
 velabant
 velabat
@@ -45169,7 +44914,6 @@ versos
 versu
 versum
 versumque
-versus
 versutiam
 versutias
 versutus
@@ -45252,7 +44996,6 @@ vesperum
 veste
 vestem
 vestemque
-vester
 vestes
 vestesque
 vestiantur
@@ -45304,19 +45047,10 @@ vestiuntur
 vestivi
 vestivit
 vestivitque
-vestra
-vestram
 vestramque
 vestrarum
 vestras
-vestre
-vestri
-vestris
-vestro
-vestrorum
-vestros
 vestrosque
-vestrum
 vetare
 vetat
 vetati
@@ -45947,7 +45681,6 @@ vivificavit
 vivificet
 vivimus
 vivis
-vivit
 vivite
 vivitis
 vivitur
@@ -45968,7 +45701,6 @@ vixi
 vixisti
 vixit
 vixitque
-vobis
 vobiscum
 vobisipsis
 vobismetipsis
@@ -46207,7 +45939,6 @@ voraverat
 voravit
 vorax
 vorticibus
-vos
 vosmetipsos
 vosque
 vota

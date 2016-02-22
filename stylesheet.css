@@ -2,6 +2,32 @@ body {
 	/*background-color: #b7d1c4*/
 }
 
+#main-wrap > div { min-height: 450px; }
+
+
+#header,
+#footer {
+	min-height: 40px;
+}
+
+/* layout */
+#main-wrap {
+	/* overflow to handle inner floating block */
+	overflow: hidden;
+}
+
+#sidebar {
+	float: left;
+	width: 50%;
+}
+
+#content-wrap {
+	float: right;
+	width: 50%;
+	word-wrap:break-word;
+	text-align: justify;
+}   
+
 h1 {
 	font-family: Tahoma;
 	font-weight: bold;
@@ -13,7 +39,7 @@ h1 {
 #file {
 	font-family: Tahoma;
 	font-weight: bold;
-	margin-left: 100px;
+	text-align: center;
 }
 
 table {
@@ -21,14 +47,12 @@ table {
 	border-collapse: separate;
 	border-spacing: 10px 5px;
 	margin: auto;
-/*	margin-left: 100px;
-	margin-right: 100px;*/
 	table-layout: fixed;
 	/*background-color: #B38B6D;*/
-	border-top-right-radius: 15px;
-	border-top-left-radius: 15px;
-	border-bottom-right-radius: 15px;
-	border-bottom-left-radius: 15px;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
 }
 .center {
 	text-align: center;
@@ -36,6 +60,10 @@ table {
 
 tr:nth-child(even) {
 	background-color: #F0F0F0;
+}
+
+tr {
+	padding-bottom: 25px;
 }
 
 th {
@@ -50,21 +78,38 @@ td {
 	word-wrap:break-word;
 }
 
+.highlightedText {
+	background: yellow;
+}
 
-#sentence {
+.sentence {
 	font-family: Verdana;
 	font-size: 1em;
 	font-weight: normal;
 	color: #3c4543;
+	padding-bottom: 25px;
+}
+
+.refs {
+	font-size: 1em;
+	font-weight: normal;
 }
 
 #upload{
-	border: 2px solid #000000;
+	/*border: 2px solid #000000;*/
 	position: relative;
-	border-radius: 5px;
-	/*background-color: #cc0323;*/
-	height: 50px;
-	width: 200px;
-	text-align: center;
-	
+/*	border-radius: 5px;
+background-color: #cc0323;*/
+height: 25px;
+width: 200px;
+text-align: center;
+
+}
+
+
+
+.popover {
+	position: absolute;
+	z-index: 100;
+	text-align: right;
 }
