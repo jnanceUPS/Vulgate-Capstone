@@ -91,10 +91,10 @@ var getRef2 = function(sen, callback){
 		var refs = parseData(data);	
 		if (refs.length != 0) {
 			//console.log(sen);
-			callback(null,{'sentence': sen, 'refs': refs});
+			callback(null,{'sentence': sen, 'hasRefs': true,'refs': refs});
 		} else {
 			//console.log(sen);
-			callback(null,{'sentence': sen, 'hasRefs': 'No references found.'});
+			callback(null,{'sentence': sen, 'hasRefs': false});
 		}
 	});	
 }
@@ -117,7 +117,7 @@ var getRef = function(sen, callback){
 		var refs = getMatchingWords(data);
 		//keepCount(data);	
 		if (refs.length != 0) {
-			callback(null,{'sentence': sen, 'refs': refs});
+			callback(null,{'sentence': sen, 'hasRefs': true,'refs': refs});
 		} else callback(null,{});
 	});	
 }
@@ -165,16 +165,18 @@ fs.readdir('./vulgate_bible/ordered_version/', function(err, filenames) {
 		console.log(err);
 		return;
 	}
-	filenames.forEach(function(filename) {
-		fs.readFile('./vulgate_bible/ordered_version/' + filename, 'utf-8', function(err, content) {
+	async.map(filenames, function(filename, callback){
+		fs.readFile('./vulgate_bible/ordered_version/' + filename, 'utf8', function(err, content) {
 			if (err) {
 				console.log(err);
 				return;
 			}
-			vulgate.push(content);
+			callback(null,content);
 		});
+	}, function(err, results){
+		vulgate = results;
+		postVulgate();
 	});
-	postVulgate();
 });
 
 
@@ -184,7 +186,7 @@ function postVulgate() {
 	});
 }
 
-	app.listen(8080);
+app.listen(8080);
 
 //gets rid of duplicate words and stop words in the sentence
 function unique_and_stop(array){
@@ -222,7 +224,7 @@ function getMatchingWords(data){
 function keepCount(data){
 	for(var i = 0; i < data.length; i++){
 		for (var j = 0; j < data[i].index.length; j++){
-			var ind = data[i].index[j].split(" ")[0];
+			var ind = data[i].index[j].split(" [")[0];
 			var pos = sess.books.indexOf(ind);
 			if(pos < 0) {
 				sess.books.push(ind);
@@ -233,6 +235,60 @@ function keepCount(data){
 	}
 }
 
+function utf16to8(str) {
+	var out, i, len, c;
+
+	out = "";
+	len = str.length;
+	for(i = 0; i < len; i++) {
+		c = str.charCodeAt(i);
+		if ((c >= 0x0001) && (c <= 0x007F)) {
+			out += str.charAt(i);
+		} else if (c > 0x07FF) {
+			out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+			out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));
+			out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+		} else {
+			out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));
+			out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+		}
+	}
+	return out;
+}
+
+function utf8to16(str) {
+	var out, i, len, c;
+	var char2, char3;
+
+	out = "";
+	len = str.length;
+	i = 0;
+	while(i < len) {
+		c = str.charCodeAt(i++);
+		switch(c >> 4)
+		{ 
+			case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+	    // 0xxxxxxx
+	    out += str.charAt(i-1);
+	    break;
+	    case 12: case 13:
+	    // 110x xxxx   10xx xxxx
+	    char2 = str.charCodeAt(i++);
+	    out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
+	    break;	
+	    case 14:
+	    // 1110 xxxx  10xx xxxx  10xx xxxx
+	    char2 = str.charCodeAt(i++);
+	    char3 = str.charCodeAt(i++);
+	    out += String.fromCharCode(((c & 0x0F) << 12) |
+	    	((char2 & 0x3F) << 6) |
+	    	((char3 & 0x3F) << 0));
+	    break;
+	 }
+	}
+
+	return out;
+}
 
 		// async.waterfall([
 		// 	function(callback){

@@ -1,60 +1,25 @@
 var app = angular.module('myApp', ['ngFileUpload']);
 
-app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Upload, $http, $q) {
+app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', function($scope, Upload, $http, $q, $anchorScroll) {
 
-		var books = ["Genesis","Exodus","Leviticus","Numeri","Deuteronomium","Josue","Judicum","Ruth","Regum I",
-		"Regum II","Regum III","Regum IV","Paralipomenon I","Paralipomenon II","Esdre","Nehemie","Tobie","Judith",
-		"Esther","Job","Psalmi","Proverbia","Ecclesiastes","Canticum Canticorum","Sapientia","Ecclesiasticus","Isaias",
-		"Jeremias","Lamentationes","Baruch","Ezechiel","Daniel","Osee","Joel","Amos","Abdias","Jonas","Michea","Nahum",
-		"Habacuc","Sophonias","Aggeus","Zacharias","Malachias","Machabeorum I","Machabeorum II","Mattheus","Marcus",
-		"Lucas","Joannes","Actus Apostolorum","ad Romanos","ad Corinthios I","ad Corinthios II","ad Galatas",
-		"ad Ephesios","ad Philippenses","ad Colossenses","ad Thessalonicenses I","ad Thessalonicenses II",
-		"ad Timotheum I","ad Timotheum II","ad Titum","ad Philemonem","ad Hebreos","Jacobi","Petri I","Petri II",
-		"Joannis I","Joannis II","Joannis III","Jude","Apocalypsis"];
+	var books = ["Genesis","Exodus","Leviticus","Numeri","Deuteronomium","Josue","Judicum","Ruth","Regum I",
+	"Regum II","Regum III","Regum IV","Paralipomenon I","Paralipomenon II","Esdre","Nehemie","Tobie","Judith",
+	"Esther","Job","Psalmi","Proverbia","Ecclesiastes","Canticum Canticorum","Sapientia","Ecclesiasticus","Isaias",
+	"Jeremias","Lamentationes","Baruch","Ezechiel","Daniel","Osee","Joel","Amos","Abdias","Jonas","Michea","Nahum",
+	"Habacuc","Sophonias","Aggeus","Zacharias","Malachias","Machabeorum I","Machabeorum II","Mattheus","Marcus",
+	"Lucas","Joannes","Actus Apostolorum","ad Romanos","ad Corinthios I","ad Corinthios II","ad Galatas",
+	"ad Ephesios","ad Philippenses","ad Colossenses","ad Thessalonicenses I","ad Thessalonicenses II",
+	"ad Timotheum I","ad Timotheum II","ad Titum","ad Philemonem","ad Hebreos","Jacobi","Petri I","Petri II",
+	"Joannis I","Joannis II","Joannis III","Jude","Apocalypsis"];
 
 	//$http.defaults.headers.post["Content-Type"] = "multipart/form-data";
 	$http.post('/vulgate').success(function(data){
-		//console.log(data.vulgate);
 		$scope.vulgate = data.vulgate;
 	})
 	.error(function(err){
 		console.log(err);
 	});
 
-
-
-		function convertRefs(refs) {
-			for (var i = 0; i < refs.length; i++){
-				var r = refs[i].substring(0,refs[i].indexOf(":"));
-				console.log(books[r]);
-			}
-		}
-
-	//gets results back from server
-	var getResults = function(){
-		$http.get('/length').success(function(numSen){
-			$scope.results = [];
-			for(var i = 0; i < numSen.length; i++){
-				//(function(i) {
-					var url = '/searchResults/' + i;
-					$http.get(url)
-					.success(function(data) {
-						var obj = {};
-						obj.sentence = data.sentence + ".";
-						obj.refs = data.refs;
-						if (obj.sentence !== "undefined.")
-							$scope.results.push(obj);
-					})
-					.error(function(data) {
-						console.log(data);
-					});
-				}
-			})
-		.error(function(data) {
-		});
-	}
-
-	//getResults2();
 	function getResults2 (){
 		$scope.results = [];
 		var defer = $q.defer();
@@ -64,8 +29,15 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			console.log(data);
 			$scope.results = data.results;
 			$scope.loading = "";
-			console.log(data.books);
-			console.log(data.freqs);
+			$scope.showDiv = true;
+			$scope.stats = [];
+			for (var i = 0; i < data.books.length; i++){
+				$scope.stats.push({'book': data.books[i], 'freq': data.freqs[i]});
+			}
+			$scope.stats.sort(function(a,b){
+				return b.freq - a.freq;
+			});
+
 		})
 		.error(function() {
 			defer.reject("Failed to get data.");
@@ -82,16 +54,35 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 	// 	return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
 	// };
 
-	$scope.showPopover = function(pop) {
-		var book = books.indexOf(pop.split(" [")[0]);
-		console.log(book);
-		$scope.popover = $scope.vulgate[book];
-		$scope.popoverIsVisible = true; 
+	$scope.popupIndex = [-1,-1]; 
+
+	//given a verse name e.g. "Numeri [7:9]", returns the corresponding verse from the Vulgate
+	$scope.getVerse = function(vName,pindex,index){
+		var spl = vName.split(" [");
+		var book = books.indexOf(spl[0]);
+		var num = spl[1].substring(0,spl[1].length-1);
+		
+		var i1 = $scope.vulgate[book].indexOf(num);
+		var verse = $scope.vulgate[book].substring(i1,getNextIndexOf("\n",$scope.vulgate[book],i1));
+		$scope.popup = verse;
+		//$scope.vref.splice(index, 0, verse);
+		if ($scope.popupIndex[0] == pindex && $scope.popupIndex[1] == index)
+			$scope.popupIndex = [-1,-1];
+		else $scope.popupIndex = [pindex, index];
+	}
+
+	$scope.showRefs = function(index){
+		$scope.popupIndex = [-1,-1];
+		$scope.verse = [];
+		var sen = $scope.results[index];
+		$scope.vref = {};
+		$scope.hasRefs = sen.hasRefs;
+		if(sen.hasRefs){
+			$scope.vref = sen.refs;
+		}
+
 	};
 
-	$scope.hidePopover = function () {
-		$scope.popoverIsVisible = false;
-	};
 
 	$scope.submit = function() {
 		if ($scope.form.file.$valid && $scope.file) {
@@ -114,3 +105,8 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 }]);
 
 
+function getNextIndexOf(char, string, startIndex){
+	for(var i = startIndex; i < string.length; i++){
+		if (string[i] == char) return i;
+	}
+}

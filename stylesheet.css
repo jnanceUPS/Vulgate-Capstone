@@ -1,3 +1,5 @@
+font-variant-ligatures: historical-ligatures;
+
 body {
 	/*background-color: #b7d1c4*/
 }
@@ -16,24 +18,28 @@ body {
 	overflow: hidden;
 }
 
+
 #sidebar {
 	float: left;
 	width: 50%;
 }
 
+#header2 {
+	float:left;
+	display: inline-block;
+	text-align: justify;
+	width: 20%;
+}
+
 #content-wrap {
 	float: right;
 	width: 50%;
-	word-wrap:break-word;
-	text-align: justify;
 }   
 
 h1 {
 	font-family: Tahoma;
 	font-weight: bold;
 	text-align: center;
-	padding-top: 25px;
-	padding-bottom: 25px;
 }
 
 #file {
@@ -42,41 +48,50 @@ h1 {
 	text-align: center;
 }
 
-table {
+.scrollable {
+	padding-right: 15px;
+	max-height: 400px;
+	overflow: auto;
+}
+#border {
+	padding: 5px;
 	border: #000000 1px solid;
-	border-collapse: separate;
-	border-spacing: 10px 5px;
-	margin: auto;
-	table-layout: fixed;
-	/*background-color: #B38B6D;*/
 	border-top-right-radius: 10px;
 	border-top-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
+	float:center;
 }
+
 .center {
 	text-align: center;
 }
-
-tr:nth-child(even) {
-	background-color: #F0F0F0;
+#ts {
+	overflow: hidden;
+	display: block;
 }
 
-tr {
-	padding-bottom: 25px;
+#t1 {
+	float: left;
+	width: 20%;
+}
+#t2 {
+	float: left;
+	width: 20%;
+}
+#t3 {
+	float: right;
+	width: 60%;
 }
 
-th {
-	word-wrap:break-word;
-	text-align: justify;
+#t4 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-style: italic;
 }
 
-td {
-	/*background-color: #cfbea5;*/
-	width: 200px;
-	max-width: 500px;
-	word-wrap:break-word;
-}
 
 .highlightedText {
 	background: yellow;
@@ -87,12 +102,17 @@ td {
 	font-size: 1em;
 	font-weight: normal;
 	color: #3c4543;
-	padding-bottom: 25px;
 }
 
 .refs {
 	font-size: 1em;
 	font-weight: normal;
+	text-align: left;
+	overflow: auto;
+}
+
+.refs:nth-child(even) {
+	background-color: #F0F0F0;
 }
 
 #upload{
@@ -104,12 +124,4 @@ height: 25px;
 width: 200px;
 text-align: center;
 
-}
-
-
-
-.popover {
-	position: absolute;
-	z-index: 100;
-	text-align: right;
 }
