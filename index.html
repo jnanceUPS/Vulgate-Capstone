@@ -23,44 +23,114 @@
 	</div>
 </div>
 <div id="main-wrap">
-	<div id="sidebar">
+	<div id="file_side">
 		<div id="file">{{fileName}}</div>
 		<div id="loading">{{loading}}</div>
-		<div id="border" ng-show="showDiv">
+		<div class="border" ng-show="showDiv">
 			<div class="scrollable">
 				<div class="refs" ng-repeat="r in results track by $index">		
-					<div><div class="sentence" ng-click="showRefs($index)" >{{r.sentence}}.</div></div>		
+					<div class="sentence" ng-click="showRefs($index)" ng-if="selectedSentence != $index">{{r.sentence}}.</div>		
+					<div class="sentence" id="highlightedText" ng-if="selectedSentence == $index"> {{r.sentence}} </div>
 				</div>
 			</div>	
+		</div>
+		<div id="totalFreq">
+			<div class="border" ng-show="showDiv">
+				<div class="scrollable" >
+					<div>
+						Total references found:
+						{{total}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="oldVNew">
+			<div class="border" ng-show="showDiv">
+				<div class="scrollable" >
+					<div>
+						Old testament references found: &emsp;
+						{{oldRef}} &emsp; {{oldPct}}%
+					</div>
+					<div>
+						New testament references found: &emsp;
+						{{newRef}} &emsp; {{newPct}}%
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="bookFreq">
+			<div class="border" ng-show="showDiv">
+				<div class="scrollable" >
+					<div class="refs" id="statWrap" ng-repeat="stat in stats">
+						<span id="statBook"> {{stat.book}} </span> 
+						<span id="statFreq"> {{stat.freq}} </span>
+						<span id="statFreqPct"> {{stat.freqPct}}% </span>
+					</div>
+				</div>
+			</div>
 		</div>	
 	</div>
-	<div id="content-wrap">
+	<div id="vulgate_side">
 		<div id="file" ng-show="showDiv">Vulgate</div>
-		<!-- 		<div> Click on a sentence to view its references! </div> -->
-		<div id="border" ng-show="showDiv">
+		<div ng-show="showDiv && selectedSentence < 0"> Click on a sentence to view its references!</div>
+		<div class="border" ng-show="showDiv && selectedSentence >= 0">
 			<div class="scrollable">
 				<div id="t0" ng-if="hasRefs==false"> No references found. </div>
 				<div class="refs" ng-repeat="ref in vref">
-					<span ng-repeat="ind in ref.inds track by $index" ng-click="getVerse(ind,$parent.$index,$index)">
+					<span ng-repeat="ind in ref.inds track by $index">
 						<span id="ts">
 							<div id="t1" ng-if="$first"> {{ref.w1}} </div>
-							<div id="t2" ng-if="$first"> {{ref.w2}} </div>
-							<div id="t3">{{ind}} </div> 
+							<div id="t1" ng-if="$first"> {{ref.w2}} </div>
+							<div id="t1" ng-if="$first"> {{ref.w3}} </div>
+							<input type="checkbox" id="t3" ng-checked="marked.markedIndex[selectedSentence][$parent.$index].indexOf($index) >= 0" ng-click="onCheck(ind,$parent.$index,$index)"> 
+							<div id="t2" ng-click="getVerse(ind,$parent.$index,$index)">{{ind}} </div>
+
 						</span>
 						<div id="t4" ng-if="popupIndex[0] == $parent.$index && popupIndex[1] == $index"> {{popup}} </div>
 					</span>
 				</div>
-				<!-- <div class="refs" ng-show="seePopup"  id="scrollArea">{{popup}}</div> -->
+			</div>
+		</div>
+		<div id="totalFreq" ng-show="marked.hasMark">
+			<div class="border" ng-show="showDiv">
+				<div class="scrollable" >
+					<div>
+						Total marked references found:
+						{{marked.total}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="oldVNew" ng-show="marked.hasMark">
+			<div class="border" ng-show="showDiv">
+				<div class="scrollable" >
+					<div>
+						Marked old testament references found: &emsp;
+						{{marked.oldRef}} &emsp; {{marked.oldPct}}%
+					</div>
+					<div>
+						Marked new testament references found: &emsp;
+						{{marked.newRef}} &emsp; {{marked.newPct}}%
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="bookFreq" ng-show="marked.hasMark">
+			<div class="border" ng-show="showDiv">
+				<div class="scrollable" >
+					<div class="refs" id="statWrap" ng-repeat="stat in marked.stats">
+						<span id="statBook"> {{stat.book}} </span> 
+						<span id="statFreq"> {{stat.freq}} </span>
+						<span id="statFreqPct"> {{stat.freqPct}}% </span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-	<div id="header2">
-		<div ng-repeat="stat in stats">
-		{{stat.book}} 
-		<span text-align="right"> {{stat.freq}} </span>
-	</div>
-	</div>
-<!-- <div id="footer"></div> -->
+<div id="footer">
+	
+</div>
+
 </body>
 </html>

@@ -11,6 +11,9 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 	"ad Ephesios","ad Philippenses","ad Colossenses","ad Thessalonicenses I","ad Thessalonicenses II",
 	"ad Timotheum I","ad Timotheum II","ad Titum","ad Philemonem","ad Hebreos","Jacobi","Petri I","Petri II",
 	"Joannis I","Joannis II","Joannis III","Jude","Apocalypsis"];
+	//1-46 old, 47-73 new
+
+
 
 	//$http.defaults.headers.post["Content-Type"] = "multipart/form-data";
 	$http.post('/vulgate').success(function(data){
@@ -26,17 +29,34 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 		var http = $http.post('/sss');
 		http.success(function(data) {
 			defer.resolve(data);
-			console.log(data);
 			$scope.results = data.results;
 			$scope.loading = "";
 			$scope.showDiv = true;
 			$scope.stats = [];
+
+			$scope.total =	data.freqs.reduce(function(a,b){
+				return a + b;
+			});
+
 			for (var i = 0; i < data.books.length; i++){
-				$scope.stats.push({'book': data.books[i], 'freq': data.freqs[i]});
+				$scope.stats.push({
+					'book': data.books[i], 
+					'freq': data.freqs[i], 
+					'freqPct': Math.round(data.freqs[i]*100/$scope.total )});
 			}
+
 			$scope.stats.sort(function(a,b){
 				return b.freq - a.freq;
 			});
+
+			$scope.oldRef = 0; 
+			$scope.newRef = 0;
+			for(var i = 0; i < $scope.stats.length; i++){
+				if (books.indexOf($scope.stats[i].book) < 46) $scope.oldRef+=$scope.stats[i].freq;
+				else $scope.newRef+=$scope.stats[i].freq;
+			}
+			$scope.oldPct = Math.round($scope.oldRef*100/$scope.total);
+			$scope.newPct = Math.round($scope.newRef*100/$scope.total);
 
 		})
 		.error(function() {
@@ -46,13 +66,101 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 		return defer.promise;
 	}
 
-	// $scope.highlight = function(word1, word2, sentence){
+	$scope.marked = {};
+	$scope.marked.hasMark = false;
+	$scope.marked.oldRef = 0;
+	$scope.marked.newRef = 0;
+	$scope.marked.total = 0;
+	$scope.marked.stats = [];
+	$scope.marked.markedIndex = [];
 
-	// 	if (!search) {
-	// 		return $sce.trustAsHtml(text);
-	// 	}
-	// 	return $sce.trustAsHtml(text.replace(new RegExp(search, 'gi'), '<span class="highlightedText">$&</span>'));
-	// };
+	$scope.onCheck = function(vName,pindex,index){
+		if(!$scope.marked.markedIndex[$scope.selectedSentence]) 
+			$scope.marked.markedIndex[$scope.selectedSentence] = [];
+		if(!$scope.marked.markedIndex[$scope.selectedSentence][pindex]) 
+			$scope.marked.markedIndex[$scope.selectedSentence][pindex] = [];
+
+		var indind = $scope.marked.markedIndex[$scope.selectedSentence][pindex].indexOf(index);
+		
+		if (indind == -1){
+			markAsRef(vName);
+			$scope.marked.markedIndex[$scope.selectedSentence][pindex].push(index);
+			$scope.marked.hasMark = true;
+		} else {
+			unmarkAsRef(vName);
+			$scope.marked.markedIndex[$scope.selectedSentence][pindex].splice(indind,1);
+			for(var i in $scope.marked.markedIndex){ //removes marked info if none are marked
+				for (var j in $scope.marked.markedIndex[i]){
+					if ($scope.marked.markedIndex[i][j].length > 0) break;
+					if(i == $scope.marked.markedIndex.length-1 &&
+						j == $scope.marked.markedIndex[i].length-1) $scope.marked.hasMark = false;
+				}
+			}
+		}
+	}
+	
+	var unmarkAsRef = function(vName){
+		$scope.marked.total--;
+		var spl = vName.split(" [");
+
+		for (var i = 0; i < $scope.marked.stats.length; i++){
+			if ($scope.marked.stats[i].book === spl[0]){
+				$scope.marked.stats[i].freq--;
+				if($scope.marked.stats[i].freq == 0){
+					$scope.marked.stats.splice(i, 1);
+				}
+				break;
+			}
+		}
+
+		recalcFreqPct($scope.marked.stats,$scope.marked.total);
+		$scope.marked.stats.sort(function(a,b){
+			return b.freq - a.freq;
+		});
+
+
+		if (books.indexOf(spl[0]) < 46) $scope.marked.oldRef--;
+		else $scope.marked.newRef--;
+		$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
+		$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
+	}
+
+	var recalcFreqPct = function(arr, total){
+		for(var i = 0; i < arr.length; i++){
+			arr[i].freqPct = Math.round(arr[i].freq * 100 / total);
+		}
+	}
+
+	var markAsRef = function(vName){
+		$scope.marked.total++;
+		var spl = vName.split(" [");
+		
+		var found = false;
+		for (var i = 0; i < $scope.marked.stats.length; i++){
+			if ($scope.marked.stats[i].book === spl[0]){
+				$scope.marked.stats[i].freq++;
+				found = true;
+				break;
+			}
+		}
+		if (!found){
+			$scope.marked.stats.push({
+				'book': spl[0], 
+				'freq': 1, 
+				'freqPct': Math.round(100/$scope.marked.total )
+			});
+		}
+		recalcFreqPct($scope.marked.stats,$scope.marked.total);
+
+		$scope.marked.stats.sort(function(a,b){
+			return b.freq - a.freq;
+		});
+
+		if (books.indexOf(spl[0]) < 46) $scope.marked.oldRef++;
+		else $scope.marked.newRef++;
+		$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
+		$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
+	};
 
 	$scope.popupIndex = [-1,-1]; 
 
@@ -70,8 +178,10 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 			$scope.popupIndex = [-1,-1];
 		else $scope.popupIndex = [pindex, index];
 	}
+	$scope.selectedSentence = -1;
 
 	$scope.showRefs = function(index){
+		$scope.selectedSentence = index;
 		$scope.popupIndex = [-1,-1];
 		$scope.verse = [];
 		var sen = $scope.results[index];
@@ -109,4 +219,14 @@ function getNextIndexOf(char, string, startIndex){
 	for(var i = startIndex; i < string.length; i++){
 		if (string[i] == char) return i;
 	}
+}
+
+function arrayIndexOf(arr1, arr2){
+	for (var i = 0; i < arr2.length; i++){
+		for (var j = 0; j < arr1.length; j++){
+			if (arr1[j] != arr2[i][j]) break;
+			if (j == arr1.length-1) return i;
+		}
+	}
+	return -1;
 }

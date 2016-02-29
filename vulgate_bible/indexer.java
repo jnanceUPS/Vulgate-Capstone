@@ -77,72 +77,109 @@ public class indexer {
 		DB db = mongo.getDB("vulgate");
 		DBCollection table = db.getCollection("index");
 
+		//String[] ha = {"a","b","c","d","e","f","g","h","i","j"};
+
+		// String[] x = getAllCombos(books,3);
+		// for(String i : x) System.out.println(i);
+
 		Scanner sc = null;
 		int i = 0;
 		long a = System.currentTimeMillis();
 		for (File file : files){
+		//File file = new File("ordered_version/01Genesis.lat");
 			try {
 				sc = new Scanner(file);
-				sc.useDelimiter("\\s+");
+			// sc.useDelimiter("\\n");
 			} catch(FileNotFoundException e) { 
 				e.printStackTrace(); 
 			}
 
 			List<String> indices;
-			String index = books[i] + " [" + sc.next() + "]";
-			while (sc.hasNext()){
-				String word = sc.next();
+			while (sc.hasNextLine()){
+				String sentence = sc.nextLine();
+				String[] words = sentence.split(" ");
+				String index = books[i] + " [" + words[0] + "]";
+				ArrayList<String> wordList = new ArrayList<>();
+
+				for (String word : words) {
 				word = word.replaceAll("\u00E6","e"); //replaces "ae" with "e"
 				word = Normalizer.normalize(word, Normalizer.Form.NFD); //takes off accent marks
-				if (word.matches("[0-9]+:[0-9]+")) {// beginning line number
-					index = books[i] + " [" + word + "]";
-					continue;
-				}
+				// if (word.matches("[0-9]+:[0-9]+")) {// beginning line number
+				// 	index = books[i] + " [" + word + "]";
+				// 	continue;
+				// }
 				word = word.toLowerCase().replaceAll("\\W", ""); //removes punctuation
 				word = word.replaceAll("\\d+", ""); //removes numbers
 				if (word.equals("")) continue; 
 				if (Arrays.binarySearch(stopwords,word)>=0) continue;
+				if (wordList.contains(word)) continue;
+				wordList.add(word);
+			}
+
+
+			String[] x = new String[wordList.size()];
+			x = wordList.toArray(x);
+			//System.out.println("Sen len:" + x.length);
+			Arrays.sort(x);
+			//System.out.println("Hello");
+			String[] threeWords = get2Combos(x);
+			//System.out.println("hi");
+			//System.out.println(words[0]);
+			for (String word : threeWords) {
+				// word = word.replaceAll("\u00E6","e"); //replaces "ae" with "e"
+				// word = Normalizer.normalize(word, Normalizer.Form.NFD); //takes off accent marks
+				// if (word.matches("[0-9]+:[0-9]+")) {// beginning line number
+				// 	index = books[i] + " [" + word + "]";
+				// 	continue;
+				// }
+				// word = word.toLowerCase().replaceAll("\\W", ""); //removes punctuation
+				// word = word.replaceAll("\\d+", ""); //removes numbers
+				// if (word.equals("")) continue; 
+				// if (Arrays.binarySearch(stopwords,word)>=0) continue;
 
 				indices = map.get(word);
 				if (indices == null){
 					indices = new ArrayList<String>();
 				}
 				if (!indices.contains(index)){
-					indices.add(index);
+					indices.add(index.intern());
 				}
 				map.put(word, indices);		
-				
-			} 
-			i++;
-		}	
-		System.out.println(System.currentTimeMillis() - a); //prints out time taken, 3-4 seconds 
-		
+			}
+		} 
+		System.out.println(i + ": " + (System.currentTimeMillis() - a));
+		i++;
+	}	
+		 //prints out time taken, 3-4 seconds 
+
 		//map = getMatchingWords(map);
-				
-		System.out.println(System.currentTimeMillis() - a);
+	System.out.println(System.currentTimeMillis() - a);
+		//map = getMatchingWords(map);
+
+	System.out.println(System.currentTimeMillis() - a);
 
 		// //writes to file
-		Path filepath = Paths.get("unique_words.txt");
-		List<String> output = new ArrayList<>();
-		for (String s: map.keySet())
-			output.add(s);
-		for (Map.Entry<String,List<String>> e : map.entrySet()){
-			DBObject entry = new BasicDBObject();
-			entry.put("_id", e.getKey());
-			entry.put("index", e.getValue());
-			table.insert(entry);
-		 	//output.add(e.getKey() + "\t" + e.getValue());
-		}
-		try {
-			Files.write(filepath, output, Charset.forName("UTF-8"));
-		} catch(IOException e){ e.printStackTrace(); }
+		//Path filepath = Paths.get("3ndex.txt");
+		//List<String> output = new ArrayList<>();
+		// for (String s: map.keySet())
+		// 	output.add(s);
+	System.out.println(map.entrySet().size());
+	for (Map.Entry<String,List<String>> e : map.entrySet()){
+		DBObject entry = new BasicDBObject();
+		entry.put("_id", e.getKey());
+		entry.put("index", e.getValue());
+		table.insert(entry);
+			//output.add(e.getKey() + "\t " + e.getValue());
 	}
+		// try {
+		// 	Files.write(filepath, output, Charset.forName("UTF-8"));
+		// } catch(IOException e){ e.printStackTrace(); }
+}
 
-	public static Map<String, List<String>> getMatchingWords(Map<String, List<String>> map){
+public static Map<String, List<String>> getMatchingWords(Map<String, List<String>> map){
 
 	String[] str = new String[map.size()];
 	str = map.keySet().toArray(str);
-
 
 	Map m = new TreeMap<String,List<String>>();
 
@@ -152,7 +189,14 @@ public class indexer {
 			List<String> inds2 = map.get(str[w2]);
 			for(String i : inds1){
 				if (inds2.contains(i)) {
-					String key = str[w1] + " " + str[w2];
+					int wk2 = str[w2].lastIndexOf(" ");
+
+					String keyPt2 = str[w2];
+					if (wk2 >= 0){
+						keyPt2 = str[w2].substring(wk2+1,str[w2].length());
+					}	
+
+					String key = str[w1] + " " + keyPt2;
 					List<String> val = (List<String>) m.get(key);
 					if (val == null){
 						val = new ArrayList<String>();
@@ -168,6 +212,36 @@ public class indexer {
 		}
 	} 	
 	return m;
+}
+
+public static String[] get3Combos(String[] arr){
+	int n = arr.length;
+	ArrayList<String> iter = new ArrayList<>();
+	for (int a = 0; a < n-2; a++){
+		for(int b = a + 1; b < n-1; b++){
+			for(int c = b + 1; c < n; c++){
+				iter.add(arr[a] + " " + arr[b] + " " + arr[c]);
+			}
+		}
+	}
+
+	String[] x = new String[iter.size()];
+	x = iter.toArray(x);
+	return x;
+}
+
+public static String[] get2Combos(String[] arr){
+	int n = arr.length;
+	ArrayList<String> iter = new ArrayList<>();
+	for (int a = 0; a < n-1; a++){
+		for(int b = a + 1; b < n; b++){
+			iter.add(arr[a] + " " + arr[b]);
+		}
+	}
+
+	String[] x = new String[iter.size()];
+	x = iter.toArray(x);
+	return x;
 }
 }
 
