@@ -13,9 +13,6 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 	"Joannis I","Joannis II","Joannis III","Jude","Apocalypsis"];
 	//1-46 old, 47-73 new
 
-
-
-	//$http.defaults.headers.post["Content-Type"] = "multipart/form-data";
 	$http.post('/vulgate').success(function(data){
 		$scope.vulgate = data.vulgate;
 	})
@@ -66,13 +63,19 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 		return defer.promise;
 	}
 
-	$scope.marked = {};
-	$scope.marked.hasMark = false;
-	$scope.marked.oldRef = 0;
-	$scope.marked.newRef = 0;
-	$scope.marked.total = 0;
-	$scope.marked.stats = [];
-	$scope.marked.markedIndex = [];
+	var resetVars = function(){
+		$scope.stats = [];
+		$scope.marked = {};
+		$scope.marked.hasMark = false;
+		$scope.marked.oldRef = 0;
+		$scope.marked.newRef = 0;
+		$scope.marked.total = 0;
+		$scope.marked.stats = [];
+		$scope.marked.markedIndex = [];
+		$scope.popupIndex = [-1,-1]; 
+		$scope.selectedSentence = -1;
+		$scope.showDiv = false;
+	}
 
 	$scope.onCheck = function(vName,pindex,index){
 		if(!$scope.marked.markedIndex[$scope.selectedSentence]) 
@@ -95,74 +98,75 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 					if(i == $scope.marked.markedIndex.length-1 &&
 						j == $scope.marked.markedIndex[i].length-1) $scope.marked.hasMark = false;
 				}
-			}
 		}
 	}
-	
-	var unmarkAsRef = function(vName){
-		$scope.marked.total--;
-		var spl = vName.split(" [");
+}
 
-		for (var i = 0; i < $scope.marked.stats.length; i++){
-			if ($scope.marked.stats[i].book === spl[0]){
-				$scope.marked.stats[i].freq--;
-				if($scope.marked.stats[i].freq == 0){
-					$scope.marked.stats.splice(i, 1);
-				}
-				break;
+var unmarkAsRef = function(vName){
+	$scope.marked.total--;
+	var spl = vName.split(" [");
+
+	for (var i = 0; i < $scope.marked.stats.length; i++){
+		if ($scope.marked.stats[i].book === spl[0]){
+			$scope.marked.stats[i].freq--;
+			if($scope.marked.stats[i].freq == 0){
+				$scope.marked.stats.splice(i, 1);
 			}
+			break;
 		}
+	}
 
-		recalcFreqPct($scope.marked.stats,$scope.marked.total);
-		$scope.marked.stats.sort(function(a,b){
-			return b.freq - a.freq;
+	recalcFreqPct($scope.marked.stats,$scope.marked.total);
+
+	$scope.marked.stats.sort(function(a,b){
+		return b.freq - a.freq;
+	});
+
+
+	if (books.indexOf(spl[0]) < 46) $scope.marked.oldRef--;
+	else $scope.marked.newRef--;
+	$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
+	$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
+}
+
+var recalcFreqPct = function(arr, total){
+	for(var i = 0; i < arr.length; i++){
+		arr[i].freqPct = Math.round(arr[i].freq * 100 / total);
+	}
+}
+
+var markAsRef = function(vName){
+	$scope.marked.total++;
+	var spl = vName.split(" [");
+
+	var found = false;
+	for (var i = 0; i < $scope.marked.stats.length; i++){
+		if ($scope.marked.stats[i].book === spl[0]){
+			$scope.marked.stats[i].freq++;
+			found = true;
+			break;
+		}
+	}
+	if (!found){
+		$scope.marked.stats.push({
+			'book': spl[0], 
+			'freq': 1, 
+			'freqPct': Math.round(100/$scope.marked.total )
 		});
-
-
-		if (books.indexOf(spl[0]) < 46) $scope.marked.oldRef--;
-		else $scope.marked.newRef--;
-		$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
-		$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
 	}
+	recalcFreqPct($scope.marked.stats,$scope.marked.total);
 
-	var recalcFreqPct = function(arr, total){
-		for(var i = 0; i < arr.length; i++){
-			arr[i].freqPct = Math.round(arr[i].freq * 100 / total);
-		}
-	}
+	$scope.marked.stats.sort(function(a,b){
+		return b.freq - a.freq;
+	});
 
-	var markAsRef = function(vName){
-		$scope.marked.total++;
-		var spl = vName.split(" [");
-		
-		var found = false;
-		for (var i = 0; i < $scope.marked.stats.length; i++){
-			if ($scope.marked.stats[i].book === spl[0]){
-				$scope.marked.stats[i].freq++;
-				found = true;
-				break;
-			}
-		}
-		if (!found){
-			$scope.marked.stats.push({
-				'book': spl[0], 
-				'freq': 1, 
-				'freqPct': Math.round(100/$scope.marked.total )
-			});
-		}
-		recalcFreqPct($scope.marked.stats,$scope.marked.total);
+	if (books.indexOf(spl[0]) < 46) $scope.marked.oldRef++;
+	else $scope.marked.newRef++;
+	$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
+	$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
+};
 
-		$scope.marked.stats.sort(function(a,b){
-			return b.freq - a.freq;
-		});
 
-		if (books.indexOf(spl[0]) < 46) $scope.marked.oldRef++;
-		else $scope.marked.newRef++;
-		$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
-		$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
-	};
-
-	$scope.popupIndex = [-1,-1]; 
 
 	//given a verse name e.g. "Numeri [7:9]", returns the corresponding verse from the Vulgate
 	$scope.getVerse = function(vName,pindex,index){
@@ -173,28 +177,32 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 		var i1 = $scope.vulgate[book].indexOf(num);
 		var verse = $scope.vulgate[book].substring(i1,getNextIndexOf("\n",$scope.vulgate[book],i1));
 		$scope.popup = verse;
-		//$scope.vref.splice(index, 0, verse);
+
 		if ($scope.popupIndex[0] == pindex && $scope.popupIndex[1] == index)
 			$scope.popupIndex = [-1,-1];
 		else $scope.popupIndex = [pindex, index];
 	}
-	$scope.selectedSentence = -1;
+
+	
 
 	$scope.showRefs = function(index){
 		$scope.selectedSentence = index;
 		$scope.popupIndex = [-1,-1];
 		$scope.verse = [];
 		var sen = $scope.results[index];
+
 		$scope.vref = {};
 		$scope.hasRefs = sen.hasRefs;
 		if(sen.hasRefs){
+			sen.refs.sort(function(a,b){
+				return b.w3.length - a.w3.length;
+			});
 			$scope.vref = sen.refs;
 		}
-
 	};
 
-
 	$scope.submit = function() {
+		resetVars();
 		if ($scope.form.file.$valid && $scope.file) {
 			$scope.upload($scope.file);
 		}
@@ -213,7 +221,6 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 		});
 	};
 }]);
-
 
 function getNextIndexOf(char, string, startIndex){
 	for(var i = startIndex; i < string.length; i++){

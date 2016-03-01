@@ -49,55 +49,6 @@ var vulgate = [];
 // 		'inds': ['1:2:3','4:5:6']
 // 	}, ...]
 // }, ...]
-var matchAndSend = function(text) {
-	var sen = text.split(/\.\s/g);
-	//need to send this so angular can open the right amount of get requests
-	app.get('/length', function(req, res){
-		res.send({'length': sen.length});
-	});
-	for(var i=0; i<sen.length;i++){
-		(function(i) {
-			var url = '/searchResults/' + i;  
-			app.get(url, function(req, res){
-				var str = sen[i].toLowerCase().replace(/[^\w ]+/g, '').split(" ");
-				str = unique_and_stop(str);
-				Reference.find({'_id': { $in: str }},function(err, data){
-					var refs = getMatchingWords(data);			
-					if (refs.length != 0) {
-						res.send({'sentence': sen[i], 'refs': refs});
-					} else res.end();
-
-				});	
-			});
-		})(i);
-	}
-};
-
-
-var getRef2 = function(sen, callback){
-	var str = sen.toLowerCase().replace(/[^\w ]+/g, '').split(" ");
-	str = unique_and_stop(str);
-	str = ungodify(str);
-	str.sort();
-	var queries = [];
-
-	for (var i = 0; i < str.length-1; i++){
-		for(var j = i+1; j < str.length; j++){
-			queries.push(str[i] + " " +  str[j]);
-		}
-	}
-
-	Reference.find({'_id': { $in: queries }},function(err, data){
-		keepCount(data);
-		var refs = parseData(data);	
-		if (refs.length != 0) {
-			callback(null,{'sentence': sen, 'hasRefs': true,'refs': refs});
-		} else {
-			callback(null,{'sentence': sen, 'hasRefs': false});
-		}
-	});	
-}
-
 
 var getRef3 = function(sen, callback){
 	var str = sen.toLowerCase().replace(/[^\w ]+/g, '').split(" ");
@@ -110,6 +61,12 @@ var getRef3 = function(sen, callback){
 			for(var k = j+1; k < str.length; k++){
 				queries3.push(str[i] + " " +  str[j] + " " + str[k]);
 			}
+		}
+	}
+	str = ungodify(str);
+	for(var i = 0; i < str.length-1; i++){
+		for(var j = i+1; j < str.length; j++){
+			queries3.push(str[i] + " " +  str[j]);			
 		}
 	}
 
@@ -128,6 +85,7 @@ var parseData3 = function(data){
 	var refs = [];
 	for (var i = 0; i < data.length; i++){
 		var words = data[i]._id.split(" ");
+		if (words.length == 2) words[2] = "";
 		refs.push({'w1': words[0], 'w2': words[1],'w3': words[2], 'inds': data[i].index});
 	}
 	return refs;
@@ -144,23 +102,9 @@ var parseData = function(data){
 }
 
 
-var getRef = function(sen, callback){
-	//console.log(sen);
-	var str = sen.toLowerCase().replace(/[^\w ]+/g, '').split(" ");
-	str = unique_and_stop(str);
-	Reference.find({'_id': { $in: str }},function(err, data){
-		var refs = getMatchingWords(data);
-		//keepCount(data);	
-		if (refs.length != 0) {
-			callback(null,{'sentence': sen, 'hasRefs': true,'refs': refs});
-		} else callback(null,{});
-	});	
-}
-
-
 var matchAndSend2 = function(){
 	app.post('/sss', function(req, res){
-		async.map(sess.matched,getRef2, function(err, results){	
+		async.map(sess.matched,getRef3, function(err, results){	
 			console.log(Date.now()-sess.date);
 			res.send({'results': results , 'books': sess.books, 'freqs': sess.freqs});
 		});
@@ -172,7 +116,6 @@ app.post('/upload/url', function(req, res){
 	var busboy = new Busboy({ headers: req.headers });
 	busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
 		console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
-
 
 		fs.readFile(filename,'utf8',function(err, data){
 			if (err) throw err;
@@ -223,7 +166,7 @@ function postVulgate() {
 
 app.listen(8080);
 
-//gets rid of duplicate words and stop words in the sentence
+//removes duplicate words and stop words in the sentence
 function unique_and_stop(array){
 	var seen = JSON.parse(JSON.stringify(stopwords)); //deep copy
 	return array.filter(function(item) {
@@ -231,14 +174,14 @@ function unique_and_stop(array){
 	});
 }
 
-//gets rid of any godwords
+//removes any godwords
 function ungodify(array){
 	return array.filter(function(item) {
 		return (godwords.indexOf(item) < 0);
 	});
 }
 
-//gets rid of all unique things
+//removes of all unique items of 2 arrays and returns array of non-uniques
 function remove_uniques(a1, a2){
 	return a1.filter(function(item) {
 		return a2.indexOf(item)>=0 ? true : false;
@@ -261,8 +204,6 @@ function getMatchingWords(data){
 	return refs;
 }
 
-
-
 function keepCount(data){
 	for(var i = 0; i < data.length; i++){
 		for (var j = 0; j < data[i].index.length; j++){
@@ -276,24 +217,3 @@ function keepCount(data){
 		}
 	}
 }
-
-		// async.waterfall([
-		// 	function(callback){
-		// 		fs.readFile(filename,'utf8',function(err, data){
-		// 			callback(null, data);
-		// 		});
-		// 	},
-		// 	function(data, callback){
-		// 		var sen = data.split(/\.\s/g);
-		// 		async.map(sen,getRef, function(err, results){
-		// 			callback(null, results);
-		// 		});
-		// 	},
-		// 	function(results, callback){
-		// 		app.post('/sss', function(req, res){
-		// 							console.log(results);
-
-		// 			res.send(results);
-		// 		});
-		// 		callback(null,"done");
-		// 	}] );

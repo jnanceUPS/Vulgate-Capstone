@@ -51,7 +51,7 @@ h1 {
 }
 
 .scrollable {
-	padding-right: 15px;
+	/*padding-right: 15px;*/
 	max-height: 400px;
 	overflow: auto;
 }
@@ -81,12 +81,12 @@ h1 {
 }
 #t2 {
 	float: right;
-	width: 40%;
+	width: 32%;
 }
 
 #t3 {
 	float: right;
-	width: 6%;
+	width: 4%;
 }
 
 #t4 {

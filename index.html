@@ -15,11 +15,11 @@
 <body id="body" ng-controller="myCtrl" >
 	<div id="header">
 		<div class="center">
-			<button id="upload" class="button" ngf-select="upload($file)">Upload File</button>
-<!-- 		<form name="form">
+			<!-- <button id="upload" class="button" ngf-select="upload($file)">Upload File</button> -->
+		<form name="form">
 			<input type="file" id="upload" name="file" class="button" ngf-select ng-model="file">
 			<button type="submit" ng-click="submit()">submit</button>
-		</form> -->
+		</form>
 	</div>
 </div>
 <div id="main-wrap">
@@ -72,9 +72,9 @@
 	</div>
 	<div id="vulgate_side">
 		<div id="file" ng-show="showDiv">Vulgate</div>
-		<div ng-show="showDiv && selectedSentence < 0"> Click on a sentence to view its references!</div>
-		<div class="border" ng-show="showDiv && selectedSentence >= 0">
-			<div class="scrollable">
+		<div class="border" ng-show="showDiv">
+			<div ng-show="showDiv && selectedSentence < 0"> Click on a sentence to view its references!</div>
+			<div class="scrollable" ng-show="selectedSentence >= 0">
 				<div id="t0" ng-if="hasRefs==false"> No references found. </div>
 				<div class="refs" ng-repeat="ref in vref">
 					<span ng-repeat="ind in ref.inds track by $index">
