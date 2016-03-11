@@ -4,6 +4,7 @@ import java.nio.file.*;
 import java.nio.charset.*;
 import java.text.Normalizer;	
 import java.net.UnknownHostException;
+import java.util.regex.Pattern;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -70,17 +71,14 @@ public class indexer {
 		File folder = new File("ordered_version/"); 
 		File[] files = folder.listFiles();
 
-		Map<String, List<String>> map = new TreeMap<>();			
-		
+		Map<String, List<String>> map = new HashMap<>();			
+		Map<String,List<String>> rootMap = getRootMap();
+
 		//MongoDB initialization
 		MongoClient mongo = new MongoClient("localhost", 27017);
 		DB db = mongo.getDB("vulgate");
 		DBCollection table = db.getCollection("index");
-
-		//String[] ha = {"a","b","c","d","e","f","g","h","i","j"};
-
-		// String[] x = getAllCombos(books,3);
-		// for(String i : x) System.out.println(i);
+		//table.drop();
 
 		Scanner sc = null;
 		int i = 0;
@@ -88,7 +86,7 @@ public class indexer {
 		for (File file : files){
 		//File file = new File("ordered_version/01Genesis.lat");
 			try {
-				sc = new Scanner(file);
+				sc = new Scanner(file, "utf-8");
 			// sc.useDelimiter("\\n");
 			} catch(FileNotFoundException e) { 
 				e.printStackTrace(); 
@@ -102,19 +100,23 @@ public class indexer {
 				ArrayList<String> wordList = new ArrayList<>();
 
 				for (String word : words) {
-				word = word.replaceAll("\u00E6","e"); //replaces "ae" with "e"
-				word = Normalizer.normalize(word, Normalizer.Form.NFD); //takes off accent marks
-				// if (word.matches("[0-9]+:[0-9]+")) {// beginning line number
-				// 	index = books[i] + " [" + word + "]";
-				// 	continue;
-				// }
-				word = word.toLowerCase().replaceAll("\\W", ""); //removes punctuation
-				word = word.replaceAll("\\d+", ""); //removes numbers
-				if (word.equals("")) continue; 
-				if (Arrays.binarySearch(stopwords,word)>=0) continue;
-				if (wordList.contains(word)) continue;
-				wordList.add(word);
-			}
+					word = Normalizer.normalize(word, Normalizer.Form.NFD); //takes off accent marks
+					word = word.toLowerCase().replaceAll("\\W|\\d+", ""); //removes punctuation
+					//word = word.replaceAll("\\d+", ""); //removes numbers
+					if (word.equals("")) continue; 
+					if (Arrays.binarySearch(stopwords,word)>=0) continue;
+					List<String> roots = rootMap.get(word);
+					if (roots == null){
+						if (wordList.contains(word)) continue;
+						wordList.add(word);
+						continue;
+					}
+					//for (String root : roots){
+					String root = roots.get(0);
+						if (wordList.contains(root)) continue;
+						else wordList.add(root);
+					//}
+				}
 
 
 			String[] x = new String[wordList.size()];
@@ -122,7 +124,7 @@ public class indexer {
 			//System.out.println("Sen len:" + x.length);
 			Arrays.sort(x);
 			//System.out.println("Hello");
-			String[] threeWords = get2Combos(x);
+			String[] threeWords = get3Combos(x);
 			//System.out.println("hi");
 			//System.out.println(words[0]);
 			for (String word : threeWords) {
@@ -150,12 +152,6 @@ public class indexer {
 		System.out.println(i + ": " + (System.currentTimeMillis() - a));
 		i++;
 	}	
-		 //prints out time taken, 3-4 seconds 
-
-		//map = getMatchingWords(map);
-	System.out.println(System.currentTimeMillis() - a);
-		//map = getMatchingWords(map);
-
 	System.out.println(System.currentTimeMillis() - a);
 
 		// //writes to file
@@ -243,6 +239,44 @@ public static String[] get2Combos(String[] arr){
 	x = iter.toArray(x);
 	return x;
 }
+
+public static Map<String,List<String>> getRootMap(){
+	Map<String, List<String>> map = new HashMap<>();
+	Scanner sc = null;	
+	File file = new File("dictionary2.txt");
+	try {
+		sc = new Scanner(file, "utf-8");
+	} catch(FileNotFoundException e) { 
+		e.printStackTrace(); 
+	}
+	List<String> indices;
+	while (sc.hasNextLine()){
+		String sentence = sc.nextLine();
+		sentence = normalize(sentence);
+			//System.out.println(sentence);
+		String[] words = sentence.split("=");
+
+		String key = words[0];
+		String[] roots = words[1].split(";");
+
+		ArrayList<String> wordList = new ArrayList<>();
+
+		for (String word : roots) {
+			if (word.equals("")) continue; 
+			wordList.add(word);
+		}
+
+		map.put(key, wordList);
+	}	
+	return map;
+}
+	private static String normalize(String word){ //removes the long vowel markings
+		String toReturn = word;
+		toReturn = Normalizer.normalize(toReturn, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+"); //simply using the NOrmalizer.Form.NFD didn't remove long marks
+        return pattern.matcher(toReturn).replaceAll("");// so we found this online and it works.
+    }
+
 }
 
 
