@@ -1,0 +1,207 @@
+(form of = barbarum.txt)
+===Adjective===
+# {{form of|Masculine accusative singular|barbarus|lang=la}}
+# {{form of|Neuter nominative singular|barbarus|lang=la}}
+# {{form of|Neuter accusative singular|barbarus|lang=la}}
+
+(general)
+===Etymology===
+====Part of Speech====
+
+=== 3 -> header 3 and more important than
+==== 4 -> header 4 which is within header 3
+
+sometimes you will see ===Etymology (1/2)=== and then ====Part of Speech====
+
+othertimes you will have header 3s for everything.  prioritize the header 3s
+
+(diminutive of = blandulus)
+===Adjective===
+{{la-adj-1&amp;2|blandulus|blandula|blandulum}}
+
+# {{diminutive of|blandus|pos=adjectives|lang=la}} [[charming]], [[pleasant]]
+
+(capital first letter)
+check first for ===Proper Noun=== {{la-proper noun|root|...}}
+otherwise check for other parts of speech like normal
+
+(misspelling of = ferrugieus.txt)
+===Adjective===
+{{la-adj-1&amp;2|ferrūgieus|ferrūgiea|ferrūgieum}}
+
+# {{misspelling of|ferrugineus|lang=la}}
+
+(la-present participle=continens.txt, tepens.txt KATHERINE)
+(la-perfect participle=altus.txt, adplausus.txt KATHERINE)
+
+(la-interj = malum.txt KATHERINE)
+====Interjection====
+{{la-interj|malum}}
+
+(comparative of = altius.txt)
+===Adverb===
+{{head|la|adverb comparative form}}
+
+# {{comparative of|alte|POS=adverb|lang=la}}
+
+(genitive singular of = verus.txt)
+====Noun====
+{{head|la|noun form|head=verūs}}
+
+# {{genitive singular of|verū|lang=la}}
+
+(neuter plural of = Latina.txt)
+==Latin==
+
+===Adjective===
+'''latīna'''
+
+# {{feminine singular of|latīnus|lang=la}}
+# {{neuter plural of|latīnus|lang=la}}
+# {{form of|accusative neuter plural form|latīnus|lang=la}}
+
+(head)
+look for any relevant tags after it.  if none appear, then use the title of the file as the root
+
+(la-part-form = alte.txt)
+====Participle====
+{{la-part-form|alte}}
+
+# {{inflection of|altus||voc|m|s|lang=la}}
+
+(feminine singular of = alma.txt)
+==Latin==
+
+===Adjective===
+{{head|la|adjective form|g=f}}
+
+# {{feminine singular of|almus|lang=la}}
+
+(superlative of = acerrime.txt)
+==Latin==
+
+===Adjective===
+{{la-adj-form|ācerrime}}
+
+# {{inflection of|ācerrimus||voc|m|s|lang=la}}
+
+===Adverb===
+{{head|la|adverb superlative form|head=ācerrime}}
+
+# {{superlative of|ācriter|POS=adverb|lang=la}}
+
+(la-gerundive = abacinandus.txt)
+===Etymology===
+Future passive participle of {{m|la|abacinō}}.
+
+===Participle===
+{{la-gerundive|abacinand}}
+
+# which is to be [[make|made]] [[blind]], which is to be [[remove]]d the [[power]] of [[sight]]
+
+(la-future participle = abacturus.txt)
+===Etymology===
+Future active participle of [[abigo|abigō]]
+
+===Participle===
+{{la-future participle|abactūr}}
+
+# about to [[deter]]
+
+(head = accusans.txt)
+===Etymology===
+Present participle of {{m|la|accūsō}}
+
+===Participle===
+{{la-present participle|accus|accūs|ans}}
+
+# [[blaming]]
+# [[accusing]]
+
+====Inflection====
+{{la-decl-3rd-part|accūsāns|accūsant}}
+
+===Noun===
+{{head|la|noun}}
+
+# [[accusant]]
+
+(la-gerund-form = simplificando.txt)
+===Participle===
+{{la-part-form|simplificandō}}
+
+# {{inflection of|simplificandus||dat|m|s|lang=la}}
+# {{inflection of|simplificandus||dat|n|s|lang=la}}
+# {{inflection of|simplificandus||abl|m|s|lang=la}}
+# {{inflection of|simplificandus||abl|n|s|lang=la}}
+
+===Gerund===
+{{la-gerund-form|simplificandō}}
+
+# {{inflection of|simplificandus||dat|lang=la}}
+# {{inflection of|simplificandus||abl|lang=la}}
+
+(supine of = versum.txt)
+===Verb===
+{{la-verb-form|versum}}
+
+# {{supine of|vertō|lang=la}}
+
+===Verb===
+{{la-verb-form|versum}}
+
+# {{supine of|verrō|lang=la}}
+
+(nominative plural of = numi.txt)
+===Noun===
+{{head|la|noun form|head=nūmī}}
+
+# {{genitive singular of|nūmus|lang=la}}
+# {{nominative plural of|nūmus|lang=la}}
+# {{vocative plural of|nūmus|lang=la}}
+
+(contraction of = Marpor.txt)
+===Noun===
+{{la-noun|Mārpor||Mārpōris|m|third}}
+
+# {{contraction of|Mārcīpor|lang=la}}
+
+(accusative plural of = saetas.txt)
+===Noun===
+{{head|la|noun form|head=saetās}}
+
+# {{accusative plural of|saeta|lang=la}}
+
+(vocative plural of = nume.txt)
+===Noun===
+{{head|la|noun form|head=nūmī}}
+
+# {{genitive singular of|nūmus|lang=la}}
+# {{nominative plural of|nūmus|lang=la}}
+# {{vocative plural of|nūmus|lang=la}}
+
+(vocative singular of = numi.txt)
+===Noun===
+{{head|la|noun form|head=nūme}}
+
+# {{vocative singular of|nūmus|lang=la}}
+
+(alt form = suffes.txt)
+===Noun===
+{{la-noun|||suffetis|m|third}}
+
+# {{alt form|sūfes|lang=la}}
+
+(altform = tinniolum.txt)
+==Latin==
+===Noun===
+{{head|la|noun}}
+
+# {{altname|tintinnabulum|lang=la}}
+
+(plural of = scabini.txt)
+==Latin==
+===Noun===
+{{head|la|noun}}
+
+# {{plural of|scabinus|lang=la}}

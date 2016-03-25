@@ -1,0 +1,22 @@
+{{la-present participle|semi-root|...}}
+	# {{present participle of|root|...}} // look here first, if no such line appears, pull from the above line
+
+{{inline adj code|root|...}}
+	# {{diminutive of|root|...}} // look first for diminutive of, if it doesn't appear, pull from above line
+
+{{la-perfect participle|semi-root}}
+	# {{alternative spelling of|intermediate-root|...}} // look first for this (possibly intermediate root), otherwise take from above
+
+{{la-future participle|root}}
+
+{{la-noun||...}} // sometimes there is nothing to extract from the base pos tag so look for the next possible thing
+	# {{alt form|root|...}} here we extract root
+
+{{la-noun|root|...}} // sometimes we need to pull this out
+	# {{feminine noun of|root|...}} // and we can pull this out as well
+
+{{head...}}
+	// always look for a next line
+	// otherwise return filename
+
+{{form of|...|root|...}} // this is the only tag that seems to have the root after the second pipe symbol

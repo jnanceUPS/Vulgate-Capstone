@@ -124,7 +124,7 @@ public class indexer {
 			//System.out.println("Sen len:" + x.length);
 			Arrays.sort(x);
 			//System.out.println("Hello");
-			String[] threeWords = get3Combos(x);
+			String[] threeWords = get2Combos(x);
 			//System.out.println("hi");
 			//System.out.println(words[0]);
 			for (String word : threeWords) {

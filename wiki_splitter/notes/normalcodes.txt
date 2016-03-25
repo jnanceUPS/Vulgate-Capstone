@@ -1,0 +1,49 @@
+inline:
+la-noun
+la-verb
+la-proper noun
+la-adj-3rd-1E
+la-adj-3rd-2E
+la-adj-3rd-3E
+alternative form of
+feminine noun of
+la-adj-1&amp;2
+inflection of
+la-adj-comparative
+la-adj-superlative
+la-adj-comp
+la-location
+la-interj
+genitive singular of
+form of (irreg.)
+neuter plural of
+feminine singular of
+superlative of
+la-gerundive
+la-future participle
+la-present participle
+supine of
+nominative plural of
+vocative plural of
+accusative plural of
+contraction of
+vocative singular of
+altname
+plural of
+comparative of
+
+
+
+
+next line:
+la-verb-form
+la-noun-form
+la-pronoun-form
+la-adj-form
+la-adj-comp-form
+la-noun form
+la-num-form
+la-adj form
+la-proper-noun-form
+la-proper noun-form
+la-gerund-form
