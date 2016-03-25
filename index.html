@@ -8,6 +8,8 @@
 	<script type="text/javascript" src="lib/jquery-2.2.0.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-cookies.min.js"></script>
+
 	<script type="text/javascript" src="lib/ng-file-upload-shim.min.js"></script>
 	<script type="text/javascript" src="lib/ng-file-upload.min.js"></script>
 	<script type="text/javascript" src="controller.js"></script>
@@ -29,6 +31,7 @@
 				<button type="submit" ng-click="editGodwords()">Edit low-priority word list</button>
 				<button type="submit" ng-click="submit()">Submit</button>
 			</form>
+			<button ng-click="saveFile()">Save results to file</button>
 		</div>
 	</div>
 	<div id="main-wrap">
@@ -88,8 +91,9 @@
 								<div id="t1" ng-if="$first"> {{ref.w1}} </div>
 								<div id="t1" ng-if="$first"> {{ref.w2}} </div>
 								<div id="t1" ng-if="$first"> {{ref.w3}} </div>
-								<input type="checkbox" id="t3" ng-checked="marked.markedIndex[selectedSentence][$parent.$index].indexOf($index) >= 0" ng-click="onCheck(ind,$parent.$index,$index)"> 
-								<div id="t2" ng-click="getVerse(ind,$parent.$index,$index)">{{ind}} </div>
+								<input type="checkbox" id="t3" ng-checked="marked.markedIndex[selectedSentence][$parent.$index].indexOf($index) >= 0" ng-click="onCheck(ind,$parent.$index,$index)">
+								<input type="text" id="t3" ng-if="marked.markedIndex[selectedSentence][$parent.$index].indexOf($index) >= 0" ng-model>
+								<div id="t2" ng-click="showVerse(ind,$parent.$index,$index)">{{ind}} </div>
 							</span>
 							<div id="t4" ng-if="(x = popupIndex[(y = $parent.$index)].indexOf($index)) >= 0"> {{popupVerse[y][x]}} </div>
 						</span>

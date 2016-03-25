@@ -17,10 +17,9 @@ app.directive('ngEnterKey', function () {
 app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', function($scope, Upload, $http, $q, $anchorScroll) {
 
 	//var stopwords = "ille,illa,illud,illi,illae,illius,illorum,illarum,illis,illum,illam,illos,illas,illo,ac,at,atque,aut,et,nec,non,sed,vel,antequam,cum,dum,si,usque,ut,qui,quae,quod,cuius,cui,quem,quam,quo,qua,quorum,quarum,quibus,quos,quas,ante,per,ad,propter,circum,super,contra,versus,inter,extra,intra,trans,post,sub,in,ob,praeter,a,ab,sine,de,pro,prae,e,ex,est,ejus,sunt,eum,que,me,quia,enim,te,eos,eorum,ego,ei,hec,omnes,eis,vos,dixit,tibi,vobis,eo,mihi,ait,erat,rex,quoniam,ne,eam,tua,erit,hoc,dicit,nos,mea,suum,suis,tu,dicens,tuum,sum,suam,quid,meum,ipse,suo,tui,quoque,sua,erant,se,neque,quis,deo,es,tuam,ea,mei,nobis,meam,nunc,meus,tuo,sic,cumque,sit,omni,tuus,sui,meo,esset,his,fuit,tue,fuerit,tuis,sue,hic,sibi,esse,ubi,ipsi,suos,suas,dicentes,etiam,erunt,nostri,malum,quidem,estis,vestra,hi,tuos,meis,hanc,vestris,cujus,sumus,mee,dico,nam,sive,tecum,iste,vestri,hujus,eas,vestrum,noster,quidam,tamquam,suorum,meos,amen,tuas,mecum,tuorum,nostrum,hac,nostra,vester,nostris,ipso,earum,hunc,ipsum,sint,dices,fuerint,ideo,ipsa,nostro,isti,ipsius,tam,eris,istum,quidquam,meas,ero,vestre,quidquid,vestro,quicumque,vivit,ipsis,vestros,aliquid,ipsorum,tamen,huic,vestram,nostre,isto,nostros,nobiscum,huc,suarum,illic,vestrorum,eadem,nostras,eodem,nostram,eritis,suus,hos,istam,quodcumque,dicitur,dicat,dicent,fui,dixisti,dicam,dicis,istis,quocumque,adhic,aliqui,aliquis,an,apud,autem,cur,deinde,ergo,etsi,fio,haud,iam,idem,igitur,infra,interim,is,ita,magis,modo,ox,necque,nisi,o,possum,quare,quilibet,quisnam,quisquam,quisque,quisquis,tum,uel,uero,unus"
-	var stopwords = "a, ab, ac, ad, adhic, ait, aliqui, aliquid, aliquis, amen, an, ante, antequam, apud, at, atque, aut, autem, circum, contra, cui, cuius, cujus, cum, cumque, cur, de, deinde, deo, dicam, dicat, dicens, dicent, dicentes, dices, dicis, dicit, dicitur, dico, dixisti, dixit, dum, e, ea, eadem, eam, earum, eas, ego, ei, eis, ejus, enim, eo, eodem, eorum, eos, erant, erat, ergo, eris, erit, eritis, ero, erunt, es, esse, esset, est, estis, et, etiam, etsi, eum, ex, extra, fio, fuerint, fuerit, fui, fuit, hac, hanc, haud, hec, hi, hic, his, hoc, hos, huc, huic, hujus, hunc, iam, idem, ideo, igitur, illa, illae, illam, illarum, illas, ille, illi, illic, illis, illius, illo, illorum, illos, illud, illum, in, infra, inter, interim, intra, ipsa, ipse, ipsi, ipsis, ipsius, ipso, ipsorum, ipsum, is, istam, iste, isti, istis, isto, istum, ita, magis, malum, me, mea, meam, meas, mecum, mee, mei, meis, meo, meos, meum, meus, mihi, modo, nam, ne, nec, necque, neque, nisi, nobis, nobiscum, non, nos, noster, nostra, nostram, nostras, nostre, nostri, nostris, nostro, nostros, nostrum, nunc, o, ob, omnes, omni, ox, per, possum, post, prae, praeter, pro, propter, qua, quae, quam, quare, quarum, quas, que, quem, qui, quia, quibus, quicumque, quid, quidam, quidem, quidquam, quidquid, quilibet, quis, quisnam, quisquam, quisque, quisquis, quo, quocumque, quod, quodcumque, quoniam, quoque, quorum, quos, rex, se, sed, si, sibi, sic, sine, sint, sit, sive, sua, suam, suarum, suas, sub, sue, sui, suis, sum, sumus, sunt, suo, suorum, suos, super, suum, suus, tam, tamen, tamquam, te, tecum, tibi, trans, tu, tua, tuam, tuas, tue, tui, tuis, tum, tuo, tuorum, tuos, tuum, tuus, ubi, uel, uero, unus, usque, ut, vel, versus, vester, vestra, vestram, vestre, vestri, vestris, vestro, vestrorum, vestros, vestrum, vivit, vobis, vos"; 
-	$scope.stopwords = stopwords;
-	var godwords = "deus,dei,deorum,deo,deis,deum,deos,dee,iesus,iesu,iesum,christus,christi,christo,christum,christe,dominus,domini,dominorum,domino,dominis,dominum,domine";
-	$scope.godwords = godwords;
+	function onRefresh(){
+
+	}
 
 	var books = ["Genesis","Exodus","Leviticus","Numeri","Deuteronomium","Josue","Judicum","Ruth","Regum I",
 	"Regum II","Regum III","Regum IV","Paralipomenon I","Paralipomenon II","Esdre","Nehemie","Tobie","Judith",
@@ -89,8 +88,10 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 	// 	var index = sen.indexOf(ref)
 	// }
 
+
+
 	$scope.editStopwords = function(){
-		$scope.showGod = false;
+		$scope.showGod = false;	
 		$scope.showStop = !$scope.showStop;
 	}
 
@@ -101,6 +102,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 
 	var resetVars = function(){
 		$scope.stats = [];
+
 		$scope.marked = {};
 		$scope.marked.hasMark = false;
 		$scope.marked.oldRef = 0;
@@ -108,10 +110,16 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 		$scope.marked.total = 0;
 		$scope.marked.stats = [];
 		$scope.marked.markedIndex = [];
+		
 		$scope.popupVerse = [];
 		$scope.popupIndex = [];
 		$scope.selectedSentence = -1;
+		
 		$scope.showDiv = false;
+
+		$scope.stopwords = "a, ab, ac, ad, adhic, ait, aliqui, aliquid, aliquis, amen, an, ante, antequam, apud, at, atque, aut, autem, circum, contra, cui, cuius, cujus, cum, cumque, cur, de, deinde, deo, dicam, dicat, dicens, dicent, dicentes, dices, dicis, dicit, dicitur, dico, dixisti, dixit, dum, e, ea, eadem, eam, earum, eas, ego, ei, eis, ejus, enim, eo, eodem, eorum, eos, erant, erat, ergo, eris, erit, eritis, ero, erunt, es, esse, esset, est, estis, et, etiam, etsi, eum, ex, extra, fio, fuerint, fuerit, fui, fuit, hac, hanc, haud, hec, hi, hic, his, hoc, hos, huc, huic, hujus, hunc, iam, idem, ideo, igitur, illa, illae, illam, illarum, illas, ille, illi, illic, illis, illius, illo, illorum, illos, illud, illum, in, infra, inter, interim, intra, ipsa, ipse, ipsi, ipsis, ipsius, ipso, ipsorum, ipsum, is, istam, iste, isti, istis, isto, istum, ita, magis, malum, me, mea, meam, meas, mecum, mee, mei, meis, meo, meos, meum, meus, mihi, modo, nam, ne, nec, necque, neque, nisi, nobis, nobiscum, non, nos, noster, nostra, nostram, nostras, nostre, nostri, nostris, nostro, nostros, nostrum, nunc, o, ob, omnes, omni, ox, per, possum, post, prae, praeter, pro, propter, qua, quae, quam, quare, quarum, quas, que, quem, qui, quia, quibus, quicumque, quid, quidam, quidem, quidquam, quidquid, quilibet, quis, quisnam, quisquam, quisque, quisquis, quo, quocumque, quod, quodcumque, quoniam, quoque, quorum, quos, rex, se, sed, si, sibi, sic, sine, sint, sit, sive, sua, suam, suarum, suas, sub, sue, sui, suis, sum, sumus, sunt, suo, suorum, suos, super, suum, suus, tam, tamen, tamquam, te, tecum, tibi, trans, tu, tua, tuam, tuas, tue, tui, tuis, tum, tuo, tuorum, tuos, tuum, tuus, ubi, uel, uero, unus, usque, ut, vel, versus, vester, vestra, vestram, vestre, vestri, vestris, vestro, vestrorum, vestros, vestrum, vivit, vobis, vos"; 
+		$scope.godwords = "deus,dei,deorum,deo,deis,deum,deos,dee,iesus,iesu,iesum,christus,christi,christo,christum,christe,dominus,domini,dominorum,domino,dominis,dominum,domine";
+		
 		$scope.showStop = false; 
 		$scope.showGod = false;
 	}
@@ -127,6 +135,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 		if (indind == -1){
 			markAsRef(vName);
 			$scope.marked.markedIndex[$scope.selectedSentence][pindex].push(index);
+			$scope.marked.markedIndex[$scope.selectedSentence][pindex].sort();
 			$scope.marked.hasMark = true;
 		} else {
 			unmarkAsRef(vName);
@@ -208,13 +217,19 @@ var markAsRef = function(vName){
 
 
 	//given a verse name e.g. "Numeri [7:9]", returns the corresponding verse from the Vulgate
-	$scope.getVerse = function(vName,pindex,index){
+	var getVerse = function(vName){
 		var spl = vName.split(" [");
 		var book = books.indexOf(spl[0]);
 		var num = spl[1].substring(0,spl[1].length-1);
 		
 		var i1 = $scope.vulgate[book].indexOf(num);
-		var verse = $scope.vulgate[book].substring(i1,getNextIndexOf("\n",$scope.vulgate[book],i1));
+		return $scope.vulgate[book].substring(i1,getNextIndexOf("\n",$scope.vulgate[book],i1));
+
+
+	}
+
+	$scope.showVerse = function(vName,pindex,index){
+		var verse = getVerse(vName);
 
 		if (!$scope.popupIndex[pindex]){
 			$scope.popupIndex[pindex] = [index];
@@ -228,7 +243,6 @@ var markAsRef = function(vName){
 			$scope.popupVerse[pindex].push(verse);
 		}
 	}
-
 	
 
 	$scope.showRefs = function(index){
@@ -275,6 +289,41 @@ var markAsRef = function(vName){
 			$scope.fileName = evt.config.data.file.name;
 		});
 	};
+
+	//saves marked data to a text file
+	$scope.saveFile = function(){
+
+		var str = "";
+
+		for(var i in $scope.marked.markedIndex){
+			str += "Sentence: \n"
+			str += $scope.results[i].sentence + "\n \n";
+			for(var j in $scope.marked.markedIndex[i]){
+				str += "Matching words:\t"
+				str += $scope.results[i].refs[j].w1 + "\t";
+				str += $scope.results[i].refs[j].w2 + "\t";
+				str += $scope.results[i].refs[j].w3 + "\n";
+
+				for(var k in $scope.marked.markedIndex[i][j]){
+					str += "Vulgate index:\t"
+					str += $scope.results[i].refs[j].inds[k] + "\n";
+					str += "Verse: \n" 
+					str += getVerse($scope.results[i].refs[j].inds[k]) + "\n";
+				}
+				str += "\n"
+			}
+			str += "-------------------------- \n \n"
+		}
+
+		$scope.fileObj = {'str':str}
+
+		$http.post('/saveFile', $scope.fileObj).success(function(data){
+		})
+		.error(function(err){ 
+			console.log(err);
+		});
+	};
+
 }]);
 
 //given a starting index, gets the next index of an item in an array

@@ -17,6 +17,7 @@ var Busboy = require('busboy'); //For multi-form data handling
 var stopwords = []
 var godwords = []//['deus','dei','deorum','deo','deis','deum','deos','dee','iesus','iesu','iesum','christus','christi','christo','christum','christe','dominus','domini','dominorum','domino','dominis','dominum','domine'];
 var vulgateDB = mongoose.createConnection('mongodb://localhost:27017/vulgate');
+//var vulgateDB = mongoose.createConnection('mongodb://L:queque2@ds064718.mlab.com:64718/vulgate');
 
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
@@ -57,13 +58,11 @@ var getRef = function(sen, callback){
 		var str = [];
 		for(var i in results){
 			//for (var j in results[i])
-				str.push(results[i][0]);
+			str.push(results[i][0]);
 		}
-		//console.log(str);
 		str = uniquify(str);
 		str = unstopify(str);
 
-		//console.log(str);
 		str.sort();
 		var queries3 = [];
 
@@ -97,7 +96,6 @@ function rootWord(word, callback){
 	Root.findById(word,function(err, data){
 		if(data == null) data = [word];
 		else data = data.index;
-		//console.log(data);
 		callback(null,data);
 	});
 }
@@ -119,6 +117,7 @@ var parseData = function(data){
 // 	'refs': [{
 // 		'w1': 'domus',
 // 		'w2': 'orationis',
+//		'w3': 'spelunca'
 // 		'inds': ['1:2:3','4:5:6']
 // 	}, ...]
 // }, ...]
@@ -140,6 +139,18 @@ app.post('/stopwords', function(req, res){
 	godwords = req.body[1];
 	stopwords = req.body[0];
 	res.end();
+});
+
+app.post('/saveFile', function(req, res){
+	console.log(req.body.str);
+
+	fs.writeFile("hello.txt", req.body.str, function(err) {
+		if(err) {
+			return console.log(err);
+		}
+
+		res.end();
+	}); 
 });
 
 //Gets file from Controller
