@@ -120,11 +120,11 @@ public class indexer {
 			x = wordList.toArray(x);
 
 			Arrays.sort(x);
-
+			String[] threeWords = null;
 			if(args[0]=="3")
-				String[] threeWords = get3Combos(x);
+				threeWords = get3Combos(x);
 			else 
-				String[] threeWords = get2Combos(x);
+				threeWords = get2Combos(x);
 
 			for (String word : threeWords) {
 
