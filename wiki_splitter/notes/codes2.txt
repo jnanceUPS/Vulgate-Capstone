@@ -1,0 +1,159 @@
+/*
+if the main keyword is {{head...}}
+check first for any subsequent keywords
+otherwise use the title of the file as root
+ */
+
+===Other===:
+
+===Adjective===:
+la-adj-3rd-1E=abstinax.txt
+la-verb-form=aestiva.txt
+la-noun-form=aconita.txt
+
+diminutive of=blandulus.txt
+la-proper noun=Afer.txt
+la-noun=abietarius.txt
+
+form of=barbarum.txt IRREGULAR KATHERINE
+la-verb=altero.txt
+
+la-adj-3rd-2E=abbatialis.txt
+la-present participle=continens.txt KATHERINE
+la-perfect participle=altus.txt KATHERINE
+
+la-pronoun-form=cuiusvis.txt
+la-adj-3rd-3E=acer.txt
+alternative form of=6tus.txt
+
+comparative of=altius.txt KATHERINE
+genitive singular of=verus.txt KATHERINE
+
+la-adj-1&amp;2=6tus.txt
+neuter plural of=Latina.txt
+la-adj-form=6ta.txt
+
+alternative case form of=Latinus.txt
+inflection of=6ta.txt
+la-adj-comparative=abstrusior.txt
+
+head=abrotanelloides.txt
+la-adj-superlative=absolutissimus.txt
+la-part-form=alte.txt
+
+feminine singular of=alma.txt
+superlative of=acerrime.txt IRREGULAR
+la-adj-comp=deterior.txt
+
+la-adj-comp-form=horribilius.txt
+
+===Participle===:
+la-adj-1&amp;2=absconditus.txt
+la-adj-3rd-1E=arrogans.txt
+la-verb-form=ablatum.txt
+
+la-noun-form=abactus.txt
+la-adj-form=calentem.txt
+la-noun=abactus.txt
+
+inflection of=abacinante.txt
+la-verb=amplexo.txt
+la-present participle=abacinans.txt KATHERINE
+
+la-perfect participle=abacinatus.txt KATHERINE
+la-gerundive=abacinandus.txt
+la-future participle=abacturus.txt
+
+head=accusans.txt
+
+===Participle===
+la-perfect participle=adplausus.txt
+la-part-form=abacinante.txt
+la-gerund-form=simplificando.txt
+
+alternative form of=abfuturus.txt KATHERINE
+
+===Verb===:
+la-verb-form=abacina.txt
+la-noun-form=accubito.txt
+la-noun=ames.txt
+
+la-verb=abacino.txt
+supine of=versum.txt IRREGULAR
+la-present participle=tepens.txt
+
+la-perfect participle=adgressus.txt
+conjugation of=circumsecueram.txt
+la-gerund-form=amando.txt
+
+alternative form of=abbacino.txt IRREGULAR
+la-interj=veto.txt
+la-adj-1&amp;2=citer.txt
+
+contraction of=arfacio.txt IRREGULAR
+la-adj-form=acerba.txt
+inflection of=abacina.txt
+
+present participle of=tepens.txt
+la-adj-comparative=adulescentior.txt
+la-future participle=amplificaturus.txt
+
+head=aberrare.txt
+la-noun form=conduce.txt
+la-part-form=acceptum.txt
+
+la-adj-comp=suavior.txt
+la-num-form=centesimo.txt
+
+===Noun===:
+la-verb-form=abitum.txt
+la-noun-form=abace.txt
+diminutive of=araneola.txt
+
+la-noun=abactor.txt
+la-present participle=ens.txt
+la-pronoun-form=te.txt
+
+nominative plural of=numi.txt
+contraction of=Marpor.txt IRREGULAR
+la-adj form=Herodiani.txt
+
+inflection of=abace.txt
+la-location=Cantabrigia.txt
+feminine noun of=agitatrix.txt
+
+la-num-form=centesima.txt
+la-adj-3rd-1E=adulescens.txt
+la-proper noun=aesculetum.txt
+
+la-verb=animo.txt
+la-adj-3rd-2E=cornis.txt
+la-proper-noun-form=Gadibus.txt
+
+
+===Noun===
+la-noun-form=aegida.txt
+accusative plural of=saetas.txt
+la-perfect participle=abortus.txt
+
+alternative form of=abax.txt IRREGULAR
+la-interj=A.txt
+vocative plural of=numi.txt
+
+vocative singular of=nume.txt
+alt form=suffes.txt IRREGULAR
+genitive singular of=numi.txt
+
+la-adj-1&amp;2=adversarius.txt
+la-adj-form=adespota.txt
+alternative case form of=Latinitas.txt EXCLUDE
+
+altname=tinniolum.txt IRREGULAR
+plural of=scabini.txt IRREGULAR
+head=A.txt
+
+la-adj-superlative=extremus.txt
+la-proper noun-form=Brunonis.txt
+la-noun form=aeris.txt
+
+la-part-form=abbreviatura.txt
