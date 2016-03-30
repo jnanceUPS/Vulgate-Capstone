@@ -124,10 +124,33 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		$scope.showGod = false;
 	}
 
-	$scope.regex = new RegExp("[^\\w\\s]+", "g");
-	$scope.regex2 = new RegExp("/\s+/", "g");
-	$scope.selectWord = function(word){
-		console.log(word);
+
+	$scope.parseSentence = function(sentence){
+		return sentence.replace(/[^\w\s]+/g, '').split(/\s+/g);
+	}	
+
+	$scope.filter = [];
+
+	$scope.selectWord = function(word, index){
+
+
+		console.log("index: ", index);
+		console.log("sen: ", $scope.selectedSentence);
+		console.log($scope.selectedSentence == index);
+		if ($scope.selectedSentence == index){
+			if(!$scope.filter[$scope.selectedSentence]) 
+				$scope.filter[$scope.selectedSentence] = [];
+			var i = $scope.filter[$scope.selectedSentence].indexOf(word);
+			console.log(i);
+			if (i >= 0){
+				$scope.filter[$scope.selectedSentence].splice(i,1);
+			}	
+			else {
+				$scope.filter[$scope.selectedSentence].push(word);
+			}
+		}
+
+		console.log($scope.filter);
 	}
 
 	$scope.onCheck = function(vName,pindex,index){
