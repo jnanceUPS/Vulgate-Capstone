@@ -84,10 +84,8 @@ public class indexer {
 		int i = 0;
 		long a = System.currentTimeMillis();
 		for (File file : files){
-		//File file = new File("ordered_version/01Genesis.lat");
 			try {
 				sc = new Scanner(file, "utf-8");
-			// sc.useDelimiter("\\n");
 			} catch(FileNotFoundException e) { 
 				e.printStackTrace(); 
 			}
@@ -102,7 +100,6 @@ public class indexer {
 				for (String word : words) {
 					word = Normalizer.normalize(word, Normalizer.Form.NFD); //takes off accent marks
 					word = word.toLowerCase().replaceAll("\\W|\\d+", ""); //removes punctuation
-					//word = word.replaceAll("\\d+", ""); //removes numbers
 					if (word.equals("")) continue; 
 					if (Arrays.binarySearch(stopwords,word)>=0) continue;
 					List<String> roots = rootMap.get(word);
@@ -121,23 +118,15 @@ public class indexer {
 
 			String[] x = new String[wordList.size()];
 			x = wordList.toArray(x);
-			//System.out.println("Sen len:" + x.length);
+
 			Arrays.sort(x);
-			//System.out.println("Hello");
-			String[] threeWords = get3Combos(x);
-			//System.out.println("hi");
-			//System.out.println(words[0]);
+
+			if(args[0]=="3")
+				String[] threeWords = get3Combos(x);
+			else 
+				String[] threeWords = get2Combos(x);
+
 			for (String word : threeWords) {
-				// word = word.replaceAll("\u00E6","e"); //replaces "ae" with "e"
-				// word = Normalizer.normalize(word, Normalizer.Form.NFD); //takes off accent marks
-				// if (word.matches("[0-9]+:[0-9]+")) {// beginning line number
-				// 	index = books[i] + " [" + word + "]";
-				// 	continue;
-				// }
-				// word = word.toLowerCase().replaceAll("\\W", ""); //removes punctuation
-				// word = word.replaceAll("\\d+", ""); //removes numbers
-				// if (word.equals("")) continue; 
-				// if (Arrays.binarySearch(stopwords,word)>=0) continue;
 
 				indices = map.get(word);
 				if (indices == null){

@@ -14,7 +14,7 @@ app.directive('ngEnterKey', function () {
 	};
 });
 
-app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', function($scope, Upload, $http, $q, $anchorScroll) {
+app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Upload, $http, $q) {
 
 	//var stopwords = "ille,illa,illud,illi,illae,illius,illorum,illarum,illis,illum,illam,illos,illas,illo,ac,at,atque,aut,et,nec,non,sed,vel,antequam,cum,dum,si,usque,ut,qui,quae,quod,cuius,cui,quem,quam,quo,qua,quorum,quarum,quibus,quos,quas,ante,per,ad,propter,circum,super,contra,versus,inter,extra,intra,trans,post,sub,in,ob,praeter,a,ab,sine,de,pro,prae,e,ex,est,ejus,sunt,eum,que,me,quia,enim,te,eos,eorum,ego,ei,hec,omnes,eis,vos,dixit,tibi,vobis,eo,mihi,ait,erat,rex,quoniam,ne,eam,tua,erit,hoc,dicit,nos,mea,suum,suis,tu,dicens,tuum,sum,suam,quid,meum,ipse,suo,tui,quoque,sua,erant,se,neque,quis,deo,es,tuam,ea,mei,nobis,meam,nunc,meus,tuo,sic,cumque,sit,omni,tuus,sui,meo,esset,his,fuit,tue,fuerit,tuis,sue,hic,sibi,esse,ubi,ipsi,suos,suas,dicentes,etiam,erunt,nostri,malum,quidem,estis,vestra,hi,tuos,meis,hanc,vestris,cujus,sumus,mee,dico,nam,sive,tecum,iste,vestri,hujus,eas,vestrum,noster,quidam,tamquam,suorum,meos,amen,tuas,mecum,tuorum,nostrum,hac,nostra,vester,nostris,ipso,earum,hunc,ipsum,sint,dices,fuerint,ideo,ipsa,nostro,isti,ipsius,tam,eris,istum,quidquam,meas,ero,vestre,quidquid,vestro,quicumque,vivit,ipsis,vestros,aliquid,ipsorum,tamen,huic,vestram,nostre,isto,nostros,nobiscum,huc,suarum,illic,vestrorum,eadem,nostras,eodem,nostram,eritis,suus,hos,istam,quodcumque,dicitur,dicat,dicent,fui,dixisti,dicam,dicis,istis,quocumque,adhic,aliqui,aliquis,an,apud,autem,cur,deinde,ergo,etsi,fio,haud,iam,idem,igitur,infra,interim,is,ita,magis,modo,ox,necque,nisi,o,possum,quare,quilibet,quisnam,quisquam,quisque,quisquis,tum,uel,uero,unus"
 	function onRefresh(){
@@ -124,95 +124,100 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', '$anchorScroll', fu
 		$scope.showGod = false;
 	}
 
+	$scope.regex = new RegExp("[^\\w\\s]+", "g");
+	$scope.regex2 = new RegExp("/\s+/", "g");
+	$scope.selectWord = function(word){
+		console.log(word);
+	}
+
 	$scope.onCheck = function(vName,pindex,index){
 		if(!$scope.marked.markedIndex[$scope.selectedSentence]) 
 			$scope.marked.markedIndex[$scope.selectedSentence] = [];
 		if(!$scope.marked.markedIndex[$scope.selectedSentence][pindex]) 
 			$scope.marked.markedIndex[$scope.selectedSentence][pindex] = [];
+		if(!$scope.marked.markedIndex[$scope.selectedSentence][pindex][index]) 
+			$scope.marked.markedIndex[$scope.selectedSentence][pindex][index] = {'marked': false, 'note': ""};
 
-		var indind = $scope.marked.markedIndex[$scope.selectedSentence][pindex].indexOf(index);
+		var indind = $scope.marked.markedIndex[$scope.selectedSentence][pindex][index].marked;
 		
-		if (indind == -1){
+		if (!indind){
 			markAsRef(vName);
-			$scope.marked.markedIndex[$scope.selectedSentence][pindex].push(index);
-			$scope.marked.markedIndex[$scope.selectedSentence][pindex].sort();
+			$scope.marked.markedIndex[$scope.selectedSentence][pindex][index].marked = true;
 			$scope.marked.hasMark = true;
 		} else {
 			unmarkAsRef(vName);
-			$scope.marked.markedIndex[$scope.selectedSentence][pindex].splice(indind,1);
-			for(var i in $scope.marked.markedIndex){ //removes marked info if none are marked
-				for (var j in $scope.marked.markedIndex[i]){
-					if ($scope.marked.markedIndex[i][j].length > 0) break;
-					if(i == $scope.marked.markedIndex.length-1 &&
-						j == $scope.marked.markedIndex[i].length-1) $scope.marked.hasMark = false;
+			$scope.marked.markedIndex[$scope.selectedSentence][pindex][index].marked = false;
+			$scope.marked.markedIndex[$scope.selectedSentence][pindex][index].note = "";
+			if ($scope.marked.total == 0) //removes marked info if none are marked
+				$scope.marked.hasMark = false;
+			
+
+		}
+	}
+
+	var unmarkAsRef = function(vName){
+		$scope.marked.total--;
+		var spl = vName.split(" [");
+
+		for (var i = 0; i < $scope.marked.stats.length; i++){
+			if ($scope.marked.stats[i].book === spl[0]){
+				$scope.marked.stats[i].freq--;
+				if($scope.marked.stats[i].freq == 0){
+					$scope.marked.stats.splice(i, 1);
 				}
-		}
-	}
-}
-
-var unmarkAsRef = function(vName){
-	$scope.marked.total--;
-	var spl = vName.split(" [");
-
-	for (var i = 0; i < $scope.marked.stats.length; i++){
-		if ($scope.marked.stats[i].book === spl[0]){
-			$scope.marked.stats[i].freq--;
-			if($scope.marked.stats[i].freq == 0){
-				$scope.marked.stats.splice(i, 1);
+				break;
 			}
-			break;
 		}
-	}
 
-	recalcFreqPct($scope.marked.stats,$scope.marked.total);
+		recalcFreqPct($scope.marked.stats,$scope.marked.total);
 
-	$scope.marked.stats.sort(function(a,b){
-		return b.freq - a.freq;
-	});
-
-
-	if (books.indexOf(spl[0]) < 46) $scope.marked.oldRef--;
-	else $scope.marked.newRef--;
-	$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
-	$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
-}
-
-var recalcFreqPct = function(arr, total){
-	for(var i = 0; i < arr.length; i++){
-		arr[i].freqPct = Math.round(arr[i].freq * 100 / total);
-	}
-}
-
-var markAsRef = function(vName){
-	$scope.marked.total++;
-	var spl = vName.split(" [");
-
-	var found = false;
-	for (var i = 0; i < $scope.marked.stats.length; i++){
-		if ($scope.marked.stats[i].book === spl[0]){
-			$scope.marked.stats[i].freq++;
-			found = true;
-			break;
-		}
-	}
-	if (!found){
-		$scope.marked.stats.push({
-			'book': spl[0], 
-			'freq': 1, 
-			'freqPct': Math.round(100/$scope.marked.total )
+		$scope.marked.stats.sort(function(a,b){
+			return b.freq - a.freq;
 		});
+
+
+		if (books.indexOf(spl[0]) < 46) $scope.marked.oldRef--;
+		else $scope.marked.newRef--;
+		$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
+		$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
 	}
-	recalcFreqPct($scope.marked.stats,$scope.marked.total);
 
-	$scope.marked.stats.sort(function(a,b){
-		return b.freq - a.freq;
-	});
+	var recalcFreqPct = function(arr, total){
+		for(var i = 0; i < arr.length; i++){
+			arr[i].freqPct = Math.round(arr[i].freq * 100 / total);
+		}
+	}
 
-	if (books.indexOf(spl[0]) < 46) $scope.marked.oldRef++;
-	else $scope.marked.newRef++;
-	$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
-	$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
-};
+	var markAsRef = function(vName){
+		$scope.marked.total++;
+		var spl = vName.split(" [");
+
+		var found = false;
+		for (var i = 0; i < $scope.marked.stats.length; i++){
+			if ($scope.marked.stats[i].book === spl[0]){
+				$scope.marked.stats[i].freq++;
+				found = true;
+				break;
+			}
+		}
+		if (!found){
+			$scope.marked.stats.push({
+				'book': spl[0], 
+				'freq': 1, 
+				'freqPct': Math.round(100/$scope.marked.total )
+			});
+		}
+		recalcFreqPct($scope.marked.stats,$scope.marked.total);
+
+		$scope.marked.stats.sort(function(a,b){
+			return b.freq - a.freq;
+		});
+
+		if (books.indexOf(spl[0]) < 46) $scope.marked.oldRef++;
+		else $scope.marked.newRef++;
+		$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
+		$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
+	};
 
 
 
@@ -305,10 +310,14 @@ var markAsRef = function(vName){
 				str += $scope.results[i].refs[j].w3 + "\n";
 
 				for(var k in $scope.marked.markedIndex[i][j]){
-					str += "Vulgate index:\t"
-					str += $scope.results[i].refs[j].inds[k] + "\n";
-					str += "Verse: \n" 
-					str += getVerse($scope.results[i].refs[j].inds[k]) + "\n";
+					if ($scope.marked.markedIndex[i][j][k].marked){
+						str += "\tVulgate index:\t"
+						str += "\t"+$scope.results[i].refs[j].inds[k] + "\n";
+						str += "\tVerse: \n" 
+						str += "\t"+getVerse($scope.results[i].refs[j].inds[k]) + "\n";
+						str += "\tNotes: " 
+						str += "\t"+$scope.marked.markedIndex[i][j][k].note + "\n";
+					}
 				}
 				str += "\n"
 			}

@@ -40,8 +40,10 @@
 			<div id="loading">{{loading}}</div>
 			<div class="border" ng-show="showDiv">
 				<div class="scrollable">
-					<div class="refs" ng-repeat="r in results track by $index">		
-						<div class="sentence" ng-click="showRefs($index)" ng-if="selectedSentence != $index">{{r.sentence}} </div>		
+					<div class="refs" ng-repeat="r in results track by $index">
+						<span ng-repeat="word in r.sentence.replace(regex, '').split(regex2) track by $index" ng-click="selectWord(word)">
+						{{word}}</span> 		
+						<div class="sentence" ng-click="showRefs($index)" ng-if="selectedSentence != $index">{{r.sentence}} </div>
 						<div class="sentence" id="highlightedText" ng-if="selectedSentence == $index"> {{r.sentence}} </div>
 					</div>
 				</div>	
@@ -91,8 +93,8 @@
 								<div id="t1" ng-if="$first"> {{ref.w1}} </div>
 								<div id="t1" ng-if="$first"> {{ref.w2}} </div>
 								<div id="t1" ng-if="$first"> {{ref.w3}} </div>
-								<input type="checkbox" id="t3" ng-checked="marked.markedIndex[selectedSentence][$parent.$index].indexOf($index) >= 0" ng-click="onCheck(ind,$parent.$index,$index)">
-								<input type="text" id="t3" ng-if="marked.markedIndex[selectedSentence][$parent.$index].indexOf($index) >= 0" ng-model>
+								<input type="checkbox" id="t3" ng-checked="marked.markedIndex[selectedSentence][$parent.$index][$index].marked" ng-click="onCheck(ind,$parent.$index,$index)">
+								<input type="text" id="t3" ng-readonly="!marked.markedIndex[selectedSentence][$parent.$index][$index].marked" ng-model="marked.markedIndex[selectedSentence][$parent.$index][$index].note">
 								<div id="t2" ng-click="showVerse(ind,$parent.$index,$index)">{{ind}} </div>
 							</span>
 							<div id="t4" ng-if="(x = popupIndex[(y = $parent.$index)].indexOf($index)) >= 0"> {{popupVerse[y][x]}} </div>

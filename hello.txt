@@ -7,40 +7,31 @@ uariasque temporum tumultuationes ante saluatoris aduentum perpessam, nouerunt q
 uel historiographorum libros saltem tenuiter legerunt, uel qui computantium relationi
 aures audiendi auidas accomodauerunt
  
+Matching words:	filius	lego	tempus
+	Vulgate index:		Daniel [6:13]
+	Verse: 
+	6:13 Tunc respondentes dixerunt coram rege : Daniel de filiis captivitatis Juda, non curavit de lege tua, et de edicto quod constituisti : sed tribus temporibus per diem orat obsecratione sua.
+	Notes: 	asdasd
+
 Matching words:	filius	libros	tempus
-Vulgate index:	Isaias [39:1]
-Verse: 
-39:1 In tempore illo misit Merodach Baladan, filius Baladan, rex Babylonis, libros et munera ad Ezechiam : audierat enim quod ægrotasset et convaluisset.
-Notes: <notes here> 
+	Vulgate index:		Isaias [39:1]
+	Verse: 
+	39:1 In tempore illo misit Merodach Baladan, filius Baladan, rex Babylonis, libros et munera ad Ezechiam : audierat enim quod ægrotasset et convaluisset.
+	Notes: 	asas
+
+Matching words:	filius	tempus	totus
+
+Matching words:	lego	libros	solum
 
 Matching words:	filius	tempus	
-Vulgate index:	Genesis [17:25]
-Verse: 
-17:25 Et Ismaël filius tredecim annos impleverat tempore circumcisionis suæ.
-
--------------------------- 
- 
-Sentence: 
-Iam uero Christum predicantem super eam flesse,
-et eius abolitionem denuntiasse, nullus ignorat, nisi quis forte paginam euangelii
-imprudens et impudens uecorditer conculcat
- 
-Matching words:	Christus	ignoro	
-Vulgate index:	ad Romanos [6:3]
-Verse: 
-6:3 an ignoratis quia quicumque baptizati sumus in Christo Jesu, in morte ipsius baptizati sumus ?
-
--------------------------- 
- 
-Sentence: 
-Quod quomodo acciderit, legenti gesta Titi
-et Vespasiani indifficulter patebit: quam lectionem uir eloquentissimus Iosephus stilo
-celebri consecrauit
- 
-Matching words:	accido	quomodo	
-Vulgate index:	Leviticus [10:19]
-Verse: 
-10:19 Respondit Aaron : Oblata est hodie victima pro peccato, et holocaustum coram Domino : mihi autem accidit quod vides ; quomodo potui comedere eam, aut placere Domino in cæremoniis mente lugubri ?
+	Vulgate index:		Genesis [17:25]
+	Verse: 
+	17:25 Et Ismaël filius tredecim annos impleverat tempore circumcisionis suæ.
+	Notes: 	
+	Vulgate index:		Genesis [18:10]
+	Verse: 
+	18:10 Cui dixit : Revertens veniam ad te tempore isto, vita comite, et habebit filium Sara uxor tua. Quo audito, Sara risit post ostium tabernaculi.
+	Notes: 	
 
 -------------------------- 
  
