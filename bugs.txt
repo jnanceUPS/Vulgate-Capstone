@@ -1,0 +1,2 @@
+Sometimes the first sentence of the uploaded text gets cut off.  Refreshing seems to fix the issue.  Has only happened ~ twice.
+
