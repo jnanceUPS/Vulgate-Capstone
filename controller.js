@@ -39,6 +39,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		console.log(err);
 	});
 
+	//gets the results from the server
 	function getResults2 (){
 		$scope.results = [];
 		var defer = $q.defer();
@@ -89,17 +90,19 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 	// }
 
 
-
+	// toggles the visibility of stopwords
 	$scope.editStopwords = function(){
 		$scope.showGod = false;	
 		$scope.showStop = !$scope.showStop;
 	}
 
+	// toggles the visibility of godwords
 	$scope.editGodwords = function(){
 		$scope.showStop = false;
 		$scope.showGod = !$scope.showGod;
 	}
 
+	//resets variables when reading another file
 	var resetVars = function(){
 		$scope.stats = [];
 
@@ -124,24 +127,22 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		$scope.showGod = false;
 	}
 
-
+	//splits up a sentence into words
 	$scope.parseSentence = function(sentence){
 		return sentence.replace(/[^\w\s]+/g, '').split(/\s+/g);
 	}	
 
 	$scope.filter = [];
 
+
 	$scope.selectWord = function(word, index){
-
-
-		console.log("index: ", index);
-		console.log("sen: ", $scope.selectedSentence);
-		console.log($scope.selectedSentence == index);
+		// console.log("index: ", index);
+		// console.log("sen: ", $scope.selectedSentence);
+		// console.log($scope.selectedSentence == index);
 		if ($scope.selectedSentence == index){
 			if(!$scope.filter[$scope.selectedSentence]) 
 				$scope.filter[$scope.selectedSentence] = [];
 			var i = $scope.filter[$scope.selectedSentence].indexOf(word);
-			console.log(i);
 			if (i >= 0){
 				$scope.filter[$scope.selectedSentence].splice(i,1);
 			}	
@@ -150,9 +151,10 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			}
 		}
 
-		console.log($scope.filter);
+		//console.log($scope.filter);
 	}
 
+	// handles all functionality of marking references
 	$scope.onCheck = function(vName,pindex,index){
 		if(!$scope.marked.markedIndex[$scope.selectedSentence]) 
 			$scope.marked.markedIndex[$scope.selectedSentence] = [];
@@ -178,6 +180,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		}
 	}
 
+	//handles unmarking a reference
 	var unmarkAsRef = function(vName){
 		$scope.marked.total--;
 		var spl = vName.split(" [");
@@ -205,12 +208,14 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
 	}
 
+	//calculates frequency percentage
 	var recalcFreqPct = function(arr, total){
 		for(var i = 0; i < arr.length; i++){
 			arr[i].freqPct = Math.round(arr[i].freq * 100 / total);
 		}
 	}
 
+	//handles marking a reference
 	var markAsRef = function(vName){
 		$scope.marked.total++;
 		var spl = vName.split(" [");
@@ -256,6 +261,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 
 	}
 
+	//shows a given verse when the reference is clicked
 	$scope.showVerse = function(vName,pindex,index){
 		var verse = getVerse(vName);
 
@@ -272,7 +278,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		}
 	}
 	
-
+	//shows the references, given a selected sentence
 	$scope.showRefs = function(index){
 		$scope.popupIndex = [];
 		$scope.popupVerse = [];
