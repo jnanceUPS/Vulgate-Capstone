@@ -151,7 +151,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			}
 		}
 
-		//console.log($scope.filter);
+		console.log($scope.filter);
 	}
 
 	// handles all functionality of marking references
@@ -289,12 +289,48 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		$scope.vref = {};
 		$scope.hasRefs = sen.hasRefs;
 		if(sen.hasRefs){
-			sen.refs.sort(function(a,b){
-				return b.w3.length - a.w3.length;
-			});
+			
+			finalRefs = filterRefs(sen.refs, index);
+
+			// sen.refs.sort(function(a,b){
+			// 	return b.w3.length - a.w3.length;
+			// });
+
 			$scope.vref = sen.refs;
 		}
 	};
+
+	function filterRefs(refs, index) {
+		var filtered = [];
+
+		for (var i in refs) {
+
+			var inds = $scope.results[index].refs[i].inds;
+
+			var one = $scope.results[index].refs[i].w1; // domus
+			var two = $scope.results[index].refs[i].w2; // spelunca
+			var three = $scope.results[index].refs[i].w3; // ""
+
+			if (($scope.filter.indexOf(one) >= 0) && ($scope.filter.indexOf(two) >= 0)) {
+				if (($scope.filter.indexOf(three) >= 0) || three === "") {
+					filtered.push({"w1" : one, "w2" : two, "w3" : three, "inds" : inds});
+				}
+			}
+
+		}
+		console.log(filtered);
+		return filtered;
+
+		// for(var i in refs){
+			
+		// 	// for(var j in $scope.marked.markedIndex[i]){
+				
+		// 		console.log("w1 ->",$scope.results[index].refs[i].w1);
+		// 		console.log("w2 ->",$scope.results[index].refs[i].w2);
+		// 		console.log("w3 ->",$scope.results[index].refs[i].w3);
+		// 	// }
+		// }
+	}
 
 	$scope.submit = function() { 
 		resetVars();
