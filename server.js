@@ -271,3 +271,10 @@ function keepCount(data){
 	}
 }
 
+function letterSub(word){
+	// if (word.match(/ae/g)){
+	// 	word.replace('ae', 'e');
+	// }
+	// if (word)
+	// return []
+}

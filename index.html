@@ -54,93 +54,93 @@
 					</div>	
 				</div>
 			</div>
-					<div id="totalFreq">
-						<div class="border" ng-show="showDiv">
-							<div class="scrollable" >
-								<div id="stat1">Total references found:</div>
-								<div id="stat2">{{total}}</div>
-								<div id="stat2">100%</div>
-							</div>
-						</div>
+			<div id="totalFreq">
+				<div class="border" ng-show="showDiv">
+					<div class="scrollable" >
+						<div id="stat1">Total references found:</div>
+						<div id="stat2">{{total}}</div>
+						<div id="stat2">100%</div>
 					</div>
-					<div id="oldVNew">
-						<div class="border" ng-show="showDiv">
-							<div class="scrollable">
-								<div id="stat1">Old testament references found:</div>
-								<div id="stat2">{{oldRef}}</div>
-								<div id="stat2">{{oldPct}}%</div>
-								<div id="stat1">New testament references found:</div>
-								<div id="stat2">{{newRef}}</div>
-								<div id="stat2">{{newPct}}%</div>
-							</div>
-						</div>
-					</div>
-					<div id="bookFreq">
-						<div class="border" ng-show="showDiv">
-							<div class="scrollable" >
-								<div class="refs" id="statWrap" ng-repeat="stat in stats">
-									<span id="stat1">{{stat.book}}</span> 
-									<span id="stat2">{{stat.freq}}</span>
-									<span id="stat2">{{stat.freqPct}}%</span>
-								</div>
-							</div>
-						</div>
-					</div>	
 				</div>
-				<div id="right_side">
-					<div id="file" ng-show="showDiv">Vulgate</div>
-					<div class="border" ng-show="showDiv">
-						<div ng-show="showDiv && selectedSentence < 0"> Click on a sentence to view its references!</div>
-						<div class="scrollable" ng-show="selectedSentence >= 0">
-							<div id="t0" ng-if="hasRefs==false"> No references found. </div>
-							<div class="refs" ng-repeat="ref in vref">
-								<span ng-repeat="ind in ref.inds track by $index">
-									<span id="ts">
-										<div id="t1" ng-if="$first"> {{ref.w1}} </div>
-										<div id="t1" ng-if="$first"> {{ref.w2}} </div>
-										<div id="t1" ng-if="$first"> {{ref.w3}} </div>
-										<input type="checkbox" id="t3" ng-checked="marked.markedIndex[selectedSentence][$parent.$index][$index].marked" ng-click="onCheck(ind,$parent.$index,$index)">
-										<input type="text" id="t3" ng-readonly="!marked.markedIndex[selectedSentence][$parent.$index][$index].marked" ng-model="marked.markedIndex[selectedSentence][$parent.$index][$index].note">
-										<div id="t2" ng-click="showVerse(ind,$parent.$index,$index)">{{ind}} </div>
-									</span>
-									<div id="t4" ng-if="(x = popupIndex[(y = $parent.$index)].indexOf($index)) >= 0"> {{popupVerse[y][x]}} </div>
-								</span>
-							</div>
+			</div>
+			<div id="oldVNew">
+				<div class="border" ng-show="showDiv">
+					<div class="scrollable">
+						<div id="stat1">Old testament references found:</div>
+						<div id="stat2">{{oldRef}}</div>
+						<div id="stat2">{{oldPct}}%</div>
+						<div id="stat1">New testament references found:</div>
+						<div id="stat2">{{newRef}}</div>
+						<div id="stat2">{{newPct}}%</div>
+					</div>
+				</div>
+			</div>
+			<div id="bookFreq">
+				<div class="border" ng-show="showDiv">
+					<div class="scrollable" >
+						<div class="refs" id="statWrap" ng-repeat="stat in stats">
+							<span id="stat1">{{stat.book}}</span> 
+							<span id="stat2">{{stat.freq}}</span>
+							<span id="stat2">{{stat.freqPct}}%</span>
 						</div>
 					</div>
-					<div id="totalFreq" ng-show="marked.hasMark">
-						<div class="border" ng-show="showDiv">
-							<div class="scrollable" >
-								<div id="stat1">Marked total references found:</div>
-								<div id="stat2">{{marked.total}}</div>
-								<div id="stat2">100%</div>
-							</div>
-						</div>
+				</div>
+			</div>	
+		</div>
+		<div id="right_side">
+			<div id="file" ng-show="showDiv">Vulgate</div>
+			<div class="border" ng-show="showDiv">
+				<div ng-show="showDiv && selectedSentence < 0"> Click on a sentence to view its references!</div>
+				<div class="scrollable" ng-show="selectedSentence >= 0">
+					<div id="t0" ng-if="hasRefs==false"> No references found. </div>
+					<div class="refs" ng-repeat="ref in vref">
+						<span ng-repeat="ind in ref.inds track by $index">
+							<span id="ts">
+								<div id="t1" ng-if="$first"> {{ref.w1}} </div>
+								<div id="t1" ng-if="$first"> {{ref.w2}} </div>
+								<div id="t1" ng-if="$first"> {{ref.w3}} </div>
+								<input type="checkbox" id="t3" ng-checked="marked.markedIndex[selectedSentence][$parent.$index][$index].marked" ng-click="onCheck(ind,$parent.$index,$index)">
+								<input type="text" id="t3" ng-readonly="!marked.markedIndex[selectedSentence][$parent.$index][$index].marked" ng-model="marked.markedIndex[selectedSentence][$parent.$index][$index].note">
+								<div id="t2" ng-click="showVerse(ind,$parent.$index,$index)">{{ind}} </div>
+							</span>
+							<div id="t4" ng-if="(x = popupIndex[(y = $parent.$index)].indexOf($index)) >= 0"> {{popupVerse[y][x]}} </div>
+						</span>
 					</div>
-					<div id="oldVNew" ng-show="marked.hasMark">
-						<div class="border" ng-show="showDiv">
-							<div class="scrollable" >
-								<div id="stat1">Marked old testament references found:</div>
-								<div id="stat2">{{marked.oldRef}}</div>
-								<div id="stat2">{{marked.oldPct}}%</div>
-								<div id="stat1">Marked new testament references found:</div>
-								<div id="stat2">{{marked.newRef}}</div>
-								<div id="stat2">{{marked.newPct}}%</div>
-							</div>
-						</div>
+				</div>
+			</div>
+			<div id="totalFreq" ng-show="marked.hasMark">
+				<div class="border" ng-show="showDiv">
+					<div class="scrollable" >
+						<div id="stat1">Marked total references found:</div>
+						<div id="stat2">{{marked.total}}</div>
+						<div id="stat2">100%</div>
 					</div>
-					<div id="bookFreq" ng-show="marked.hasMark">
-						<div class="border" ng-show="showDiv">
-							<div class="scrollable" >
-								<div class="refs" id="statWrap" ng-repeat="stat in marked.stats">
-									<span id="stat1"> {{stat.book}} </span> 
-									<span id="stat2"> {{stat.freq}} </span>
-									<span id="stat2"> {{stat.freqPct}}% </span>
-								</div>
-							</div>
+				</div>
+			</div>
+			<div id="oldVNew" ng-show="marked.hasMark">
+				<div class="border" ng-show="showDiv">
+					<div class="scrollable" >
+						<div id="stat1">Marked old testament references found:</div>
+						<div id="stat2">{{marked.oldRef}}</div>
+						<div id="stat2">{{marked.oldPct}}%</div>
+						<div id="stat1">Marked new testament references found:</div>
+						<div id="stat2">{{marked.newRef}}</div>
+						<div id="stat2">{{marked.newPct}}%</div>
+					</div>
+				</div>
+			</div>
+			<div id="bookFreq" ng-show="marked.hasMark">
+				<div class="border" ng-show="showDiv">
+					<div class="scrollable" >
+						<div class="refs" id="statWrap" ng-repeat="stat in marked.stats">
+							<span id="stat1"> {{stat.book}} </span> 
+							<span id="stat2"> {{stat.freq}} </span>
+							<span id="stat2"> {{stat.freqPct}}% </span>
 						</div>
 					</div>
 				</div>
 			</div>
-		</body>
-		</html>
+		</div>
+	</div>
+</body>
+</html>

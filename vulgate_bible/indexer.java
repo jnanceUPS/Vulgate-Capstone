@@ -78,7 +78,7 @@ public class indexer {
 		MongoClient mongo = new MongoClient("localhost", 27017);
 		DB db = mongo.getDB("vulgate");
 		DBCollection table = db.getCollection("index");
-		//table.drop();
+		table.drop();
 
 		Scanner sc = null;
 		int i = 0;
@@ -123,7 +123,7 @@ public class indexer {
 			String[] threeWords = null;
 			if(args[0]=="3")
 				threeWords = get3Combos(x);
-			else 
+			else
 				threeWords = get2Combos(x);
 
 			for (String word : threeWords) {

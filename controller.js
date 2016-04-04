@@ -296,7 +296,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			// 	return b.w3.length - a.w3.length;
 			// });
 
-			$scope.vref = sen.refs;
+			$scope.vref = sen.refs;//finalRefs;
 		}
 	};
 
@@ -310,6 +310,10 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			var one = $scope.results[index].refs[i].w1; // domus
 			var two = $scope.results[index].refs[i].w2; // spelunca
 			var three = $scope.results[index].refs[i].w3; // ""
+
+			console.log(one);
+			console.log($scope.filter);
+			console.log($scope.filter.indexOf(one));
 
 			if (($scope.filter.indexOf(one) >= 0) && ($scope.filter.indexOf(two) >= 0)) {
 				if (($scope.filter.indexOf(three) >= 0) || three === "") {
