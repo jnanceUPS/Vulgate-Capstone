@@ -48,7 +48,9 @@
 						</div>
 						<div class="sentence"  id="highlightedText" ng-click="showRefs($index)" ng-if="selectedSentence == $index">
 							<span class="sentence" ng-repeat="word in parseSentence(r.sentence) track by $index" ng-click="selectWord(word, $parent.$index)">
-								{{word}}
+
+
+								<!-- {{word}} -->
 							</span> 		
 						</div>
 					</div>	
