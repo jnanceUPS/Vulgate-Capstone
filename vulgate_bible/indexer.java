@@ -78,7 +78,7 @@ public class indexer {
 		MongoClient mongo = new MongoClient("localhost", 27017);
 		DB db = mongo.getDB("vulgate");
 		DBCollection table = db.getCollection("index");
-		//table.drop();
+		table.drop();
 
 		Scanner sc = null;
 		int i = 0;

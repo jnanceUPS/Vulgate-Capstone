@@ -46,6 +46,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		var http = $http.post('/sss');
 		http.success(function(data) {
 			defer.resolve(data);
+
 			$scope.results = data.results;
 			$scope.loading = "";
 			$scope.showDiv = true;
@@ -151,7 +152,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			}
 		}
 
-		console.log($scope.filter);
+		
 	}
 
 	// handles all functionality of marking references
@@ -289,36 +290,59 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		$scope.vref = {};
 		$scope.hasRefs = sen.hasRefs;
 		if(sen.hasRefs){
-			
+
 			finalRefs = filterRefs(sen.refs, index);
+
+			// console.log("final: ",finalRefs);
 
 			// sen.refs.sort(function(a,b){
 			// 	return b.w3.length - a.w3.length;
 			// });
 
-			$scope.vref = sen.refs;
+			// $scope.vref = sen.refs;
+
+			finalRefs.sort(function(a,b){
+				return b.w3.length - a.w3.length;
+			});
+
+			$scope.vref = finalRefs;
 		}
 	};
 
 	function filterRefs(refs, index) {
-		var filtered = [];
+		// console.log("***************"); // just to break up the print stmts during testing for legibility
+		// console.log(index);
 
-		for (var i in refs) {
+		// for succinctness
+		var results = $scope.results[index];
+		var filter = $scope.filter;
+		
+		// console.log("filter: ",filter);
 
-			var inds = $scope.results[index].refs[i].inds;
+		var filtered = []; // to be returned at the end
 
-			var one = $scope.results[index].refs[i].w1; // domus
-			var two = $scope.results[index].refs[i].w2; // spelunca
-			var three = $scope.results[index].refs[i].w3; // ""
+		for (var ref in refs) {
 
-			if (($scope.filter.indexOf(one) >= 0) && ($scope.filter.indexOf(two) >= 0)) {
-				if (($scope.filter.indexOf(three) >= 0) || three === "") {
+			var inds = results.refs[ref].inds;
+			// console.log("inds: ",inds);
+
+			var one = results.refs[ref].w1;
+			// console.log("one: ",one);
+
+			var two = results.refs[ref].w2;
+			// console.log("two: ",two);
+
+			var three = results.refs[ref].w3;
+			// console.log("three: ",three);
+
+			if ((filter[index].indexOf(one) >= 0) && (filter[index].indexOf(two) >= 0)) {
+				if ((filter[index].indexOf(three) >= 0) || three === "") {
 					filtered.push({"w1" : one, "w2" : two, "w3" : three, "inds" : inds});
 				}
 			}
 
 		}
-		console.log(filtered);
+		
 		return filtered;
 
 		// for(var i in refs){
