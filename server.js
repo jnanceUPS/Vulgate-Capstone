@@ -161,6 +161,7 @@ app.post('/upload/url', function(req, res){
 		file.on('data', (buffer) => {
 			var data = buffer.toString('utf8');
 			var sen = data.split(/\.\s/g);
+			//console.log("\"", sen[0], "\"" );
 			sess = req.session;
 			sess.matched = sen;
 			sess.books = [], sess.freqs = [];
