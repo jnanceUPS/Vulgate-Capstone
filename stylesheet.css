@@ -131,7 +131,7 @@ h1 {
 	color:black;
 }
 
-#highlightedWord {
+#filteredWord {
 	background: #C0C0C0;
 	color: #ff6b6b;
 	text-decoration: underline;
