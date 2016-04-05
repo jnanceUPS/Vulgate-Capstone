@@ -196,6 +196,13 @@ fs.readdir('./vulgate_bible/ordered_version/', function(err, filenames) {
 });
 
 
+app.post('/rootIt', function(req,res){
+	rootWord(req.body.word,function(err,results){
+		//res.end();
+		res.send({'root': results[0]});
+	});
+})
+
 function postVulgate() {
 	app.post('/vulgate', function(req, res){
 		res.send({'vulgate': vulgate});

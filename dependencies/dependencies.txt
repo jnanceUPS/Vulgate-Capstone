@@ -9,6 +9,7 @@ Note that the JWKTL needs to parse the XML Wiktionary Data before it can be used
 
 Node.js - download, add node to path
 MongoDB - download, npm install mongodb (if mongodb isn't in node_modules), add mongo java driver to class path (for running indexer.java)
+(and running rootsToDB.java)
 
 
 

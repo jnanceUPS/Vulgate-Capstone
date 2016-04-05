@@ -131,6 +131,12 @@ h1 {
 	color:black;
 }
 
+#highlightedWord {
+	background: #C0C0C0;
+	color: #ff6b6b;
+	text-decoration: underline;
+}
+
 .sentence {
 	font-family: Verdana;
 	font-size: 1em;
