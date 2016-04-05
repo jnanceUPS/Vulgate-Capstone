@@ -28,6 +28,7 @@ public class rootsToDB {
 		MongoClient mongo = new MongoClient("localhost", 27017);
 		DB db = mongo.getDB("vulgate");
 		DBCollection table = db.getCollection("roots");
+		table.drop();
 
 		Scanner sc = null;
 		long a = System.currentTimeMillis();
