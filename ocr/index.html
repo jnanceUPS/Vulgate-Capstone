@@ -1,0 +1,34 @@
+<!doctype html>
+<html ng-app= "tess">
+
+  <head>
+    <link rel="stylesheet" type= "text/css" href="stylesheet.css">
+    <title>Tesseract Page</title>
+      <meta charset="UTF-8">
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  </head>
+
+  <body ng-controller= "MainCtrl">
+    <div id="input">
+      <form>
+        The Tesseract:<br>
+<!--         <input type="text" name="input"><br> -->
+        <textarea name="userInput" style="height: 43em; width: 45em">
+        </textarea>
+        <br>
+        <br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+    <div id="pdf">
+      <!--<h2>Tesseract</h2>
+    -->
+      <!-- <img src="sampleVulgatePDF-1.png" alt="Oops" style="float: right; width:45em; height:45em"> -->
+      <!-- <form enctype="multipart/form-data" action="/upload/image" method="post">
+        <input id="image-file" type="file" /> -->
+        <input type="file" id="upload" name="file" class="button" ngf-select ng-model="file">
+      <!-- </form> -->
+    </div>
+  </body>
+</html>
