@@ -303,8 +303,31 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		$scope.hasRefs = sen.hasRefs;
 		if(sen.hasRefs){
 
+			// if (confirm("Filter results")) {
+			// 	var finalRefs = filterRefs(sen.refs, index);
+
+			// 	finalRefs.sort(function(a,b){
+			// 		return b.w3.length - a.w3.length;
+			// 	});
+
+			// 	$scope.vref = finalRefs;
+			// }
+			// else {
+			// 	sen.refs.sort(function(a,b){
+			// 		return b.w3.length - a.w3.length;
+			// 	});
+
+			// 	$scope.vref = sen.refs;
+			// }
+			
 			var finalRefs = filterRefs(sen.refs, index);
 
+			finalRefs.sort(function(a,b){
+				return b.w3.length - a.w3.length;
+			});
+
+			$scope.vref = finalRefs;
+		
 			// console.log("final: ",finalRefs);
 
 			// sen.refs.sort(function(a,b){
@@ -312,21 +335,14 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			// });
 
 			// $scope.vref = sen.refs;
+		
 
-			finalRefs.sort(function(a,b){
-				return b.w3.length - a.w3.length;
-			});
-
-			$scope.vref = finalRefs;
 		}
 	};
 
 
 
 	function filterRefs(refs, index) {
-		// console.log("***************"); // just to break up the print stmts during testing for legibility
-		// console.log(index);
-
 		// for succinctness
 		var results = $scope.results[index];
 		var filter = $scope.filter;
@@ -336,17 +352,11 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		for (var ref in refs) {
 
 			var inds = results.refs[ref].inds;
-			// console.log("inds: ",inds);
 
 			var one = results.refs[ref].w1;
-			// console.log("one: ",one);
-
-
 			var two = results.refs[ref].w2;
-			// console.log("two: ",two);
-
 			var three = results.refs[ref].w3;
-			// console.log("three: ",three);
+			
 
 			if (filter[index]){
 				if ((filter[index].indexOf(one) >= 0) && (filter[index].indexOf(two) >= 0)) {
@@ -358,16 +368,6 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		}
 		
 		return filtered;
-
-		// for(var i in refs){
-			
-		// 	// for(var j in $scope.marked.markedIndex[i]){
-
-		// 		console.log("w1 ->",$scope.results[index].refs[i].w1);
-		// 		console.log("w2 ->",$scope.results[index].refs[i].w2);
-		// 		console.log("w3 ->",$scope.results[index].refs[i].w3);
-		// 	// }
-		// }
 	}
 
 	$scope.submit = function() { 

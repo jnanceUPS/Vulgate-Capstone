@@ -125,6 +125,26 @@ h1 {
 	font-style: italic;
 }
 
+#t5 {
+	word-wrap: break-word;
+	float: left;
+	height: 1em;
+    width: 90%;
+    transition: all 0.5s ease;
+}
+
+#t5:focus {
+	word-wrap: break-word;
+	width: 90%;
+	padding: 5px 5px;
+	height: 2em;
+	
+}
+
+textarea {
+	resize: none;
+}
+
 
 #highlightedText {
 	background: #C0C0C0;
