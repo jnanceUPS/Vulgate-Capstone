@@ -121,7 +121,7 @@ public class indexer {
 
 			Arrays.sort(x);
 			String[] threeWords = null;
-			if(args[0]=="3")
+			if(args[0].equals("3"))
 				threeWords = get3Combos(x);
 			else
 				threeWords = get2Combos(x);
