@@ -1,5 +1,4 @@
 Sentence: 
-
 Ierusalem, totius Iudee metropolim, non ignobilem nec ignotam ciuitatem, regalibus
 honorificentiis in immensum multotiens decoratam, multotiens a tirannis hostibus
 obsessam, et ad solum usque dirutam, et a propriis filiis in captiuitatem abductis orbatam,
@@ -7,31 +6,17 @@ uariasque temporum tumultuationes ante saluatoris aduentum perpessam, nouerunt q
 uel historiographorum libros saltem tenuiter legerunt, uel qui computantium relationi
 aures audiendi auidas accomodauerunt
  
-Matching words:	filius	lego	tempus
-	Vulgate index:		Daniel [6:13]
+Matching words:	abductus	tempus	
+	Vulgate index:		Sapientia [14:20]
 	Verse: 
-	6:13 Tunc respondentes dixerunt coram rege : Daniel de filiis captivitatis Juda, non curavit de lege tua, et de edicto quod constituisti : sed tribus temporibus per diem orat obsecratione sua.
-	Notes: 	asdasd
+	14:20 Multitudo autem hominum, abducta per speciem operis,/ eum qui ante tempus tamquam homo honoratus fuerat,/ nunc deum æstimaverunt./
+	Notes: 	Ray is pretty awesome.
 
-Matching words:	filius	libros	tempus
-	Vulgate index:		Isaias [39:1]
-	Verse: 
-	39:1 In tempore illo misit Merodach Baladan, filius Baladan, rex Babylonis, libros et munera ad Ezechiam : audierat enim quod ægrotasset et convaluisset.
-	Notes: 	asas
+Matching words:	audiendus	auro	
 
-Matching words:	filius	tempus	totus
+Matching words:	audiendus	lego	
 
-Matching words:	lego	libros	solum
-
-Matching words:	filius	tempus	
-	Vulgate index:		Genesis [17:25]
-	Verse: 
-	17:25 Et Ismaël filius tredecim annos impleverat tempore circumcisionis suæ.
-	Notes: 	
-	Vulgate index:		Genesis [18:10]
-	Verse: 
-	18:10 Cui dixit : Revertens veniam ad te tempore isto, vita comite, et habebit filium Sara uxor tua. Quo audito, Sara risit post ostium tabernaculi.
-	Notes: 	
+Matching words:	auro	filius	
 
 -------------------------- 
  

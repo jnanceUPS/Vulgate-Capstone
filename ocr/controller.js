@@ -8,6 +8,6 @@ app.controller('MainCtrl', ['$scope', 'Upload', '$http', function($scope, Upload
     Upload.upload({
       url: 'upload/url',
       data: {file: file}
-    })
+    }).then(function( resp))
 
 }]);

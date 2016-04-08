@@ -39,8 +39,6 @@ app.post('/upload/url', function(req, res){
 	busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
 		console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
 		});
-		file.on('data', function(data){});
-	});
 	busboy.on('finish', function() {
 		res.end();
 	});

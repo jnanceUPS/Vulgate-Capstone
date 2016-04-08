@@ -27,7 +27,8 @@
       <!-- <img src="sampleVulgatePDF-1.png" alt="Oops" style="float: right; width:45em; height:45em"> -->
       <!-- <form enctype="multipart/form-data" action="/upload/image" method="post">
         <input id="image-file" type="file" /> -->
-        <input type="file" id="upload" name="file" class="button" ngf-select ng-model="file">
+        <input type="file" id="upload" name="file" class="button" ng-model="file" ngf-select="upload($file)">
+
       <!-- </form> -->
     </div>
   </body>
