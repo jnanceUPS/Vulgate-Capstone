@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="vulgate_bible/|node_modules/ng-file-upload/demo/src/main/java/|wiki_splitter/" kind="src" path=""/>
+	<classpathentry kind="src" path="node_modules/ng-file-upload/demo/src/main/java"/>
+	<classpathentry kind="src" path="vulgate_bible"/>
+	<classpathentry kind="src" path="wiki_splitter"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/HT/Desktop/Capstone/Project/vulgate_bible/mongo-java-driver-3.2.1.jar"/>
+	<classpathentry kind="output" path="node_modules/ng-file-upload/demo/target/ng-file-upload-demo-server-0.0.1/WEB-INF/classes"/>
+</classpath>

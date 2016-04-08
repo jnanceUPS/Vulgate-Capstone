@@ -1,0 +1,27 @@
+
+header {
+	background-color:black;
+	color:white;
+	text-align:center;
+	padding:5em;
+}
+
+#input {
+    float: left;
+    margin: 8px 8px;
+    resize: none;
+    font-size: 1em;
+}
+
+#pdf {
+    float: right;
+    width: 40%;
+}
+
+h2{
+    float: center;
+}
+
+#userInput{
+    float: right;
+}
