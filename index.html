@@ -109,7 +109,7 @@
 							</span>
 							<div id="t4" ng-if="(x = popupIndex[(y = $parent.$index)].indexOf($index)) >= 0"> {{popupVerse[y][x]}} </div>
 
-							<div ng-if="marked.markedIndex[selectedSentence][$parent.$index][$index].marked">
+							<div ng-show="marked.markedIndex[selectedSentence][$parent.$index][$index].marked">
 								<textarea placeholder="Optional: Type your notes here." id="t5" ng-readonly="!marked.markedIndex[selectedSentence][$parent.$index][$index].marked" ng-model="marked.markedIndex[selectedSentence][$parent.$index][$index].note">
 							</div>
 
