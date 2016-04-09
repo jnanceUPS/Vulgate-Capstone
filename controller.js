@@ -177,6 +177,8 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			$scope.marked.markedIndex[$scope.selectedSentence][pindex][index] = {'marked': false, 'note': ""};
 
 		var indind = $scope.marked.markedIndex[$scope.selectedSentence][pindex][index].marked;
+
+		console.log("indind: ",indind);
 		
 		if (!indind){
 			markAsRef(vName);
@@ -259,7 +261,6 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
 		$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
 	};
-
 
 
 	//given a verse name e.g. "Numeri [7:9]", returns the corresponding verse from the Vulgate
