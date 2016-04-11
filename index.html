@@ -111,15 +111,17 @@
 									<div id="t2" ng-click="showVerse(ind,$parent.$index,$index)">
 										{{ind}}
 									</div>
+
+									<div id="note" ng-show="marked.markedIndex[selectedSentence][$parent.$index][$index].marked">
+										<textarea placeholder="Optional: Type your notes here." id="t5" ng-readonly="!marked.markedIndex[selectedSentence][$parent.$index][$index].marked" ng-model="marked.markedIndex[selectedSentence][$parent.$index][$index].note"></textarea>
+									</div>
+
 								</span>
 
 								<div id="t4" ng-if="(x = popupIndex[(y = $parent.$index)].indexOf($index)) >= 0">
 									{{popupVerse[y][x]}}
 								</div>
 
-								<div id="note" ng-show="marked.markedIndex[selectedSentence][$parent.$index][$index].marked">
-									<textarea placeholder="Optional: Type your notes here." id="t5" ng-readonly="!marked.markedIndex[selectedSentence][$parent.$index][$index].marked" ng-model="marked.markedIndex[selectedSentence][$parent.$index][$index].note"></textarea>
-								</div>
 							</span>
 						</div>
 					</div>

@@ -21,15 +21,15 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 
 	}
 
-	var books = ["Genesis","Exodus","Leviticus","Numeri","Deuteronomium","Josue","Judicum","Ruth","Regum I",
-	"Regum II","Regum III","Regum IV","Paralipomenon I","Paralipomenon II","Esdre","Nehemie","Tobie","Judith",
-	"Esther","Job","Psalmi","Proverbia","Ecclesiastes","Canticum Canticorum","Sapientia","Ecclesiasticus","Isaias",
-	"Jeremias","Lamentationes","Baruch","Ezechiel","Daniel","Osee","Joel","Amos","Abdias","Jonas","Michea","Nahum",
-	"Habacuc","Sophonias","Aggeus","Zacharias","Malachias","Machabeorum I","Machabeorum II","Mattheus","Marcus",
-	"Lucas","Joannes","Actus Apostolorum","ad Romanos","ad Corinthios I","ad Corinthios II","ad Galatas",
-	"ad Ephesios","ad Philippenses","ad Colossenses","ad Thessalonicenses I","ad Thessalonicenses II",
-	"ad Timotheum I","ad Timotheum II","ad Titum","ad Philemonem","ad Hebreos","Jacobi","Petri I","Petri II",
-	"Joannis I","Joannis II","Joannis III","Jude","Apocalypsis"];
+	var books = ["Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel",
+		"2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Tobit","Judith",
+		"Esther","Job","Psalms","Proverbs","Ecclesiastes","Song of Solomon","Wisdom","Ecclesiasticus","Isaiah",
+		"Jeremiah","Lamentations","Baruch","Ezekiel","Daniel","Hosea","Joel","Amos","Obadiah","Jonah","Micah","Nahum",
+		"Habakkuk","Zephaniah","Haggai","Zechariah","Malachi","1 Maccabees","2 Maccabees","Matthew","Mark",
+		"Luke","John","Acts","Romans","1 Corinthians","2 Corinthians","Galatians",
+		"Ephesians","Philippians","Colossians","1 Thessalonians","2 Thessalonians",
+		"1 Timothy","2 Timothy","Titus","Philemon","Hebrews","James","1 Peter","2 Peter",
+		"1 John","2 John","3 John","Jude","Revelation"];
 	//1-46 old, 47-73 new
 
 	$http.post('/vulgate').success(function(data){
