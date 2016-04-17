@@ -13,24 +13,20 @@
     <div id="input">
       <form>
         The Tesseract:<br>
-<!--         <input type="text" name="input"><br> -->
         <textarea name="userInput" style="height: 43em; width: 45em">
         </textarea>
         <br>
         <br>
-        <input type="submit" value="Submit">
       </form>
     </div>
 
     <div id="pdf">
-      <!--<h2>Tesseract</h2>
-    -->
-      <!-- <img src="sampleVulgatePDF-1.png" alt="Oops" style="float: right; width:45em; height:45em"> -->
-      <!-- <form enctype="multipart/form-data" action="/upload/image" method="post">
-        <input id="image-file" type="file" /> -->
-        <input type="file" id="upload" name="file" class="button" ng-model="file" ngf-select="onFileSelect($file)" mulitple>
 
-      <!-- </form> -->
+      <!-- img src="sampleVulgatePDF-1.png" alt="Oops" style="float: right; width:45em; height:45em"> -->
+        <form action="/upload" enctype="multipart/form-data" method="post">
+          <input type="file" name="upload" multiple="multiple"><br>
+          <input type="submit" value="Upload">
+        </form>
     </div>
   </body>
 </html>
