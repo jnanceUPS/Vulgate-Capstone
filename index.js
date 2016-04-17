@@ -63,7 +63,7 @@ function reader() {
 //	 }
 	// contains proper name
 	// two or more words are the same
-});
+	});
 }
 
 fs.readFile('./index.html', function(err, html){

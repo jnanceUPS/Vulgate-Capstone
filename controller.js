@@ -136,35 +136,47 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 	$scope.filter = [];
 	$scope.highlight = [];
 
+	$scope.toFilter = false;
 
 	$scope.selectWord = function(word, index){
-		var defer = $q.defer();
-		$http.post('/rootIt', {'word': word}).success(function(data){
-			//console.log(data.root);
-			defer.resolve(data);
-			if ($scope.selectedSentence == index){
-				if(!$scope.filter[$scope.selectedSentence]){ 
-					$scope.filter[$scope.selectedSentence] = [];
-					$scope.highlight[$scope.selectedSentence] = [];
+		
+			var defer = $q.defer();
+			$http.post('/rootIt', {'word': word}).success(function(data){
+				//console.log(data.root);
+				defer.resolve(data);
+				if ($scope.selectedSentence == index){
+					if(!$scope.filter[$scope.selectedSentence]){ 
+						$scope.filter[$scope.selectedSentence] = [];
+						$scope.highlight[$scope.selectedSentence] = [];
+					}
+					var i = $scope.filter[$scope.selectedSentence].indexOf(data.root);
+					if (i >= 0){
+						$scope.filter[$scope.selectedSentence].splice(i,1);
+						$scope.highlight[$scope.selectedSentence].splice(i,1);
+					}	
+					else {
+						$scope.filter[$scope.selectedSentence].push(data.root);
+						$scope.highlight[$scope.selectedSentence].push(word);
+					}
 				}
-				var i = $scope.filter[$scope.selectedSentence].indexOf(data.root);
-				if (i >= 0){
-					$scope.filter[$scope.selectedSentence].splice(i,1);
-					$scope.highlight[$scope.selectedSentence].splice(i,1);
-				}	
-				else {
-					$scope.filter[$scope.selectedSentence].push(data.root);
-					$scope.highlight[$scope.selectedSentence].push(word);
-				}
-			}
-			$scope.showRefs($scope.selectedSentence);
+				$scope.showRefs($scope.selectedSentence);
 
-		}).error(function(data){
-			defer.reject(data);
-		});
-		return defer.promise;
+			}).error(function(data){
+				defer.reject(data);
+			});
+			return defer.promise;
+		
+	}
 
+	$scope.setFilterPreferenceOn = function() {
+		
+		$scope.toFilter = true;
+		console.log($scope.toFilter);
+	}
 
+	$scope.setFilterPreferenceOff = function() {
+		$scope.toFilter = false;
+		console.log($scope.toFilter);
 	}
 
 	// handles all functionality of marking references
@@ -320,15 +332,31 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 
 			// 	$scope.vref = sen.refs;
 			// }
-			
-			var finalRefs = filterRefs(sen.refs, index);
+		////////////////////////////////////////////////////////////	
 
-			finalRefs.sort(function(a,b){
-				return b.w3.length - a.w3.length;
-			});
+		// if (toFilter) {
+		// 	var finalRefs = filterRefs(sen.refs, index);
 
-			$scope.vref = finalRefs;
-		
+		// 	finalRefs.sort(function(a,b){
+		// 		return b.w3.length - a.w3.length;
+		// 	});
+
+		// 	$scope.vref = finalRefs;
+		// }
+		// if (!toFilter) {
+		// 	sen.refs.sort(function(a,b) {
+		// 		return b.w3.length - a.w3.length;
+		// 	});
+		// 	$scope.vref = sen.refs;
+		// }
+
+		var finalRefs = filterRefs(sen.refs, index);
+		finalRefs.sort(function(a,b) {
+			return b.w3.length - a.w3.length;
+		});
+		$scope.vref = finalRefs;
+
+		////////////////////////////////////////////////////////////
 			// console.log("final: ",finalRefs);
 
 			// sen.refs.sort(function(a,b){

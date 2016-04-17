@@ -25,3 +25,8 @@ h2{
 #userInput{
     float: right;
 }
+
+.pdfobject-container {
+   width: 200px;
+   height: 500px;
+}

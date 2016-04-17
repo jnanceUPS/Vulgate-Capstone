@@ -2,6 +2,8 @@
 <html ng-app="tess">
 
   <head>
+    <link rel="stylesheet" href="/bower_components/ideal-image-slider.css">
+    <link rel="stylesheet" href="/bower_components/ideal-image-slider/themes/default/default.css">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <title>Tesseract Page</title>
       <meta charset="UTF-8">
@@ -22,15 +24,19 @@
       </form>
     </div>
 
-    <div id="pdf">
+    <div id="my-pdf">
+    <script src="pdfObject.js"></script>
+    <script>PDFObject.embed("temp.pdf", "my-pdf");</script>
       <!--<h2>Tesseract</h2>
     -->
       <!-- <img src="sampleVulgatePDF-1.png" alt="Oops" style="float: right; width:45em; height:45em"> -->
       <!-- <form enctype="multipart/form-data" action="/upload/image" method="post">
         <input id="image-file" type="file" /> -->
-        <input type="file" id="upload" name="file" class="button" ng-model="file" ngf-select="onFileSelect($file)" mulitple>
+        <!-- <input type="file" id="upload" name="file" class="button" ng-model="file" ngf-select="onFileSelect($file)" mulitple> -->
 
       <!-- </form> -->
     </div>
+
+
   </body>
 </html>

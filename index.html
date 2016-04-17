@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="lib/ng-file-upload-shim.min.js"></script>
 		<script type="text/javascript" src="lib/ng-file-upload.min.js"></script>
 		<script type="text/javascript" src="controller.js"></script>
+		<script src="jquery-1.12.3.min.js"></script>
 
 	</head>
 	<body ng-controller="myCtrl">
@@ -50,7 +51,16 @@
 								<span class="sentence" ng-repeat="word in parseSentence(r.sentence) track by $index" ng-click="selectWord(word, $parent.$index)">
 									<span id="filteredWord" ng-if="highlight[selectedSentence].indexOf(word) >= 0"> {{word}}</span>
 									<span ng-if="highlight[selectedSentence].indexOf(word) < 0">{{word}}</span>
-								</span> 		
+								</span>
+								<br/>
+								<br/>
+								<div class="sentence" id="filterLink">
+									<a id="filterLink" href="" style="float: right;" ng-click="setFilterPreferenceOn()">Filter references for this sentence</a>
+								</div>
+								<br/>
+								<div class="sentence" id="filterLink">
+									<a id="filterLink" href="" style="float: right;" ng-click="setFilterPreferenceOff()">Do not filter references for this sentence</a>
+								</div>
 							</div>
 						</div>	
 					</div>
