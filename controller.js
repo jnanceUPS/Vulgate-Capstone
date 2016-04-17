@@ -140,32 +140,31 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 
 	$scope.selectWord = function(word, index){
 		
-			var defer = $q.defer();
-			$http.post('/rootIt', {'word': word}).success(function(data){
-				//console.log(data.root);
-				defer.resolve(data);
-				if ($scope.selectedSentence == index){
-					if(!$scope.filter[$scope.selectedSentence]){ 
-						$scope.filter[$scope.selectedSentence] = [];
-						$scope.highlight[$scope.selectedSentence] = [];
-					}
-					var i = $scope.filter[$scope.selectedSentence].indexOf(data.root);
-					if (i >= 0){
-						$scope.filter[$scope.selectedSentence].splice(i,1);
-						$scope.highlight[$scope.selectedSentence].splice(i,1);
-					}	
-					else {
-						$scope.filter[$scope.selectedSentence].push(data.root);
-						$scope.highlight[$scope.selectedSentence].push(word);
-					}
+		var defer = $q.defer();
+		$http.post('/rootIt', {'word': word}).success(function(data){
+			//console.log(data.root);
+			defer.resolve(data);
+			if ($scope.selectedSentence == index){
+				if(!$scope.filter[$scope.selectedSentence]){ 
+					$scope.filter[$scope.selectedSentence] = [];
+					$scope.highlight[$scope.selectedSentence] = [];
 				}
-				$scope.showRefs($scope.selectedSentence);
+				var i = $scope.filter[$scope.selectedSentence].indexOf(data.root);
+				if (i >= 0){
+					$scope.filter[$scope.selectedSentence].splice(i,1);
+					$scope.highlight[$scope.selectedSentence].splice(i,1);
+				}	
+				else {
+					$scope.filter[$scope.selectedSentence].push(data.root);
+					$scope.highlight[$scope.selectedSentence].push(word);
+				}
+			}
+			$scope.showRefs($scope.selectedSentence);
 
-			}).error(function(data){
-				defer.reject(data);
-			});
-			return defer.promise;
-		
+		}).error(function(data){
+			defer.reject(data);
+		});
+		return defer.promise;
 	}
 
 	$scope.setFilterPreferenceOn = function() {
@@ -306,6 +305,11 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 	
 	//shows the references, given a selected sentence
 	$scope.showRefs = function(index){
+
+		if ($scope.selectedSentence != index) {
+			$scope.toFilter = false;
+		}
+
 		$scope.popupIndex = [];
 		$scope.popupVerse = [];
 		$scope.selectedSentence = index;
@@ -334,27 +338,27 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			// }
 		////////////////////////////////////////////////////////////	
 
-		// if (toFilter) {
-		// 	var finalRefs = filterRefs(sen.refs, index);
+		if ($scope.toFilter) {
+			var finalRefs = filterRefs(sen.refs, index);
 
-		// 	finalRefs.sort(function(a,b){
-		// 		return b.w3.length - a.w3.length;
-		// 	});
+			finalRefs.sort(function(a,b){
+				return b.w3.length - a.w3.length;
+			});
 
-		// 	$scope.vref = finalRefs;
-		// }
-		// if (!toFilter) {
-		// 	sen.refs.sort(function(a,b) {
-		// 		return b.w3.length - a.w3.length;
-		// 	});
-		// 	$scope.vref = sen.refs;
-		// }
+			$scope.vref = finalRefs;
+		}
+		if (!$scope.toFilter) {
+			sen.refs.sort(function(a,b) {
+				return b.w3.length - a.w3.length;
+			});
+			$scope.vref = sen.refs;
+		}
 
-		var finalRefs = filterRefs(sen.refs, index);
-		finalRefs.sort(function(a,b) {
-			return b.w3.length - a.w3.length;
-		});
-		$scope.vref = finalRefs;
+		// var finalRefs = filterRefs(sen.refs, index);
+		// finalRefs.sort(function(a,b) {
+		// 	return b.w3.length - a.w3.length;
+		// });
+		// $scope.vref = finalRefs;
 
 		////////////////////////////////////////////////////////////
 			// console.log("final: ",finalRefs);
