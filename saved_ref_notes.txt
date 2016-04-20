@@ -1,0 +1,16 @@
+Sentence: 
+Ierusalem, totius Iudee metropolim, non ignobilem nec ignotam ciuitatem, regalibus
+honorificentiis in immensum multotiens decoratam, multotiens a tirannis hostibus
+obsessam, et ad solum usque dirutam, et a propriis filiis in captiuitatem abductis orbatam,
+uariasque temporum tumultuationes ante saluatoris aduentum perpessam, nouerunt qui
+uel historiographorum libros saltem tenuiter legerunt, uel qui computantium relationi
+aures audiendi auidas accomodauerunt
+ 
+Matching words:	filius	lego	tempus
+	Vulgate index:		Galatians [4:4]
+	Verse: 
+	4:4 At ubi venit plenitudo temporis, misit Deus Filium suum factum ex muliere, factum sub lege,
+	Notes: 	NOTES GO HERE NOTES GO HERE
+
+-------------------------- 
+ 
