@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html ng-app="myApp">
 	<head>
 		<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
 		<title>Vulgate Reference Finder</title>
-		<h1>&#xa756ue<sup>2</sup></h1>
+		<!-- <h1>&#xa756ue<sup>2</sup></h1> -->
+		<h1>Operta</h1>
 
 		<script type="text/javascript" src="lib/jquery-2.2.0.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
@@ -14,7 +15,7 @@
 		<script type="text/javascript" src="lib/ng-file-upload.min.js"></script>
 		<script type="text/javascript" src="controller.js"></script>
 		<script src="jquery-1.12.3.min.js"></script>
-
+		<script src="bower_components/FileSaver/FileSaver.js"></script>
 	</head>
 	<body ng-controller="myCtrl">
 		<div ng-show="showStop" id="stopwordBorder">	
@@ -108,7 +109,7 @@
 					<div ng-show="showDiv && selectedSentence < 0"> Click on a sentence to view its references!</div>
 					<div class="scrollable" ng-show="selectedSentence >= 0">
 						<div id="t0" ng-if="hasRefs==false"> No references found. </div>
-						<div class="refs" ng-repeat="ref in vref">
+						<div class="refs" ng-repeat="ref in vref[selectedSentence]">
 							<span ng-repeat="ind in ref.inds track by $index">
 								<span id="ts">
 
