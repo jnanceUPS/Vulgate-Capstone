@@ -144,7 +144,7 @@ app.post('/stopwords', function(req, res){
 app.post('/saveFile', function(req, res){
 	console.log(req.body.str);
 	
-	fs.writeFile("hello.txt", req.body.str, function(err) {
+	fs.writeFile("saved_ref_notes.txt", req.body.str, function(err) {
 		if(err) {
 			return console.log(err);
 		}
