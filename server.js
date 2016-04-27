@@ -142,6 +142,7 @@ app.post('/stopwords', function(req, res){
 });
 
 app.post('/saveFile', function(req, res){
+
 	console.log(req.body.str);
 	
 	fs.writeFile("saved_ref_notes.txt", req.body.str, function(err) {
@@ -150,7 +151,8 @@ app.post('/saveFile', function(req, res){
 		}
 
 		res.end();
-	}); 
+	});
+
 });
 
 //Gets file from Controller

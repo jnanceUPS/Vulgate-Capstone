@@ -21,6 +21,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 
 	}
 
+	//1-46 old, 47-73 new
 	var books = ["Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth","1 Samuel",
 		"2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah","Tobit","Judith",
 		"Esther","Job","Psalms","Proverbs","Ecclesiastes","Song of Solomon","Wisdom","Ecclesiasticus","Isaiah",
@@ -30,7 +31,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		"Ephesians","Philippians","Colossians","1 Thessalonians","2 Thessalonians",
 		"1 Timothy","2 Timothy","Titus","Philemon","Hebrews","James","1 Peter","2 Peter",
 		"1 John","2 John","3 John","Jude","Revelation"];
-	//1-46 old, 47-73 new
+	
 
 	$http.post('/vulgate').success(function(data){
 		$scope.vulgate = data.vulgate;
@@ -85,12 +86,6 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		return defer.promise;
 	}
 
-	// $scope.highlightWord = function(refWord){
-	// 	var sen = $scope.results[$scope.selectedSentence];
-	// 	var index = sen.indexOf(ref)
-	// }
-
-
 	// toggles the visibility of stopwords
 	$scope.editStopwords = function(){
 		$scope.showGod = false;	
@@ -137,6 +132,16 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 	$scope.highlight = [];
 
 	$scope.toFilter = false;
+	$scope.setFilterPreferenceOn = function() {
+		
+		$scope.toFilter = true;
+		console.log($scope.toFilter);
+	}
+
+	$scope.setFilterPreferenceOff = function() {
+		$scope.toFilter = false;
+		console.log($scope.toFilter);
+	}
 
 	$scope.selectWord = function(word, index){
 		
@@ -167,17 +172,6 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		return defer.promise;
 	}
 
-	$scope.setFilterPreferenceOn = function() {
-		
-		$scope.toFilter = true;
-		console.log($scope.toFilter);
-	}
-
-	$scope.setFilterPreferenceOff = function() {
-		$scope.toFilter = false;
-		console.log($scope.toFilter);
-	}
-
 	// handles all functionality of marking references
 	$scope.onCheck = function(vName,pindex,index){
 		if(!$scope.marked.markedIndex[$scope.selectedSentence]) 
@@ -205,6 +199,38 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 
 		}
 	}
+
+	//handles marking a reference
+	var markAsRef = function(vName){
+		$scope.marked.total++;
+		var spl = vName.split(" [");
+
+		var found = false;
+		for (var i = 0; i < $scope.marked.stats.length; i++){
+			if ($scope.marked.stats[i].book === spl[0]){
+				$scope.marked.stats[i].freq++;
+				found = true;
+				break;
+			}
+		}
+		if (!found){
+			$scope.marked.stats.push({
+				'book': spl[0], 
+				'freq': 1, 
+				'freqPct': Math.round(100/$scope.marked.total )
+			});
+		}
+		recalcFreqPct($scope.marked.stats,$scope.marked.total);
+
+		$scope.marked.stats.sort(function(a,b){
+			return b.freq - a.freq;
+		});
+
+		if (books.indexOf(spl[0]) < 46) $scope.marked.oldRef++;
+		else $scope.marked.newRef++;
+		$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
+		$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
+	};
 
 	//handles unmarking a reference
 	var unmarkAsRef = function(vName){
@@ -241,41 +267,9 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		}
 	}
 
-	//handles marking a reference
-	var markAsRef = function(vName){
-		$scope.marked.total++;
-		var spl = vName.split(" [");
-
-		var found = false;
-		for (var i = 0; i < $scope.marked.stats.length; i++){
-			if ($scope.marked.stats[i].book === spl[0]){
-				$scope.marked.stats[i].freq++;
-				found = true;
-				break;
-			}
-		}
-		if (!found){
-			$scope.marked.stats.push({
-				'book': spl[0], 
-				'freq': 1, 
-				'freqPct': Math.round(100/$scope.marked.total )
-			});
-		}
-		recalcFreqPct($scope.marked.stats,$scope.marked.total);
-
-		$scope.marked.stats.sort(function(a,b){
-			return b.freq - a.freq;
-		});
-
-		if (books.indexOf(spl[0]) < 46) $scope.marked.oldRef++;
-		else $scope.marked.newRef++;
-		$scope.marked.oldPct = Math.round($scope.marked.oldRef*100/$scope.marked.total);
-		$scope.marked.newPct = Math.round($scope.marked.newRef*100/$scope.marked.total);
-	};
-
-
 	//given a verse name e.g. "Numeri [7:9]", returns the corresponding verse from the Vulgate
 	var getVerse = function(vName){
+		console.log('vname: ',vName);
 		var spl = vName.split(" [");
 		var book = books.indexOf(spl[0]);
 		var num = spl[1].substring(0,spl[1].length-1);
@@ -303,6 +297,8 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		}
 	}
 	
+
+	$scope.vref = [];
 	//shows the references, given a selected sentence
 	$scope.showRefs = function(index){
 
@@ -316,61 +312,62 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		$scope.verse = [];
 		var sen = $scope.results[index];
 
-		$scope.vref = {};
+		// $scope.vref = {}; // uncomment if done with below EXPERIMENTING
 		$scope.hasRefs = sen.hasRefs;
-		if(sen.hasRefs){
 
-			// if (confirm("Filter results")) {
-			// 	var finalRefs = filterRefs(sen.refs, index);
 
-			// 	finalRefs.sort(function(a,b){
-			// 		return b.w3.length - a.w3.length;
-			// 	});
+		////////////////////////////////////////////////
+		/////////////////EXPERIMENTING//////////////////
+		////////////////////////////////////////////////
 
-			// 	$scope.vref = finalRefs;
-			// }
-			// else {
-			// 	sen.refs.sort(function(a,b){
-			// 		return b.w3.length - a.w3.length;
-			// 	});
-
-			// 	$scope.vref = sen.refs;
-			// }
-		////////////////////////////////////////////////////////////	
-
-		if ($scope.toFilter) {
-			var finalRefs = filterRefs(sen.refs, index);
-
-			finalRefs.sort(function(a,b){
-				return b.w3.length - a.w3.length;
-			});
-
-			$scope.vref = finalRefs;
-		}
-		if (!$scope.toFilter) {
-			sen.refs.sort(function(a,b) {
-				return b.w3.length - a.w3.length;
-			});
-			$scope.vref = sen.refs;
-		}
-
-		// var finalRefs = filterRefs(sen.refs, index);
-		// finalRefs.sort(function(a,b) {
-		// 	return b.w3.length - a.w3.length;
-		// });
-		// $scope.vref = finalRefs;
-
-		////////////////////////////////////////////////////////////
-			// console.log("final: ",finalRefs);
-
-			// sen.refs.sort(function(a,b){
-			// 	return b.w3.length - a.w3.length;
-			// });
-
-			// $scope.vref = sen.refs;
 		
-
+		if (!$scope.vref[index]) {
+			$scope.vref[index] = {};
 		}
+
+		if(sen.hasRefs){	
+
+			if ($scope.toFilter) {
+				var finalRefs = filterRefs(sen.refs, index);
+
+				finalRefs.sort(function(a,b){
+					return b.w3.length - a.w3.length;
+				});
+
+				$scope.vref[index] = finalRefs;
+			}
+			if (!$scope.toFilter) {
+				sen.refs.sort(function(a,b) {
+					return b.w3.length - a.w3.length;
+				});
+				$scope.vref[index] = sen.refs;
+			}
+		}
+
+		////////////////////////////////////////////////
+		/////////////////EXPERIMENTING//////////////////
+		////////////////////////////////////////////////
+
+
+		// uncomment when done EXPERIMENTING above
+		// if(sen.hasRefs){	
+
+		// 	if ($scope.toFilter) {
+		// 		var finalRefs = filterRefs(sen.refs, index);
+
+		// 		finalRefs.sort(function(a,b){
+		// 			return b.w3.length - a.w3.length;
+		// 		});
+
+		// 		$scope.vref = finalRefs;
+		// 	}
+		// 	if (!$scope.toFilter) {
+		// 		sen.refs.sort(function(a,b) {
+		// 			return b.w3.length - a.w3.length;
+		// 		});
+		// 		$scope.vref = sen.refs;
+		// 	}
+		// }
 	};
 
 
@@ -434,39 +431,89 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 	//saves marked data to a text file
 	$scope.saveFile = function(){
 
-		var str = "";
+		var str = "";	
+
+		// joshua's code
+
+		console.log("*****$scope.vref*****");
+		console.log($scope.vref);
+		console.log("**************");
+
+		// added [i] to $scope.vref[i][j]
+		// was previously just [j]
+
+		// for(var i in $scope.marked.markedIndex){
+		// 	str += "Sentence: \n";
+		// 	str += $scope.results[i].sentence + "\n \n";
+		// 	for(var j in $scope.marked.markedIndex[i]){
+		// 		str += "Matching words:\t";
+		// 		str += $scope.vref[j].w1 + "\t";
+		// 		str += $scope.vref[j].w2 + "\t";
+		// 		str += $scope.vref[j].w3 + "\n";
+
+		// 		for(var k in $scope.marked.markedIndex[i][j]){
+		// 			if ($scope.marked.markedIndex[i][j][k].marked){
+		// 				str += "\tVulgate index:\t"
+		// 				str += "\t"+$scope.vref[j].inds[k] + "\n";
+		// 				str += "\tVerse: \n" 
+		// 				str += "\t"+getVerse($scope.vref[j].inds[k]) + "\n";
+		// 				str += "\tNotes: " 
+		// 				str += "\t"+$scope.marked.markedIndex[i][j][k].note + "\n";
+		// 			}
+		// 		}
+		// 		str += "\n";
+		// 	}
+		// 	str += "-------------------------- \n \n";
+		// }
 
 		for(var i in $scope.marked.markedIndex){
-			str += "Sentence: \n"
+			str += "Sentence: \n";
 			str += $scope.results[i].sentence + "\n \n";
 			for(var j in $scope.marked.markedIndex[i]){
-				str += "Matching words:\t"
-				str += $scope.results[i].refs[j].w1 + "\t";
-				str += $scope.results[i].refs[j].w2 + "\t";
-				str += $scope.results[i].refs[j].w3 + "\n";
+				str += "Matching words:\t";
+				str += $scope.vref[i][j].w1 + "\t";
+				str += $scope.vref[i][j].w2 + "\t";
+				str += $scope.vref[i][j].w3 + "\n";
 
 				for(var k in $scope.marked.markedIndex[i][j]){
 					if ($scope.marked.markedIndex[i][j][k].marked){
 						str += "\tVulgate index:\t"
-						str += "\t"+$scope.results[i].refs[j].inds[k] + "\n";
+						str += "\t"+$scope.vref[i][j].inds[k] + "\n";
 						str += "\tVerse: \n" 
-						str += "\t"+getVerse($scope.results[i].refs[j].inds[k]) + "\n";
+						str += "\t"+getVerse($scope.vref[i][j].inds[k]) + "\n";
 						str += "\tNotes: " 
 						str += "\t"+$scope.marked.markedIndex[i][j][k].note + "\n";
 					}
 				}
-				str += "\n"
+				str += "\n";
 			}
-			str += "-------------------------- \n \n"
+			str += "-------------------------- \n \n";
 		}
+		
 
-		$scope.fileObj = {'str':str}
+		// changing $scope.results[_].refs[_] seems to have worked...for now
 
-		$http.post('/saveFile', $scope.fileObj).success(function(data){
-		})
-		.error(function(err){ 
-			console.log(err);
-		});
+
+		var s = [str];
+		var blob = new Blob(s, {type: "text/plain;charset=utf-8"});
+
+		var dateObj = new Date();
+		var month = dateObj.getUTCMonth() + 1; //months from 1-12
+		var day = dateObj.getUTCDate();
+		var year = dateObj.getUTCFullYear();
+
+		date = month + "_" + day + "_" + year;
+
+		var filename = "saved_refs_" + date + ".txt";
+		saveAs(blob, filename);
+
+		// $scope.fileObj = {'str':str}
+
+		// $http.post('/saveFile', $scope.fileObj).success(function(data){
+		// })
+		// .error(function(err){ 
+		// 	console.log(err);
+		// });
 	};
 
 }]);
@@ -478,6 +525,16 @@ function getNextIndexOf(item, arr, startIndex){
 		if (arr[i] == item) return i;
 	}
 	return -1;
+}
+
+function toArrayBuffer(str) {
+	var buffer = new Buffer(str);
+	var ab = new ArrayBuffer(buffer.length);
+	var view = new Uint8Array(ab);
+	for (var i = 0; i < buffer.length; ++i) {
+		view[i] = buffer[i];
+	}
+	return ab;
 }
 
 //gets the index of an object in an array of objects. Also works for arrays in array of arrays.
