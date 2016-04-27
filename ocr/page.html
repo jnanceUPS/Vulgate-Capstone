@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="tess">
+<html ng-app="myApp" ng-controller='myCtrl'>
 
   <head>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
@@ -7,11 +7,19 @@
       <meta charset="UTF-8">
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
       <script type="text/javascript" src="controller.js"></script>
-      <script src="/PDFObject-master/pdfobject.js"></script>
-      <script>PDFObject.embed("/temp.pdf", "#pdf");</script>
+      <script>
+        var reader = new FileReader();
+        reader.onload = function(){
+          var text = reader.result;
+          var node = document.getElementById('userInput');
+          node.innerText = text;
+          console.log(reader.result.substring(0, 200));
+        };
+        reader.readAsText("./tessOutput.txt");
+    </script>
   </head>
 
-  <body ng-controller="MainCtrl">
+  <body>
     <div id="input">
       <form>
         The Tesseract:<br>
@@ -22,12 +30,13 @@
       </form>
     </div>
 
+    <script scr="controller.js"></script>
+
     <div id="pdf">
+      <img src="temp.png" alt="Oops, there was a problem uploading" style="height: 45em; width: 38em; float: right">
 
 
 
-      <!-- img src="sampleVulgatePDF-1.png" alt="Oops" style="float: right; width:45em; height:45em"> -->
-        
     </div>
   </body>
 </html>

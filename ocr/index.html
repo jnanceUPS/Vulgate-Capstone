@@ -1,18 +1,16 @@
-<!doctype html>
-<html ng-app="tess">
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller='myCtrl'>
 
   <head>
-    <link rel="stylesheet" href="/bower_components/ideal-image-slider.css">
-    <link rel="stylesheet" href="/bower_components/ideal-image-slider/themes/default/default.css">
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link type="text/css" rel="stylesheet" href="stylesheet.css">
     <title>Tesseract Page</title>
-      <meta charset="UTF-8">
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-      <script type="text/javascript" src="controller.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript" src="controller.js"></script>
   </head>
 
-  <body ng-controller="MainCtrl">
-    <div id="input">
+  <body>
+    <div>
       <form>
         The Tesseract:<br>
         <textarea name="userInput" style="height: 43em; width: 45em">
@@ -22,10 +20,16 @@
       </form>
     </div>
 
+    <script src="controller.js"></script>
+
     <div id="pdf">
 
+<!--       <div class="controls">
+          <button id="passwordButton" class="secondaryButton" ng-click="tess()"></button>
+         </div> -->
 
-      <!-- img src="sampleVulgatePDF-1.png" alt="Oops" style="float: right; width:45em; height:45em"> -->
+<!-- 
+      img src="sampleVulgatePDF-1.png" alt="Oops" style="float: right; width:45em; height:45em"> -->
         <form action="/upload" enctype="multipart/form-data" method="post">
           <input type="file" name="upload" multiple="multiple"><br>
           <input type="submit" value="Upload">
