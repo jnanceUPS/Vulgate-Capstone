@@ -56,14 +56,17 @@ app.post('/upload', function(req, res){
 });
 
 app.get('/tess', function(req, res){
+	var options = {
+		l: 'lat'
+	}
 
-	tesseract.process(__dirname + './temp.png', function(err, text){
+	tesseract.process(__dirname + './temp.png', options, function(err, text){
             if(err) {
-                res.send("Oops, an error occured. Sorry!");
+                res.send("Oops, an error occured trying to run the Tesseract. Sorry!");
             }
             else{
             	fs.writeFile('tessOutput.txt', text, function(err){
-            		if(err) console.log("You done fucked up");
+            		if(err) console.log("Error writing TessOutput to text file!");
             	});
             	res.writeHead(200, {'content-type': 'text/html'});
                 res.write('Reading image...<head><meta http-equiv="refresh" content="1; url=./view"></meta></head>');

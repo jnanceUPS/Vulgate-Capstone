@@ -6,6 +6,10 @@ header {
 	padding:5em;
 }
 
+body {
+    background-color: #b7d1c4;
+}
+
 #input {
     float: left;
     margin: 8px 8px;
@@ -25,8 +29,6 @@ h2{
 #userInput{
     float: right;
 }
-
-.pdfobject-container {
-   width: 200px;
-   height: 500px;
+#iframe_1{
+    display: none;
 }

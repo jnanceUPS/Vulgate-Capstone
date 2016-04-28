@@ -6,31 +6,63 @@
     <title>Tesseract Page</title>
       <meta charset="UTF-8">
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-      <script type="text/javascript" src="controller.js"></script>
-      <script>
-        var reader = new FileReader();
-        reader.onload = function(){
-          var text = reader.result;
-          var node = document.getElementById('userInput');
-          node.innerText = text;
-          console.log(reader.result.substring(0, 200));
-        };
-        reader.readAsText("./tessOutput.txt");
-    </script>
+      <script type="text/javascript" src="ocrController.js"></script>
+      <script src="bower_components/FileSaver/FileSaver.js"></script>
   </head>
 
   <body>
+
+    <script>
+      function test(){
+        string=window['iframe_1'].document.body.innerHTML
+        string=string.substring(5,string.length-6)
+        document.getElementById('userInput').value = string
+      }
+    </script>
+
+    <script>
+      function saveFile(){
+        console.log("saving file");
+        var textToWrite = document.getElementById('userInput').value;
+
+        var blob = new Blob([textToWrite], {type: "text/plain;charset=utf-8"});
+
+        var dateObj = new Date();
+        var month = dateObj.getUTCMonth() + 1; //months from 1-12
+        var day = dateObj.getUTCDate();
+        var year = dateObj.getUTCFullYear();
+
+        date = month + "_" + day + "_" + year;
+
+        var filename = "tesseract_output_" + date + ".txt";
+        saveAs(blob, filename);
+      }
+
+    </script>
+
+    <iframe id="iframe_1" name="iframe_1" src="tessOutput.txt" onload="test()" style="height: 0px; width: 0px"></iframe>
+
+
+
+
+
+
     <div id="input">
+
       <form>
         The Tesseract:<br>
-        <textarea name="userInput" style="height: 43em; width: 45em">
+        <textarea id="userInput" name="userInput" style="height: 43em; width: 45em">
         </textarea>
         <br>
         <br>
       </form>
+      <br>
+      <br>
+     <!--  <button ng-click="saveFile()">Save results to file</button> -->
+      <input type="button" onclick="saveFile()" value="Save results to file">   
     </div>
 
-    <script scr="controller.js"></script>
+    <script scr="ocrController.js"></script>
 
     <div id="pdf">
       <img src="temp.png" alt="Oops, there was a problem uploading" style="height: 45em; width: 38em; float: right">
