@@ -6,8 +6,10 @@
     "busboy": "^0.2.12",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "formidable" : "^1.0.17",
     "mongodb": "^2.1.6",
     "mongoose": "^4.4.3",
-    "ng-file-upload": "^11.2.3"
+    "ng-file-upload": "^11.2.3",
+    "ntesseract": "^0.2.8"
   }
 }
