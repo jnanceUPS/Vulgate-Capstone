@@ -328,6 +328,9 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		if(sen.hasRefs){	
 
 			if ($scope.toFilter) {
+
+				$scope.marked.markedIndex = [];
+				
 				var finalRefs = filterRefs(sen.refs, index);
 
 				finalRefs.sort(function(a,b){
@@ -337,6 +340,9 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 				$scope.vref[index] = finalRefs;
 			}
 			if (!$scope.toFilter) {
+
+				$scope.marked.markedIndex = [];
+
 				sen.refs.sort(function(a,b) {
 					return b.w3.length - a.w3.length;
 				});
