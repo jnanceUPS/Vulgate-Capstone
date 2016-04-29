@@ -66,7 +66,7 @@ function reader() {
 	});
 }
 
-fs.readFile('./index.html', function(err, html){
+fs.readFile('./operta.html', function(err, html){
 	if (err) {
 		throw err;
 	}

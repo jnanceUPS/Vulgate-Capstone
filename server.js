@@ -6,9 +6,10 @@ mongoose = require('mongoose'),
 path = require('path'),
 app = express(),
 bodyParser = require('body-parser');
+var tesseract = require('ntesseract');
+var formidable = require('formidable');
 
-// var spawn = require('child_process').spawn;
-// var child = spawn('java', ['params1', 'param2']);
+
 var session = require('express-session');
 var async = require('async');
 var Busboy = require('busboy'); //For multi-form data handling
@@ -29,7 +30,51 @@ app.use(session({
 }));
 
 app.get('/', function(req, res) {
-	res.sendFile(path.join(__dirname, ',/', 'index.html'));
+	res.sendFile(path.join(__dirname, './', './homePage.html'));
+});
+
+app.get('/tess', function(req, res){
+	res.sendFile(path.join(__dirname, './', './ocrIndex.html'));
+});
+
+app.get('/view', function(req, res){
+	res.sendFile(path.join(__dirname, './', './page.html'));
+});
+
+app.post('/upload', function(req, res){	
+	 
+	var form = new formidable.IncomingForm();
+
+	form.parse(req, function(err, fields, files){
+	 	fs.rename(files.upload.path, './temp.png');
+	 	res.writeHead(200, {'content-type': 'text/html'});
+		res.write('Uploading...<head><meta http-equiv="refresh" content="1; url=./process"></meta></head><body></body><style>body{background-color: #b7d1c4;}</style>');
+		res.end();
+	});
+});
+
+app.get('/process', function(req, res){
+	var options = {
+		l: 'lat'
+	}
+
+	tesseract.process(__dirname + './temp.png', options, function(err, text){
+            if(err) {
+                res.send("Oops, an error occured trying to run the Tesseract. Sorry!");
+            }
+            else{
+            	fs.writeFile('tessOutput.txt', text, function(err){
+            		if(err) console.log("Error writing TessOutput to text file!");
+            	});
+            	res.writeHead(200, {'content-type': 'text/html'});
+                res.write('Reading image...<head><meta http-equiv="refresh" content="1; url=./view"></meta></head><body></body><style>body{background-color: #b7d1c4;}</style>');
+            	res.end();
+            }
+        });
+});
+
+app.get('/operta', function(req, res) {
+	res.sendFile(path.join(__dirname, './', 'operta.html'));
 });
 
 var Reference = vulgateDB.model('Reference', 

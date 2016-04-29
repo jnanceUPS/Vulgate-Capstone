@@ -1,7 +1,7 @@
 {
   "name": "Vulgate-Capstone",
   "description": "",
-  "main": ["index.js", "controller.js"],
+  "main": ["plainText.js", "controller.js"],
   "authors": [
     "Joshua Nance <jnance@pugetsound.edu>"
   ],
