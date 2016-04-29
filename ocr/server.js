@@ -37,12 +37,17 @@ exports = module.exports = app;
 app.use(express.static(__dirname));
 
 app.get('/', function(req, res) {
-	res.sendFile(path.join(__dirname, ',/', 'index.html'));
+	res.sendFile(path.join(__dirname, './', './homePage.html'));
+});
+
+app.get('/tess', function(req, res){
+	res.sendFile(path.join(__dirname, './', './ocrIndex.html'));
 });
 
 app.get('/view', function(req, res){
 	res.sendFile(path.join(__dirname, './', './page.html'));
 });
+
 app.post('/upload', function(req, res){	
 	 
 	var form = new formidable.IncomingForm();
@@ -50,12 +55,12 @@ app.post('/upload', function(req, res){
 	form.parse(req, function(err, fields, files){
 	 	fs.rename(files.upload.path, './temp.png');
 	 	res.writeHead(200, {'content-type': 'text/html'});
-		res.write('Uploading...<head><meta http-equiv="refresh" content="1; url=./tess"></meta></head>');
+		res.write('Uploading...<head><meta http-equiv="refresh" content="1; url=./process"></meta></head><body></body><style>body{background-color: #b7d1c4;}</style>');
 		res.end();
 	});
 });
 
-app.get('/tess', function(req, res){
+app.get('/process', function(req, res){
 	var options = {
 		l: 'lat'
 	}
@@ -69,7 +74,7 @@ app.get('/tess', function(req, res){
             		if(err) console.log("Error writing TessOutput to text file!");
             	});
             	res.writeHead(200, {'content-type': 'text/html'});
-                res.write('Reading image...<head><meta http-equiv="refresh" content="1; url=./view"></meta></head>');
+                res.write('Reading image...<head><meta http-equiv="refresh" content="1; url=./view"></meta></head><body></body><style>body{background-color: #b7d1c4;}</style>');
             	res.end();
             }
         });

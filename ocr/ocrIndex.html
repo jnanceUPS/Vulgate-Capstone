@@ -6,30 +6,21 @@
     <title>Tesseract Page</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script type="text/javascript" src="ocrController.js"></script>
   </head>
 
   <body>
-    <div>
-      <form>
-        The Tesseract:<br>
-        <textarea name="userInput" style="height: 43em; width: 45em">
-        </textarea>
+    <div id="para">
+      <br>
+      <br>
+      <br>
+      <br>
+        <p style="font-size: 300%;"><b> The Tesseract </b> </p>
+        <p><b>Note:</b> You can only upload .PNG (image) files into the Tesseract.
         <br>
+        If the source is a .PDF, there are many tools that can turn a .PDF into a .PNG.
         <br>
-      </form>
-    </div>
-
-    <script src="ocrController.js"></script>
-
-    <div id="pdf">
-
-<!--       <div class="controls">
-          <button id="passwordButton" class="secondaryButton" ng-click="tess()"></button>
-         </div> -->
-
-<!-- 
-      img src="sampleVulgatePDF-1.png" alt="Oops" style="float: right; width:45em; height:45em"> -->
+        For example, a website such as <a href="http://pdf2png.com" target="_blank">pdf2png.com </a>works perfectly well.
+      </p>
         <form action="/upload" enctype="multipart/form-data" method="post">
           <input type="file" name="upload" multiple="multiple"><br>
           <input type="submit" value="Upload">
@@ -38,4 +29,10 @@
 
 
   </body>
+  <style>
+  #para{
+    float: center;
+    text-align: center;
+  }
+  </style>
 </html>
