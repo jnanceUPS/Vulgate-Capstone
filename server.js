@@ -58,9 +58,10 @@ app.get('/process', function(req, res){
 		l: 'lat'
 	}
 
-	tesseract.process(__dirname + './temp.png', options, function(err, text){
+	tesseract.process(__dirname + '/temp.png', options, function(err, text){
             if(err) {
-                res.send("Oops, an error occured trying to run the Tesseract. Sorry!");
+            	res.send(err);
+                // res.send("Oops, an error occured trying to run the Tesseract. Sorry!");
             }
             else{
             	fs.writeFile('tessOutput.txt', text, function(err){
