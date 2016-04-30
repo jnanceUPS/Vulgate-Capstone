@@ -131,16 +131,17 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 	$scope.filter = [];
 	$scope.highlight = [];
 
-	$scope.toFilter = false;
-	$scope.setFilterPreferenceOn = function() {
-		
-		$scope.toFilter = true;
-		console.log($scope.toFilter);
+	
+	$scope.toFilter = [];
+	
+	$scope.setFilterPreferenceOn = function(index) {
+		$scope.marked.markedIndex[index] = [];
+		$scope.toFilter[index] = true;
 	}
 
-	$scope.setFilterPreferenceOff = function() {
-		$scope.toFilter = false;
-		console.log($scope.toFilter);
+	$scope.setFilterPreferenceOff = function(index) {
+		$scope.marked.markedIndex[index] = [];
+		$scope.toFilter[index] = false;
 	}
 
 	$scope.selectWord = function(word, index){
@@ -302,9 +303,9 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 	//shows the references, given a selected sentence
 	$scope.showRefs = function(index){
 
-		if ($scope.selectedSentence != index) {
-			$scope.toFilter = false;
-		}
+		// if ($scope.selectedSentence != index) {
+		// 	$scope.toFilter = false;
+		// }
 
 		$scope.popupIndex = [];
 		$scope.popupVerse = [];
@@ -327,9 +328,9 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 
 		if(sen.hasRefs){	
 
-			if ($scope.toFilter) {
+			if ($scope.toFilter[index]) {
 
-				$scope.marked.markedIndex = [];
+				// $scope.marked.markedIndex[index] = [];
 
 				var finalRefs = filterRefs(sen.refs, index);
 
@@ -339,9 +340,9 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 
 				$scope.vref[index] = finalRefs;
 			}
-			if (!$scope.toFilter) {
+			if (!$scope.toFilter[index]) {
 
-				$scope.marked.markedIndex = [];
+				// $scope.marked.markedIndex[index] = [];
 
 				sen.refs.sort(function(a,b) {
 					return b.w3.length - a.w3.length;
@@ -349,31 +350,6 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 				$scope.vref[index] = sen.refs;
 			}
 		}
-
-		////////////////////////////////////////////////
-		/////////////////EXPERIMENTING//////////////////
-		////////////////////////////////////////////////
-
-
-		// uncomment when done EXPERIMENTING above
-		// if(sen.hasRefs){	
-
-		// 	if ($scope.toFilter) {
-		// 		var finalRefs = filterRefs(sen.refs, index);
-
-		// 		finalRefs.sort(function(a,b){
-		// 			return b.w3.length - a.w3.length;
-		// 		});
-
-		// 		$scope.vref = finalRefs;
-		// 	}
-		// 	if (!$scope.toFilter) {
-		// 		sen.refs.sort(function(a,b) {
-		// 			return b.w3.length - a.w3.length;
-		// 		});
-		// 		$scope.vref = sen.refs;
-		// 	}
-		// }
 	};
 
 
@@ -439,42 +415,11 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 
 		var str = "";	
 
-		// joshua's code
-
-		console.log("*****$scope.vref*****");
-		console.log($scope.vref);
-		console.log("**************");
-
-		// added [i] to $scope.vref[i][j]
-		// was previously just [j]
-
-		// for(var i in $scope.marked.markedIndex){
-		// 	str += "Sentence: \n";
-		// 	str += $scope.results[i].sentence + "\n \n";
-		// 	for(var j in $scope.marked.markedIndex[i]){
-		// 		str += "Matching words:\t";
-		// 		str += $scope.vref[j].w1 + "\t";
-		// 		str += $scope.vref[j].w2 + "\t";
-		// 		str += $scope.vref[j].w3 + "\n";
-
-		// 		for(var k in $scope.marked.markedIndex[i][j]){
-		// 			if ($scope.marked.markedIndex[i][j][k].marked){
-		// 				str += "\tVulgate index:\t"
-		// 				str += "\t"+$scope.vref[j].inds[k] + "\n";
-		// 				str += "\tVerse: \n" 
-		// 				str += "\t"+getVerse($scope.vref[j].inds[k]) + "\n";
-		// 				str += "\tNotes: " 
-		// 				str += "\t"+$scope.marked.markedIndex[i][j][k].note + "\n";
-		// 			}
-		// 		}
-		// 		str += "\n";
-		// 	}
-		// 	str += "-------------------------- \n \n";
-		// }
-
 		for(var i in $scope.marked.markedIndex){
 			str += "Sentence: \n";
+
 			str += $scope.results[i].sentence + "\n \n";
+
 			for(var j in $scope.marked.markedIndex[i]){
 				str += "Matching words:\t";
 				str += $scope.vref[i][j].w1 + "\t";
@@ -495,10 +440,6 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			}
 			str += "-------------------------- \n \n";
 		}
-		
-
-		// changing $scope.results[_].refs[_] seems to have worked...for now
-
 
 		var s = [str];
 		var blob = new Blob(s, {type: "text/plain;charset=utf-8"});
