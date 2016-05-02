@@ -14,7 +14,8 @@
     <script>
       function test(){
         string=window['iframe_1'].document.body.innerHTML
-        string=string.substring(5,string.length-6)
+        console.log(string);
+        string=string.substring(59,string.length-6)
         document.getElementById('userInput').value = string
       }
     </script>

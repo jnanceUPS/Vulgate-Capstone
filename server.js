@@ -8,6 +8,7 @@ app = express(),
 bodyParser = require('body-parser');
 var tesseract = require('ntesseract');
 var formidable = require('formidable');
+var exec = require('child_process').exec;
 
 
 var session = require('express-session');

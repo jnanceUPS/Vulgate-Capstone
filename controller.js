@@ -194,10 +194,9 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			unmarkAsRef(vName);
 			$scope.marked.markedIndex[$scope.selectedSentence][pindex][index].marked = false;
 			$scope.marked.markedIndex[$scope.selectedSentence][pindex][index].note = "";
+
 			if ($scope.marked.total == 0) //removes marked info if none are marked
 				$scope.marked.hasMark = false;
-			
-
 		}
 	}
 
