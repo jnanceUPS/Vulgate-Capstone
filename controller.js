@@ -128,17 +128,21 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		return sentence.replace(/[^\w\s]+/g, '').split(/[\s]+/g);
 	}	
 
-	$scope.filter = [];
+	$scope.filter = []; // words added to the filter for selectively filtering references
 	$scope.highlight = [];
 
 	
-	$scope.toFilter = [];
+	$scope.toFilter = []; // an array of booleans; a toFilter for each sentence to allow for retention of checked references
 	
+	// this method ensures that the list of references does not reset
+	// unless someone decides to reset the filter preference
 	$scope.setFilterPreferenceOn = function(index) {
 		$scope.marked.markedIndex[index] = [];
 		$scope.toFilter[index] = true;
 	}
 
+	// this method ensures that the list of references does not reset
+	// unless someone decides to reset the filter preference
 	$scope.setFilterPreferenceOff = function(index) {
 		$scope.marked.markedIndex[index] = [];
 		$scope.toFilter[index] = false;
@@ -297,7 +301,8 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		}
 	}
 	
-
+	// this array will hold the references for each
+	// sentence in the source document
 	$scope.vref = [];
 	//shows the references, given a selected sentence
 	$scope.showRefs = function(index){
@@ -312,15 +317,8 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		$scope.verse = [];
 		var sen = $scope.results[index];
 
-		// $scope.vref = {}; // uncomment if done with below EXPERIMENTING
 		$scope.hasRefs = sen.hasRefs;
 
-
-		////////////////////////////////////////////////
-		/////////////////EXPERIMENTING//////////////////
-		////////////////////////////////////////////////
-
-		
 		if (!$scope.vref[index]) {
 			$scope.vref[index] = {};
 		}
@@ -329,10 +327,9 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 
 			if ($scope.toFilter[index]) {
 
-				// $scope.marked.markedIndex[index] = [];
-
 				var finalRefs = filterRefs(sen.refs, index);
 
+				// place 3 word references first
 				finalRefs.sort(function(a,b){
 					return b.w3.length - a.w3.length;
 				});
@@ -341,8 +338,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			}
 			if (!$scope.toFilter[index]) {
 
-				// $scope.marked.markedIndex[index] = [];
-
+				// place 3 word references first
 				sen.refs.sort(function(a,b) {
 					return b.w3.length - a.w3.length;
 				});
@@ -352,7 +348,10 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 	};
 
 
-
+	// if the filter option is chosen
+	// this method will reduce the list
+	// of references shown based on words
+	// that have been added to that word filter
 	function filterRefs(refs, index) {
 		// for succinctness
 		var results = $scope.results[index];
@@ -368,7 +367,9 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			var two = results.refs[ref].w2;
 			var three = results.refs[ref].w3;
 			
-
+			// admittedly this code only works as long as the program is focused on
+			// producing two and three word references
+			// if it is ever changed, then this code will also need to be changed
 			if (filter[index]){
 				if ((filter[index].indexOf(one) >= 0) && (filter[index].indexOf(two) >= 0)) {
 					if ((filter[index].indexOf(three) >= 0) || three === "") {
@@ -443,25 +444,17 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 		var s = [str];
 		var blob = new Blob(s, {type: "text/plain;charset=utf-8"});
 
+		// this block of code constructs a filename using the date on which the file was saved
 		var dateObj = new Date();
 		var month = dateObj.getUTCMonth() + 1; //months from 1-12
 		var day = dateObj.getUTCDate();
 		var year = dateObj.getUTCFullYear();
-
 		date = month + "_" + day + "_" + year;
-
 		var filename = "saved_refs_" + date + ".txt";
+
+		// save the references to a file with the above filename
 		saveAs(blob, filename);
-
-		// $scope.fileObj = {'str':str}
-
-		// $http.post('/saveFile', $scope.fileObj).success(function(data){
-		// })
-		// .error(function(err){ 
-		// 	console.log(err);
-		// });
 	};
-
 }]);
 
 //given a starting index, gets the next index of an item in an array
@@ -471,16 +464,6 @@ function getNextIndexOf(item, arr, startIndex){
 		if (arr[i] == item) return i;
 	}
 	return -1;
-}
-
-function toArrayBuffer(str) {
-	var buffer = new Buffer(str);
-	var ab = new ArrayBuffer(buffer.length);
-	var view = new Uint8Array(ab);
-	for (var i = 0; i < buffer.length; ++i) {
-		view[i] = buffer[i];
-	}
-	return ab;
 }
 
 //gets the index of an object in an array of objects. Also works for arrays in array of arrays.

@@ -4,14 +4,37 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+/**
+ * This class serves as a wrapper for the HashMap that contains
+ * root word data.  The dictionar is itself a Hashmap whose
+ * keys are Strings and whose values are ArrayLists of Strings.
+ *
+ * A small example of how this would look:
+ * 		unrootedWord => rootOne, rootTwo, ..., rootN
+ *
+ * This representation allows you to record multiple roots, should a word have more than one.
+ * 
+ * @author  Joshua Nance
+ * @version  1.0
+ */
 public class RootDictionary {
 
 	private HashMap<String, ArrayList<String>> dictionary;
 
+	/**
+	 * Creates a new RootDictionary object.
+	 * 
+	 */
 	public RootDictionary() {
 		this.dictionary = new HashMap<String, ArrayList<String>>();
 	}
 
+	/**
+	 * Adds a root to the dictionary.
+	 * 
+	 * @param key The unrooted word.
+	 * @param val The root word.
+	 */
 	public void addRoot(String key, String val) {
 
 		if (!this.dictionary.containsKey(key)) {
@@ -25,6 +48,11 @@ public class RootDictionary {
 
 	}
 
+	/**
+	 * This method will write the entire dictionary to a given file.
+	 * 
+	 * @param filename The name of the file to write to.
+	 */
 	public void writeToFile(String filename) {
 		File file = new File(filename);
 		FileOutputStream stream = null;
@@ -74,6 +102,10 @@ public class RootDictionary {
 
 	}
 
+	/**
+	 * Testing method to check that the right information is getting recorded.
+	 * Not important for production.
+	 */
 	public void printDictionary() {
 		for (String s : this.dictionary.keySet()) {
 			String key = s.toString();

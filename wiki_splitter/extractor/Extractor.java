@@ -8,15 +8,22 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 
+/**
+ * This is the main workhorse class of the Wiktionary Splitter.
+ * An Extractor object will loop through individual text files
+ * (each of which contains information on one Latin word), and
+ * will extract any possible roots from that file, and add them
+ * into a RootDictionary object.
+ */
 public class Extractor {
 
-	/* PRODUCTION FIELDS */
-	private File dir;
-	private File output;
-	private RootDictionary dict;
+	private File dir; // the folder that contains the individual text files to be parsed
+	private File output; // the file to which the RootDictionary will be written
+	private RootDictionary dict; // The final destination for root data
 
-	/* CONSTANTS */
-	private final String XML_TEXT_TAG = "<text";
+	// it's important that we don't start parsing before we hit the actual text of the page
+	// if we were to parse before hitting this tag, we would potentially confuse the rooting process
+	private final String XML_TEXT_TAG = "<text"; 
 
 	private final String BEGIN_LATIN = "==Latin=="; // identifies the relevant latin portion of a given entry
 	private final String END_LATIN = "----"; // identifies the end of the relevant latin portion
@@ -87,6 +94,11 @@ public class Extractor {
 		}
 	}
 
+	/**
+	 * This is the actual root extraction method.
+
+	 * @param file The file from which you wish to extract root data.
+	 */
 	private void findRoots(File file) {
 
 		if (file.exists() && file.isFile() && file.canRead()) {
@@ -110,27 +122,31 @@ public class Extractor {
 						latinEntry = true;
 					}
 
+					// because files can contain data for words that
+					// appear in multiple languages, we want to make sure
+					// we are only parsing root data from the Latin section
 					if (latinEntry && line.contains(END_LATIN)) {
 						sc.close();
 						return;
 					}
 
+					// two left curly brackets indicate the beginning
+					// of what might be a root line
 					if (latinEntry && line.contains(BRACKETS)) {
-						String code = this.getCode(line);
+						String code = this.getCode(line); // get that potential root line's code
 						if (this.INLINE_CODES.contains(code)) {
 							
+							// parse rules for irregular codes
 							if (this.IRREGULAR_CODES.contains(code)) {
 
 								if (code.equals(HEAD)) {
 									String key = this.getKey(file.getName());
 
+									// a future revision might need to add a call to isValidRoot here
 									if (this.containsNoSpaces(key)) {
 										this.dict.addRoot(key, key);
 										rootCount++;
 									}
-
-									// this.dict.addRoot(key,key);
-									// rootCount++;
 								}
 
 								if (code.equals(FORM)) {
@@ -141,10 +157,9 @@ public class Extractor {
 										this.dict.addRoot(key, root);
 										rootCount++;										
 									}
-
 								}
-
 							}
+							// parse rules for regular codes
 							else {
 								String root = this.getRegularRoot(line);
 								String key = this.getKey(file.getName());
@@ -153,14 +168,13 @@ public class Extractor {
 									this.dict.addRoot(key, root);
 									rootCount++;
 								}
-
 							}
-
 						}
 					}
 				}
 				sc.close();
 
+				// make sure to increment the root counter as you go
 				if (rootCount == 0) {
 					String key = this.getKey(file.getName());
 					this.dict.addRoot(key,key);
@@ -174,6 +188,8 @@ public class Extractor {
 		}
 	}
 
+	// simple string parsing to extract a code
+	// from a line that begins with two left curly brackets
 	private String getCode(String input) {
 		int start = input.indexOf(BRACKETS);
 		int end = input.indexOf(SPLITTER,start);
@@ -193,11 +209,14 @@ public class Extractor {
 		return key;
 	}
 
+	// checks for spaces in a potential root
+	// if it has spaces it would not be a valid root
 	private boolean containsNoSpaces(String filename) {
 		CharSequence space = " ";
 		return filename.contains(space);
 	}
 
+	// string parsing for a regularly formated root line
 	private String getRegularRoot(String input) {
 		int first = input.indexOf(SPLITTER);
 		int second = input.indexOf(SPLITTER, first + 1);
@@ -214,6 +233,7 @@ public class Extractor {
 		return root;
 	}
 
+	// string parsing for an irregularly formatted root line
 	private String getIrregularRoot(String input) {
 
 		int first = input.indexOf(SPLITTER);
@@ -233,25 +253,32 @@ public class Extractor {
 
 	}
 
+	// a root is valid if it contains no special characters
+	// and no Wiktionary keywords like LANG_LA above
 	private boolean isValidRoot(String root) {
-	boolean hasValidLength = root.length() >= 1;
+		boolean hasValidLength = root.length() >= 1;
 
-	char[] rootChars = root.toCharArray();
-	boolean specialCharFound = false;
+		char[] rootChars = root.toCharArray();
+		boolean specialCharFound = false;
 
-	for (int i = 0; i < rootChars.length; i++) {
-		if (EXCLUSIONS.contains(rootChars[i])) {
-			specialCharFound = true;
+		for (int i = 0; i < rootChars.length; i++) {
+			if (EXCLUSIONS.contains(rootChars[i])) {
+				specialCharFound = true;
+			}
+		}
+
+		if (specialCharFound || root.contains(LANG_LA)) {
+			return false;
+		}
+		else {
+			return hasValidLength;
 		}
 	}
 
-	if (specialCharFound || root.contains(LATIN)) {
-		return false;
-	}
-	else {
-		return hasValidLength;
-	}
-
+	/**
+	 * Returns a RootDictionary object containing root information.
+	 * @return RootDictionary The roots data extracted using this class.
+	 */
 	public RootDictionary getDictionary() {
 		return this.dict;
 	}
