@@ -22,9 +22,19 @@ First you must install the main dependencies, which includes any libraries, thir
 ### Installing the Tesseract OCR software
 Tip: When attempting to run the OCR software through the web application, you may be faced with an error while it is trying to process the uploaded PNG file.  This is likely due to the fact that you did not properly install the trained language data from [Tesseract's trained language data GitHub page.](https://github.com/tesseract-ocr/tessdata)  You will need to grab the `lat.traineddata` file from that page and add it to the proper folder.  This may change depending on where you installed the Tesseract OCR application itself.  If installed on a Macintosh computer using Homebrew, you want to place the `lat.traineddata` file in `/usr/local/Cellar/tesseract/3.04.01/share/tessdata`.  Essentially, locate where your `tessdata` folder is located, and place the trained data file inside of this folder.
 
-1.  ... **Ray will write this portion** ...
+1. Relatively simple as a Macintosh user, especially using Homebrew.  Simply run `brew install tesseract --all-languages" and you should be good to go.
+2.  ... **Ray will write this portion** ...
 
 ### Running the web application itself
 1. If it is not already running, start MongoDB by running `mongod` in your command line.
 2. Navigate to the main project directory, Vulgate-Capstone, and run the command `node server.js`.
 3. Navigate to `localhost:8080` to access the main page of the web application.
+
+## End User Installation
+Assuming the web application was properly installed on some server, the end user simply needs to download and install the Tesseract OCR software on their own local machine.
+
+Tip from above: When attempting to run the OCR software through the web application, you may be faced with an error while it is trying to process the uploaded PNG file.  This is likely due to the fact that you did not properly install the trained language data from [Tesseract's trained language data GitHub page.](https://github.com/tesseract-ocr/tessdata)  You will need to grab the `lat.traineddata` file from that page and add it to the proper folder.  This may change depending on where you installed the Tesseract OCR application itself.  If installed on a Macintosh computer using Homebrew, you want to place the `lat.traineddata` file in `/usr/local/Cellar/tesseract/3.04.01/share/tessdata`.  Essentially, locate where your `tessdata` folder is located, and place the trained data file inside of this folder.
+
+### Installing the Tesseract OCR Software
+1. Relatively simple as a Macintosh user, especially using Homebrew.  Simply run `brew install tesseract --all-languages" and you should be good to go.
+2. If you are not a Macintosh user... ** Ray will write this section ** ...
