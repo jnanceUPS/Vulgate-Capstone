@@ -12,11 +12,17 @@
   <body>
 
     <script>
-      function test(){
+      function injectData(){
         string=window['iframe_1'].document.body.innerHTML
-        console.log(string);
+        //grab the contents of the iFrame, save it as string
+
+        //console.log(string);
+
         string=string.substring(59,string.length-6)
+        // This string has to be substringed by 59 in front and 6 off the end because for some reason all of the HTML of the iFrame gets injected into the iFrame.  So in chrome, this line makes sure that none of this appears in the textarea
+        //however, this does mean that if the user is using Firefox, the beginning of the document may be cut off (the amount of HTML it injects is different)
         document.getElementById('userInput').value = string
+        //this puts the content of the iFrame into the textarea (id='userInput')
       }
     </script>
 
@@ -33,6 +39,7 @@
         var year = dateObj.getUTCFullYear();
 
         date = month + "_" + day + "_" + year;
+        //therefore, the file is saved as the date of that it was saved
 
         var filename = "tesseract_output_" + date + ".txt";
         saveAs(blob, filename);
@@ -40,7 +47,7 @@
 
     </script>
 
-    <iframe id="iframe_1" name="iframe_1" src="tessOutput.txt" onload="test()" style="height: 0px; width: 0px"></iframe>
+    <iframe id="iframe_1" name="iframe_1" src="tessOutput.txt" onload="injectData()" style="height: 0px; width: 0px"></iframe>
 
 
 

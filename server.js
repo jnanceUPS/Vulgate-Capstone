@@ -32,6 +32,7 @@ app.use(session({
 
 app.get('/', function(req, res) {
 	res.sendFile(path.join(__dirname, './', './homePage.html'));
+	//this sets the homepage
 });
 
 app.get('/tess', function(req, res){
@@ -50,6 +51,7 @@ app.post('/upload', function(req, res){
 	 	fs.rename(files.upload.path, './temp.png');
 	 	res.writeHead(200, {'content-type': 'text/html'});
 		res.write('Uploading...<head><meta http-equiv="refresh" content="1; url=./process"></meta></head><body></body><style>body{background-color: #b7d1c4;}</style>');
+		//The above code gives the style of this intermediate page, writes "Uploading..." onto that page, and then redirects to ./process
 		res.end();
 	});
 });
@@ -57,6 +59,8 @@ app.post('/upload', function(req, res){
 app.get('/process', function(req, res){
 	var options = {
 		l: 'lat'
+		//This is the line that requires one to download lat.traineddata and place it into the tessdata folder.
+		//if this is causing problems, delete/comment out this section, and remove the "options" param from tesseract.process on line 66
 	}
 
 	tesseract.process(__dirname + '/temp.png', options, function(err, text){
@@ -70,6 +74,7 @@ app.get('/process', function(req, res){
             	});
             	res.writeHead(200, {'content-type': 'text/html'});
                 res.write('Reading image...<head><meta http-equiv="refresh" content="1; url=./view"></meta></head><body></body><style>body{background-color: #b7d1c4;}</style>');
+            	//This line of code gives the style of this intermediate page, writes "Reading image..." onto that page, and redirects to ./view
             	res.end();
             }
         });
