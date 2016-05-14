@@ -23,7 +23,7 @@ First you must install the main dependencies, which includes any libraries, thir
 Tip: When attempting to run the OCR software through the web application, you may be faced with an error while it is trying to process the uploaded PNG file.  This is likely due to the fact that you did not properly install the trained language data from [Tesseract's trained language data GitHub page.](https://github.com/tesseract-ocr/tessdata)  You will need to grab the `lat.traineddata` file from that page and add it to the proper folder.  This may change depending on where you installed the Tesseract OCR application itself.  If installed on a Macintosh computer using Homebrew, you want to place the `lat.traineddata` file in `/usr/local/Cellar/tesseract/3.04.01/share/tessdata`.  Essentially, locate where your `tessdata` folder is located, and place the trained data file inside of this folder.
 
 1. Relatively simple as a Macintosh user, especially using [Homebrew](http://brew.sh/).  In fact, this is one of two ways that both use the command line.  So, unfortunatley, it isn't quite as user friendly as simply Downloading and Installing like one might be used to, but still relatively simple.  Once you have installed Homebrew, using the instructions on the website linked, simply run `brew install tesseract --all-languages` in the command line and you should be good to go.
-2.  ... **Ray will write this portion** ...
+2. As a Windows user, download the `lat.traineddata` from [Tesseract's trained language data GitHub page.](https://github.com/tesseract-ocr/tessdata) Find where your `tessdata` folder is (most likely `C:\Program Files\Tesseract OCR\tessdata`) and put move `lat.traineddata` into that folder.
 
 ### Running the web application itself
 1. If it is not already running, start MongoDB by running `mongod` in your command line.
@@ -37,4 +37,5 @@ Tip from above: When attempting to run the OCR software through the web applicat
 
 ### Installing the Tesseract OCR Software
 1. Relatively simple as a Macintosh user, especially using [Homebrew](http://brew.sh/).  In fact, this is one of two ways that both use the command line.  So, unfortunatley, it isn't quite as user friendly as simply Downloading and Installing like one might be used to, but still relatively simple.  Once you have installed Homebrew, using the instructions on the website linked, simply run `brew install tesseract --all-languages` in the command line and you should be good to go.
-3. If you are not a Macintosh user... ** Ray will write this section ** ...
+2. For Windows, a .exe file is available for the installation of the Tesseract.  Simply head over to [Tesseract's download page](https://github.com/tesseract-ocr/tesseract/wiki/Downloads) and download one of the 3rd party Window's installers.  Run that .exe, and the Tesseract should be installed at `C:\Program Files\Tesseract OCR\`.
+
