@@ -1,6 +1,6 @@
 # Operta
 
-*Operta* is a web application that allows users to upload a source text and receive a list of possible biblical references to the Latin Vulgate bible from within that source text.  Below, you will find the server installation guide, as well as tips for everyday users who will be accessing the website on their own local machines (after it has already been uploaded to a server).
+*Operta* is a web application that allows users to upload a source text and receive a list of possible biblical references to the Latin Vulgate Bible from within that source text.  Below, you will find the server installation guide, as well as tips for everyday users who will be accessing the website on their own local machines (after it has already been uploaded to a server).
 
 ## Server Installation
 First you must install the main dependencies, which includes any libraries, third-party tools, and languages we used in the development of *Operta*.  Second, you must create the index and load it into the database, for without the index the web application will produce no reference results.  Third, you must install the Tesseract OCR software to the server.  Unfortunately it is not pre-installed when you clone the repository.  Without this installed, the OCR functionality will not work.
