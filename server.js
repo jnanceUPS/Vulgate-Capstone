@@ -277,15 +277,15 @@ app.post('/upload/url', function(req, res){
 */
 
 //loads all vulgate books
-//fs.readdir('/var/www/html/Vulgate-Capstone/vulgate_bible/ordered_version/', function(err, filenames) {
-fs.readdir('./vulgate_bible/ordered_version/', function(err, filenames){
+fs.readdir('/var/www/html/Vulgate-Capstone/vulgate_bible/ordered_version/', function(err, filenames) {
+//fs.readdir('./vulgate_bible/ordered_version/', function(err, filenames){ //this is the local server version
 	if (err) {
 		console.log(err);
 		return;
 	}
 	async.map(filenames, function(filename, callback){
-		//fs.readFile('/var/www/html/Vulgate-Capstone/vulgate_bible/ordered_version/' + filename, 'utf8', function(err, content) {
-		fs.readFile('./vulgate_bible/ordered_version/' + filename, 'utf8', function(err, content) {
+		fs.readFile('/var/www/html/Vulgate-Capstone/vulgate_bible/ordered_version/' + filename, 'utf8', function(err, content) {
+		//fs.readFile('./vulgate_bible/ordered_version/' + filename, 'utf8', function(err, content) { //this is the local server version
 			if (err) {
 				console.log(err);
 				return;
