@@ -48,7 +48,7 @@ app.post('/upload', function(req, res){
 	var form = new formidable.IncomingForm();
 
 	form.parse(req, function(err, fields, files){
-	 	fs.rename(files.upload.path, './temp.png');
+	 	fs.rename(files.upload.path, '/tmp/temp.png');
 	 	res.writeHead(200, {'content-type': 'text/html'});
 		res.write('Uploading...<head><meta http-equiv="refresh" content="1; url=./process"></meta></head><body></body><style>body{background-color: #b7d1c4;}</style>');
 		//The above code gives the style of this intermediate page, writes "Uploading..." onto that page, and then redirects to ./process
@@ -104,9 +104,7 @@ var getRef = function(sen, callback){
 	var str = sen.toLowerCase().replace(/[^\w\s]+/g, '').split(/\s+/g);
 	str = uniquify(str);
 	str = unstopify(str);
-	
 	async.map(str,rootWord,function(err,results){
-
 		var str = [];
 		for(var i in results){
 			//for (var j in results[i])
@@ -175,8 +173,10 @@ var parseData = function(data){
 // }, ...]
 var matchAndSend = function(){
 	app.post('/sss', function(req, res){
-		async.map(sess.matched,getRef, function(err, results){	
-			console.log(Date.now()-sess.date);
+		//console.log(res); //David -- just raw data (not useful)
+		async.map(sess.matched, getRef, function(err, results){	
+			//console.log(Date.now()-sess.date);
+			//console.log(sess.matched); //David
 			res.send({'results': results , 'books': sess.books, 'freqs': sess.freqs});
 		});
 	});
@@ -208,14 +208,59 @@ app.post('/saveFile', function(req, res){
 });
 
 //Gets file from Controller
+//with david's fixes
 app.post('/upload/url', function(req, res){
+	var busboy = new Busboy({ headers: req.headers });
+	//var test_arr = [];
+	var book = '';
+	busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+		console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
+		file.on('data', function(buffer)  {
+			var data = buffer.toString('utf8');
+			book += data;	//david: concatenate the book together!
+
+			//david debugging: found out only the last chunk was being processed
+			/*console.log("START sen" );
+			        for (var i = 0; i < test_arr.length; i++){
+					console.log(i + " => " + test_arr[i]);
+				}
+			console.log("END sen" );
+			*/
+		});
+		//david added this block
+		//after the file has been completely uploaded (into 'book', now split and process)
+		file.on('end', function() {
+			var sen = book.split(/\.\s/g);
+			sess = req.session;
+			sess.matched = sen;
+			sess.books = [], sess.freqs = [];
+			sess.date = Date.now();
+			matchAndSend();
+		});
+	});
+
+	busboy.on('finish', function() {
+		res.end();
+	});
+	req.pipe(busboy);
+});
+
+//old, without david's fix
+//only last buffered chunk is ever processed
+/*app.post('/upload/url', function(req, res){
 	var busboy = new Busboy({ headers: req.headers });
 	busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
 		console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
-		file.on('data', (buffer) => {
+		file.on('data', function(buffer)  {
 			var data = buffer.toString('utf8');
+			data = data.replace(/(\r\n|\n|\r)/gm,"");	//remove newlines
 			var sen = data.split(/\.\s/g);
-			//console.log("\"", sen[0], "\"" );
+			//david
+			console.log("START sen" );
+			        for (var i = 0; i < sen.length; i++){
+					console.log(i + " => " + sen[i]);
+				}
+			console.log("END sen" );
 			sess = req.session;
 			sess.matched = sen;
 			sess.books = [], sess.freqs = [];
@@ -229,14 +274,17 @@ app.post('/upload/url', function(req, res){
 	});
 	req.pipe(busboy);
 });
+*/
 
 //loads all vulgate books
-fs.readdir('./vulgate_bible/ordered_version/', function(err, filenames) {
+//fs.readdir('/var/www/html/Vulgate-Capstone/vulgate_bible/ordered_version/', function(err, filenames) {
+fs.readdir('./vulgate_bible/ordered_version/', function(err, filenames){
 	if (err) {
 		console.log(err);
 		return;
 	}
 	async.map(filenames, function(filename, callback){
+		//fs.readFile('/var/www/html/Vulgate-Capstone/vulgate_bible/ordered_version/' + filename, 'utf8', function(err, content) {
 		fs.readFile('./vulgate_bible/ordered_version/' + filename, 'utf8', function(err, content) {
 			if (err) {
 				console.log(err);

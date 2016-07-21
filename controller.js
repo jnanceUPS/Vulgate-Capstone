@@ -49,6 +49,7 @@ app.controller('myCtrl', ['$scope', 'Upload', '$http', '$q', function($scope, Up
 			defer.resolve(data);
 
 			$scope.results = data.results;
+			console.log($scope.results);
 			$scope.loading = "";
 			$scope.showDiv = true;
 			$scope.stats = [];
